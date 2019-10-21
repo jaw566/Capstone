@@ -9,7 +9,7 @@
     <title>F1/10 Yellow Tails</title>
   </head>
 
-  <body>
+  <body> 
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark font-weight-bold">
       <a class="navbar-brand" href="index.html">
         <img src="img/logo.png" alt="Logo" style="width:40px;">
@@ -24,37 +24,54 @@
         <li class="nav-item">
            <a class="nav-link" href="pitcrew.html">Pit Crew</a>
         </li>
-        <li class="nav-item dropdown active">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            Resources</a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="documents.html">Documents</a>
-                <a class="dropdown-item" href="presentations.html">Presentations</a>
-            </div>
-        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          Resources</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="documents.html">Documents</a>
+            <a class="dropdown-item" href="presentations.html">Presentations</a>
+          </div>
+          </li>
         <li>
           <a class="nav-link" href="technologies.html">Technologies</a>
         </li>
         <li>
-          <a class="nav-link" href="schedule.html">Schedule</a>
+            <a class="nav-link active" href="#">Schedule</a>
         </li>
       </ul>
     </nav>
 
     <div class="jumbotron text-center text-light bg-dark">
-            <h1>Presentations</h1>
-        </div>
+        <h1>Schedule</h1>
+    </div>
 
     <div class="container">
-        <div class = "card-deck mt-5">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Mini Intro</h4>
-                    <p class="card-text">The slides to our short mini introduction. We introduced our clients and project, going over a general solution.</p>
-                    <a href="documents/Mini Intro.pdf" class="card-link">Download</a>
-                </div>
-            </div>
-        </div>
+        <table class="table table-striped mt-5 font-weight-bold">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>10/15/2019</td>
+                <td>Full Website Launch</td>
+                <td>We'll continue to keep the site up to date to share our progress!</td>
+              </tr>
+              <tr>
+                <td>11/1/2019</td>
+                <td>Technical Fesability</td>
+                <td>Once we are finished testing and writing we will make sure to post it here.</td>
+              </tr>
+              <tr>
+                <td>12/2019</td>
+                <td>Pre Alpha Product</td>
+                <td>We are on track to have something working before winter break.</td>
+              </tr>
+            </tbody>
+          </table>
     </div>
 
     <!--Footer-->
