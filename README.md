@@ -36,3 +36,11 @@ Now we can launch the test.py file
 
 *If the test.py file can not find PyQt5 your pipenv is either not running or not set up correctly*
 
+## Using the PyQt Designer
+If you want to use the designer you navigate to the pyqt bin
+
+`cd /usr/lib/x86_64-linux-gnu/qt5/bin/`
+
+Then we can run the designer
+
+`./designer`
