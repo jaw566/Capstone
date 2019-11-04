@@ -1,0 +1,1 @@
+roscore & roslaunch race f1_tenth.launch && fg
