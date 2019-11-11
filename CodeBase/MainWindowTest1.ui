@@ -20,7 +20,7 @@
       <x>10</x>
       <y>0</y>
       <width>161</width>
-      <height>192</height>
+      <height>351</height>
      </rect>
     </property>
    </widget>
@@ -50,13 +50,13 @@
      <string>Run Sim</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEditLogger">
+   <widget class="QTextBrowser" name="logBrowser">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>380</y>
-      <width>621</width>
-      <height>138</height>
+      <x>10</x>
+      <y>360</y>
+      <width>611</width>
+      <height>192</height>
      </rect>
     </property>
    </widget>
@@ -67,13 +67,14 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>39</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionSet_ROS_Workspace"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
@@ -84,6 +85,11 @@
    <addaction name="menuSettings"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSet_ROS_Workspace">
+   <property name="text">
+    <string>Set ROS Workspace</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
