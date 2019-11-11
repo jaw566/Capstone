@@ -44,3 +44,7 @@ If you want to use the designer you navigate to the pyqt bin
 Then we can run the designer
 
 `./designer`
+
+After you have saved your UI file you cna run the following command to generate a python file with all the objets generated.
+
+`pyuic5 -x UI_FILE_NAME.ui -o NAME_OF_EXC.py`
