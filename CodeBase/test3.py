@@ -8,35 +8,57 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from profileSelect import Ui_profileSelect
+import sys
 import subprocess
+import socket 
 
+
+#variables
+hostname = socket.gethostname()    
+localIPAddress = socket.gethostbyname(hostname)
+robotIPAddress = ""
+ROSWorkspacePath = ""
 
 class Ui_MainWindow(object):
+
+    def openProfileLoader(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_profileSelect()
+        self.ui.setupUi(self.window)
+        self.ui.localIPAddressField.setText(localIPAddress)
+        self.window.show()
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        
         self.treeView = QtWidgets.QTreeView(self.centralwidget)
         self.treeView.setGeometry(QtCore.QRect(10, 0, 161, 351))
         self.treeView.setObjectName("treeView")
-        
         self.StartCarBttn = QtWidgets.QPushButton(self.centralwidget)
         self.StartCarBttn.setGeometry(QtCore.QRect(630, 470, 170, 48))
         self.StartCarBttn.setObjectName("StartCarBttn")
-        
         self.runSimBttn = QtWidgets.QPushButton(self.centralwidget)
         self.runSimBttn.setGeometry(QtCore.QRect(630, 410, 170, 48))
         self.runSimBttn.setObjectName("runSimBttn")
-        self.runSimBttn.clicked.connect(self.startSimBttnAction)
-        
         self.logBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.logBrowser.setGeometry(QtCore.QRect(10, 360, 611, 192))
         self.logBrowser.setObjectName("logBrowser")
-        
+        self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
+        self.scrollArea.setGeometry(QtCore.QRect(200, 10, 581, 331))
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 579, 329))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.verticalScrollBar = QtWidgets.QScrollBar(self.scrollAreaWidgetContents)
+        self.verticalScrollBar.setGeometry(QtCore.QRect(560, 0, 16, 331))
+        self.verticalScrollBar.setOrientation(QtCore.Qt.Vertical)
+        self.verticalScrollBar.setObjectName("verticalScrollBar")
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         MainWindow.setCentralWidget(self.centralwidget)
-        
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
         self.menubar.setObjectName("menubar")
@@ -48,9 +70,12 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-        self.actionSet_ROS_Workspace = QtWidgets.QAction(MainWindow)
-        self.actionSet_ROS_Workspace.setObjectName("actionSet_ROS_Workspace")
-        self.menuFile.addAction(self.actionSet_ROS_Workspace)
+        
+        self.actionSelect_Profile = QtWidgets.QAction(MainWindow)
+        self.actionSelect_Profile.setObjectName("actionSelect_Profile")
+        self.menuFile.addAction(self.actionSelect_Profile)
+        self.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
+        
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuSettings.menuAction())
 
@@ -64,21 +89,15 @@ class Ui_MainWindow(object):
         self.runSimBttn.setText(_translate("MainWindow", "Run Sim"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuSettings.setTitle(_translate("MainWindow", "Settings"))
-        self.actionSet_ROS_Workspace.setText(_translate("MainWindow", "Set ROS Workspace"))
-
-    def startSimBttnAction(self):
-        # This is executed when the button is pressed
-        print('Run Sim Button Pressed')
-        subprocess.call(['./runSim.sh'], shell=True)
+        self.actionSelect_Profile.setText(_translate("MainWindow", "Set ROS Workspace"))
+        
 
 
 if __name__ == "__main__":
-    import sys
-
-    subprocess.call(['roscore &'], shell=True)
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
+    ui.openProfileLoader()
     sys.exit(app.exec_())

@@ -60,6 +60,42 @@
      </rect>
     </property>
    </widget>
+   <widget class="QScrollArea" name="scrollArea">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>10</y>
+      <width>581</width>
+      <height>331</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>579</width>
+       <height>329</height>
+      </rect>
+     </property>
+     <widget class="QScrollBar" name="verticalScrollBar">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>0</y>
+        <width>16</width>
+        <height>331</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -74,7 +110,7 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionSet_ROS_Workspace"/>
+    <addaction name="actionSelect_Profile"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
@@ -85,9 +121,9 @@
    <addaction name="menuSettings"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionSet_ROS_Workspace">
+  <action name="actionSelect_Profile">
    <property name="text">
-    <string>Set ROS Workspace</string>
+    <string>Select Profile</string>
    </property>
   </action>
  </widget>
