@@ -40,6 +40,7 @@ class Ui_MainWindow(object):
         self.StartCarBttn = QtWidgets.QPushButton(self.centralwidget)
         self.StartCarBttn.setGeometry(QtCore.QRect(630, 470, 170, 48))
         self.StartCarBttn.setObjectName("StartCarBttn")
+        self.StartCarBttn.setStyleSheet("background-color: green")
         self.runSimBttn = QtWidgets.QPushButton(self.centralwidget)
         self.runSimBttn.setGeometry(QtCore.QRect(630, 410, 170, 48))
         self.runSimBttn.setObjectName("runSimBttn")
