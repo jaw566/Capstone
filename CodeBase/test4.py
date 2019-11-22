@@ -8,27 +8,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from profileSelect import Ui_profileSelect
-import sys
-import subprocess
-import socket 
 
-
-#variables
-hostname = socket.gethostname()    
-localIPAddress = socket.gethostbyname(hostname)
-robotIPAddress = ""
-ROSWorkspacePath = ""
 
 class Ui_MainWindow(object):
-
-    def openProfileLoader(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_profileSelect()
-        self.ui.setupUi(self.window)
-        self.ui.localIPAddressField.setText(localIPAddress)
-        self.window.show()
-
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -40,7 +22,6 @@ class Ui_MainWindow(object):
         self.StartCarBttn = QtWidgets.QPushButton(self.centralwidget)
         self.StartCarBttn.setGeometry(QtCore.QRect(630, 470, 170, 48))
         self.StartCarBttn.setObjectName("StartCarBttn")
-        self.StartCarBttn.setStyleSheet("background-color: green")
         self.runSimBttn = QtWidgets.QPushButton(self.centralwidget)
         self.runSimBttn.setGeometry(QtCore.QRect(630, 410, 170, 48))
         self.runSimBttn.setObjectName("runSimBttn")
@@ -58,7 +39,6 @@ class Ui_MainWindow(object):
         self.verticalScrollBar.setGeometry(QtCore.QRect(560, 0, 16, 331))
         self.verticalScrollBar.setOrientation(QtCore.Qt.Vertical)
         self.verticalScrollBar.setObjectName("verticalScrollBar")
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.racingStrat = QtWidgets.QGroupBox(self.scrollAreaWidgetContents)
         self.racingStrat.setGeometry(QtCore.QRect(0, 0, 561, 111))
         self.racingStrat.setObjectName("racingStrat")
@@ -98,9 +78,10 @@ class Ui_MainWindow(object):
         self.radioButton_7 = QtWidgets.QRadioButton(self.planningBox)
         self.radioButton_7.setGeometry(QtCore.QRect(10, 50, 212, 40))
         self.radioButton_7.setObjectName("radioButton_7")
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 39))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -110,12 +91,9 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-        
         self.actionSelect_Profile = QtWidgets.QAction(MainWindow)
         self.actionSelect_Profile.setObjectName("actionSelect_Profile")
         self.menuFile.addAction(self.actionSelect_Profile)
-        self.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
-        
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuSettings.menuAction())
 
@@ -126,6 +104,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "RosLauncher"))
         self.StartCarBttn.setText(_translate("MainWindow", "Start Car"))
+        self.runSimBttn.setText(_translate("MainWindow", "Run Sim"))
         self.racingStrat.setTitle(_translate("MainWindow", "Racing Strategy"))
         self.radioButton.setText(_translate("MainWindow", "option1"))
         self.radioButton_2.setText(_translate("MainWindow", "option 2"))
@@ -138,18 +117,16 @@ class Ui_MainWindow(object):
         self.planningBox.setTitle(_translate("MainWindow", "Planning"))
         self.radioButton_8.setText(_translate("MainWindow", "option2"))
         self.radioButton_7.setText(_translate("MainWindow", "option1"))
-        self.runSimBttn.setText(_translate("MainWindow", "Run Sim"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuSettings.setTitle(_translate("MainWindow", "Settings"))
-        self.actionSelect_Profile.setText(_translate("MainWindow", "Set ROS Workspace"))
-        
+        self.actionSelect_Profile.setText(_translate("MainWindow", "Select Profile"))
 
 
 if __name__ == "__main__":
+    import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
-    ui.openProfileLoader()
     sys.exit(app.exec_())
