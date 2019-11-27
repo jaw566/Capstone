@@ -1,3 +1,6 @@
+#This test has ROS runing and the Simulation
+#All hard coded
+
 from PyQt5 import QtWidgets, uic
 import sys
 import subprocess

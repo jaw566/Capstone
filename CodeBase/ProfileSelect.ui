@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>600</width>
     <height>300</height>
    </rect>
   </property>
@@ -16,10 +16,10 @@
   <widget class="QPushButton" name="openProfileBttn">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>370</x>
      <y>260</y>
-     <width>89</width>
-     <height>25</height>
+     <width>100</width>
+     <height>35</height>
     </rect>
    </property>
    <property name="text">
@@ -29,10 +29,10 @@
   <widget class="QPushButton" name="createProfileBttn">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>480</x>
      <y>260</y>
-     <width>89</width>
-     <height>25</height>
+     <width>100</width>
+     <height>35</height>
     </rect>
    </property>
    <property name="text">
@@ -42,10 +42,10 @@
   <widget class="QLabel" name="localIPLabel">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>30</y>
-     <width>111</width>
-     <height>17</height>
+     <x>10</x>
+     <y>20</y>
+     <width>240</width>
+     <height>35</height>
     </rect>
    </property>
    <property name="text">
@@ -55,10 +55,10 @@
   <widget class="QLabel" name="robotIPLabel">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>70</y>
-     <width>131</width>
-     <height>17</height>
+     <x>10</x>
+     <y>80</y>
+     <width>240</width>
+     <height>35</height>
     </rect>
    </property>
    <property name="text">
@@ -68,10 +68,10 @@
   <widget class="QLabel" name="rosWSLabel">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>110</y>
-     <width>111</width>
-     <height>17</height>
+     <x>10</x>
+     <y>140</y>
+     <width>240</width>
+     <height>35</height>
     </rect>
    </property>
    <property name="text">
@@ -81,40 +81,40 @@
   <widget class="QLineEdit" name="localIPAddressField">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>30</y>
-     <width>171</width>
-     <height>25</height>
+     <x>270</x>
+     <y>20</y>
+     <width>240</width>
+     <height>35</height>
     </rect>
    </property>
   </widget>
   <widget class="QLineEdit" name="robotIPField">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>70</y>
-     <width>171</width>
-     <height>25</height>
+     <x>270</x>
+     <y>80</y>
+     <width>240</width>
+     <height>35</height>
     </rect>
    </property>
   </widget>
   <widget class="QLineEdit" name="ROSWSField">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>110</y>
-     <width>171</width>
-     <height>25</height>
+     <x>270</x>
+     <y>140</y>
+     <width>240</width>
+     <height>35</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="browseROSWSBttn">
    <property name="geometry">
     <rect>
-     <x>268</x>
-     <y>140</y>
-     <width>61</width>
-     <height>25</height>
+     <x>390</x>
+     <y>190</y>
+     <width>120</width>
+     <height>35</height>
     </rect>
    </property>
    <property name="text">
