@@ -25,6 +25,21 @@ ROSWorkspacePath = ""
 
 class Ui_MainWindow(object):
 
+    def startSimBttnAction(self):
+        # This is executed when the button is pressed
+        #print('Run Sim Button Pressed')
+        subprocess.call(['roscore &'], shell=True)
+        subprocess.call(['./runSim.sh >> logfile_sim.txt'], shell=True)
+
+    def logContentsFromFile(self):
+        curr_wkg_dir = os.getcwd()
+        myfile = QtCore.QFile(curr_wkg_dir+"/logfile_sim.txt")
+        myfile.open(QtCore.QIODevice.ReadOnly)
+        stream = QtCore.QTextStream(myfile)
+        content = stream.readAll()
+        myfile.close()
+        self.Console.append(content)
+
     def openProfileLoader(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_profileSelect()
@@ -50,14 +65,19 @@ class Ui_MainWindow(object):
         # hard coded text in console      
         self.Console.append("Starting RosLaunch Console...") 
 
-        # TODO: grab contents from logfile
-        curr_wkg_dir = os.getcwd()
-        myfile = QtCore.QFile(curr_wkg_dir+"/logfile_sim.txt")
-        myfile.open(QtCore.QIODevice.ReadOnly)
-        stream = QtCore.QTextStream(myfile)
-        content = stream.readAll()
-        myfile.close()
-        self.Console.append(content)
+        ## TODO: grab contents from logfile
+        #curr_wkg_dir = os.getcwd()
+        #myfile = QtCore.QFile(curr_wkg_dir+"/logfile_sim.txt")
+        #myfile.open(QtCore.QIODevice.ReadOnly)
+        #stream = QtCore.QTextStream(myfile)
+        #content = stream.readAll()
+        #myfile.close()
+        #self.Console.append(content)
+
+        self.startSimBttn = self.findChild(QtWidgets.QPushButton, 'runSimBttn')
+        # Remember to pass the definition/method, not the return value!
+        self.startSimBttn.clicked.connect(self.startSimBttnAction) 
+        self.startSimBttn.clicked.connect(self.logContentsFromFile)
 
         
         self.Console.setGeometry(QtCore.QRect(10, 720, 991, 192))
