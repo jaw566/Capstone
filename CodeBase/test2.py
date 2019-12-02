@@ -20,10 +20,10 @@ class Ui(QtWidgets.QMainWindow):
     
     def startSimBttnAction(self):
         # This is executed when the button is pressed
-        print('Run Sim Button Pressed')
-        subprocess.call(['./runSim.sh'], shell=True)
+        #print('Run Sim Button Pressed')
+        subprocess.call(['./runSim.sh >> logfile_sim.txt'], shell=True)
         
-subprocess.call(['roscore &'], shell=True)
+subprocess.call(['roscore >> logfile_core.txt &'], shell=True)
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()
 app.exec_()
