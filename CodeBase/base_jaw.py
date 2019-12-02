@@ -74,10 +74,10 @@ class Ui_MainWindow(object):
         #myfile.close()
         #self.Console.append(content)
 
-        self.startSimBttn = self.findChild(QtWidgets.QPushButton, 'runSimBttn')
+        #self.runSimBttn = self.findChild(QtWidgets.QPushButton, 'runSimBttn')
         # Remember to pass the definition/method, not the return value!
-        self.startSimBttn.clicked.connect(self.startSimBttnAction) 
-        self.startSimBttn.clicked.connect(self.logContentsFromFile)
+        self.runSimBttn.clicked.connect(self.startSimBttnAction) 
+        self.runSimBttn.clicked.connect(self.logContentsFromFile)
 
         
         self.Console.setGeometry(QtCore.QRect(10, 720, 991, 192))
