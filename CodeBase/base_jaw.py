@@ -28,8 +28,8 @@ class Ui_MainWindow(object):
     def startSimBttnAction(self):
         # This is executed when the button is pressed
         #print('Run Sim Button Pressed')
-        subprocess.call(['roscore &'], shell=True)
-        subprocess.call(['./runSim.sh >> logfile_sim.txt'], shell=True)
+        self.Console.append("Simulator RUNNING....")
+        subprocess.call(['./runSim.sh >> logfile_sim.txt &'], shell=True)
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
@@ -37,6 +37,7 @@ class Ui_MainWindow(object):
         myfile.open(QtCore.QIODevice.ReadOnly)
         stream = QtCore.QTextStream(myfile)
         content = stream.readAll()
+        # TODO: read one line at a time and translate
         myfile.close()
         self.Console.append(content)
 
@@ -62,19 +63,12 @@ class Ui_MainWindow(object):
         self.runSimBttn.setGeometry(QtCore.QRect(1020, 790, 170, 48))
         self.runSimBttn.setObjectName("runSimBttn")
         self.Console = QtWidgets.QTextBrowser(self.centralwidget)
+        # JAW - console code
         # hard coded text in console      
-        self.Console.append("Starting RosLaunch Console...") 
-
-        ## TODO: grab contents from logfile
-        #curr_wkg_dir = os.getcwd()
-        #myfile = QtCore.QFile(curr_wkg_dir+"/logfile_sim.txt")
-        #myfile.open(QtCore.QIODevice.ReadOnly)
-        #stream = QtCore.QTextStream(myfile)
-        #content = stream.readAll()
-        #myfile.close()
-        #self.Console.append(content)
-
-        #self.runSimBttn = self.findChild(QtWidgets.QPushButton, 'runSimBttn')
+        self.Console.append("Starting RosLaunch Console") 
+        self.Console.append("=======================") 
+        self.Console.append("ROS core initiated...........") 
+        self.Console.append("Simulator READY.............")
         # Remember to pass the definition/method, not the return value!
         self.runSimBttn.clicked.connect(self.startSimBttnAction) 
         self.runSimBttn.clicked.connect(self.logContentsFromFile)
@@ -199,6 +193,7 @@ class Ui_MainWindow(object):
 
 
 if __name__ == "__main__":
+    subprocess.call(['roscore &'], shell=True)
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
