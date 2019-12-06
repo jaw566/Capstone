@@ -11,6 +11,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from profileSelect import Ui_profileSelect
+from PyQt5.QtWidgets import QFileDialog
 import sys
 import subprocess
 import socket 
@@ -77,7 +78,6 @@ class Ui_MainWindow(object):
         self.StartCarBttn.setGeometry(QtCore.QRect(1020, 860, 170, 48))
         self.StartCarBttn.setObjectName("StartCarBttn")
         self.StartCarBttn.clicked.connect(self.startCarBttnAction)
-        
         
         self.runSimBttn = QtWidgets.QPushButton(self.centralwidget)
         self.runSimBttn.setGeometry(QtCore.QRect(1020, 790, 170, 48))
