@@ -25,6 +25,17 @@ robotIPAddress = ""
 ROSWorkspacePath = ""
 
 class Ui_MainWindow(object):
+    
+    def list_files(self, startpath):
+        for root, dirs, files in os.walk(startpath):
+            level = root.replace(startpath, '').count(os.sep)
+            indent = ' ' * 4 * (level)
+            #print('{}{}/'.format(indent, os.path.basename(root)))
+            self.treeView.append('{}{}/'.format(indent, os.path.basename(root)))
+            subindent = ' ' * 4 * (level + 1)
+            for f in files:
+                #print('{}{}'.format(subindent, f))
+                self.treeView.append('{}{}'.format(subindent, f))
 
     def startCarBttnAction(self):
         # This is executed when the button is pressed
@@ -35,7 +46,7 @@ class Ui_MainWindow(object):
         # This is executed when the button is pressed
         #print('Run Sim Button Pressed')
         self.Console.append("Simulator RUNNING....")
-        subprocess.call(['./runSim.sh >> logfile_sim.txt &'], shell=True)
+        subprocess.call(['./runSim.sh >> logfile_sim.txt &', ROSWorkspacePath], shell=True)
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
@@ -47,19 +58,29 @@ class Ui_MainWindow(object):
         myfile.close()
         self.Console.append(content)
 
+    def createProfile(self):
+        robotIPAddress = self.ui.robotIPLabel.text
+        ROSWorkspacePath = self.ui.ROSWSField.text
+        self.window.close()
+
+    
     def openProfileLoader(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_profileSelect()
         self.ui.setupUi(self.window)
         self.ui.localIPAddressField.setText(localIPAddress)
         self.ui.browseROSWSBttn.clicked.connect(self.filePicker)
+        self.ui.createProfileBttn.clicked.connect(self.createProfile)
         self.window.show()
 
     def filePicker(self):
         dialog = QFileDialog()
-        fname = dialog.getOpenFileName(None, "Window name", "", "Python files (*.py)") #returns a tuple
-        #print(fname)
-        self.ui.ROSWSField.setText(fname[0]) #element 0 is our file path
+        #fname = dialog.getOpenFileName(None, "Window name", "", "Open Save Directory") #returns a tuple so need fname[0]
+        fname = dialog.getExistingDirectory(None, ("Select Folder"))#returns string
+        print(fname)
+        self.ui.ROSWSField.setText(fname) #element 0 is our file path
+        print(ROSWorkspacePath)
+        self.list_files(str(fname))
 
     def editor(self):
         self.textEdit = QtGui.QTextEdit()
@@ -70,8 +91,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(1200, 1000)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.treeView = QtWidgets.QTreeView(self.centralwidget)
-        self.treeView.setGeometry(QtCore.QRect(10, 0, 161, 351))
+        
+        self.treeView = QtWidgets.QTextBrowser(self.centralwidget)
+        self.treeView.setGeometry(QtCore.QRect(10, 0, 180, 351))
         self.treeView.setObjectName("treeView")
 
         self.StartCarBttn = QtWidgets.QPushButton(self.centralwidget)
@@ -209,6 +231,7 @@ class Ui_MainWindow(object):
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuSettings.setTitle(_translate("MainWindow", "Settings"))
         self.actionSelect_Profile.setText(_translate("MainWindow", "Select Profile"))
+        
 
 
 if __name__ == "__main__":
