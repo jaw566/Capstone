@@ -10,6 +10,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 from profileSelect import Ui_profileSelect
 import sys
 import subprocess
@@ -23,24 +25,38 @@ localIPAddress = socket.gethostbyname(hostname)
 robotIPAddress = ""
 ROSWorkspacePath = ""
 
+def list_files(startpath):
+    for root, dirs, files in os.walk(startpath):
+        level = root.replace(startpath, '').count(os.sep)
+        indent = ' ' * 4 * (level)
+        print('{}{}/'.format(indent, os.path.basename(root)))
+        subindent = ' ' * 4 * (level + 1)
+        for f in files:
+            print('{}{}'.format(subindent, f))
+
+
+
 class Ui_MainWindow(object):
 
     def startSimBttnAction(self):
         # This is executed when the button is pressed
         #print('Run Sim Button Pressed')
-        self.Console.append("Simulator RUNNING....")
         subprocess.call(['./runSim.sh >> logfile_sim.txt &'], shell=True)
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
-        myfile = QtCore.QFile(curr_wkg_dir+"/logfile_sim.txt")
-        myfile.open(QtCore.QIODevice.ReadOnly)
-        stream = QtCore.QTextStream(myfile)
-        content = stream.readAll()
-        # TODO: read one line at a time and translate
-        myfile.close()
-        self.Console.append(content)
-
+        print("here")
+        with open(curr_wkg_dir+"/logfile_sim.txt") as fp:
+            line = fp.readline()
+            print(line)
+            cnt = 1
+            line = fp.readline()
+            while line and (cnt < 4):
+                print("here :)")
+                self.Console.append("SIMULATOR initiation: {}".format(line.strip()))
+                line = fp.readline()
+                cnt += 1
+       
     def openProfileLoader(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_profileSelect()
@@ -53,9 +69,24 @@ class Ui_MainWindow(object):
         MainWindow.resize(1200, 1000)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.treeView = QtWidgets.QTreeView(self.centralwidget)
+
+        # directory tree stuff
+        self.treeView = QtWidgets.QTextBrowser(self.centralwidget)
         self.treeView.setGeometry(QtCore.QRect(10, 0, 161, 351))
         self.treeView.setObjectName("treeView")
+        #list_files(os.getcwd())
+        startpath=os.getcwd()
+        for root, dirs, files in os.walk(startpath):
+            level = root.replace(startpath, '').count(os.sep)
+            indent = ' ' * 4 * (level)
+            #print('{}{}/'.format(indent, os.path.basename(root)))
+            self.treeView.append('{}{}/'.format(indent, os.path.basename(root)))
+            subindent = ' ' * 4 * (level + 1)
+            for f in files:
+                #print('{}{}'.format(subindent, f))
+                self.treeView.append('{}{}'.format(subindent, f))
+
+
         self.StartCarBttn = QtWidgets.QPushButton(self.centralwidget)
         self.StartCarBttn.setGeometry(QtCore.QRect(1020, 860, 170, 48))
         self.StartCarBttn.setObjectName("StartCarBttn")
@@ -63,15 +94,27 @@ class Ui_MainWindow(object):
         self.runSimBttn.setGeometry(QtCore.QRect(1020, 790, 170, 48))
         self.runSimBttn.setObjectName("runSimBttn")
         self.Console = QtWidgets.QTextBrowser(self.centralwidget)
+            
         # JAW - console code
-        # hard coded text in console      
-        self.Console.append("Starting RosLaunch Console") 
-        self.Console.append("=======================") 
-        self.Console.append("ROS core initiated...........") 
-        self.Console.append("Simulator READY.............")
+        #self.Console.append("Starting RosLaunch Console") 
+        #self.Console.append("=======================") 
+        ## print stuff from rosecore execution to Console
+        #curr_wkg_dir = os.getcwd()
+        #with open(curr_wkg_dir+"/logfile_core.txt") as fp:
+        #    line = fp.readline()
+        #    cnt = 1
+        #    line = fp.readline()
+        #    while line and (cnt < 4):
+        #        if cnt != 2:
+        #            self.Console.append("ROS core initiation: {}".format(line.strip()))
+        #        line = fp.readline()
+        #        cnt += 1
+        ## hard coded text in console      
+        #self.Console.append("ROS core INITIATED...........") 
+        #self.Console.append("Simulator READY.............")
         # Remember to pass the definition/method, not the return value!
-        self.runSimBttn.clicked.connect(self.startSimBttnAction) 
-        self.runSimBttn.clicked.connect(self.logContentsFromFile)
+        #self.runSimBttn.clicked.connect(self.startSimBttnAction) 
+        #self.runSimBttn.clicked.connect(self.logContentsFromFile)
 
         
         self.Console.setGeometry(QtCore.QRect(10, 720, 991, 192))
@@ -193,7 +236,7 @@ class Ui_MainWindow(object):
 
 
 if __name__ == "__main__":
-    subprocess.call(['roscore &'], shell=True)
+    #subprocess.call(['roscore >> logfile_core.txt &'], shell=True)
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
