@@ -88,21 +88,21 @@ class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1200, 1000)
+        MainWindow.resize(1200, 955)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         
         self.treeView = QtWidgets.QTextBrowser(self.centralwidget)
-        self.treeView.setGeometry(QtCore.QRect(10, 0, 180, 351))
+        self.treeView.setGeometry(QtCore.QRect(10, 0, 180, 431))
         self.treeView.setObjectName("treeView")
 
         self.StartCarBttn = QtWidgets.QPushButton(self.centralwidget)
-        self.StartCarBttn.setGeometry(QtCore.QRect(1020, 860, 170, 48))
+        self.StartCarBttn.setGeometry(QtCore.QRect(1010, 790, 170, 48))
         self.StartCarBttn.setObjectName("StartCarBttn")
         self.StartCarBttn.clicked.connect(self.startCarBttnAction)
         
         self.runSimBttn = QtWidgets.QPushButton(self.centralwidget)
-        self.runSimBttn.setGeometry(QtCore.QRect(1020, 790, 170, 48))
+        self.runSimBttn.setGeometry(QtCore.QRect(1010, 720, 170, 48))
         self.runSimBttn.setObjectName("runSimBttn")
         self.Console = QtWidgets.QTextBrowser(self.centralwidget)
         # JAW - console code
@@ -118,7 +118,7 @@ class Ui_MainWindow(object):
         self.Console.setGeometry(QtCore.QRect(10, 720, 991, 192))
         self.Console.setObjectName("Console")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(190, 0, 991, 701))
+        self.tabWidget.setGeometry(QtCore.QRect(190, 0, 991, 671))
         self.tabWidget.setObjectName("tabWidget")
         self.ConfigTab = QtWidgets.QWidget()
         self.ConfigTab.setObjectName("ConfigTab")

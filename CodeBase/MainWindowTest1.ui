@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1200</width>
-    <height>1000</height>
+    <height>955</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,16 +19,16 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>161</width>
-      <height>351</height>
+      <width>181</width>
+      <height>431</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="StartCarBttn">
     <property name="geometry">
      <rect>
-      <x>1020</x>
-      <y>860</y>
+      <x>1010</x>
+      <y>790</y>
       <width>170</width>
       <height>48</height>
      </rect>
@@ -40,8 +40,8 @@
    <widget class="QPushButton" name="runSimBttn">
     <property name="geometry">
      <rect>
-      <x>1020</x>
-      <y>790</y>
+      <x>1010</x>
+      <y>720</y>
       <width>170</width>
       <height>48</height>
      </rect>
@@ -66,7 +66,7 @@
       <x>190</x>
       <y>0</y>
       <width>991</width>
-      <height>701</height>
+      <height>671</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -311,7 +311,7 @@
      <x>0</x>
      <y>0</y>
      <width>1200</width>
-     <height>39</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

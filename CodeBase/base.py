@@ -31,11 +31,11 @@ class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1200, 1000)
+        MainWindow.resize(1200, 955)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.treeView = QtWidgets.QTreeView(self.centralwidget)
-        self.treeView.setGeometry(QtCore.QRect(10, 0, 161, 351))
+        self.treeView.setGeometry(QtCore.QRect(10, 0, 181, 351))
         self.treeView.setObjectName("treeView")
         self.StartCarBttn = QtWidgets.QPushButton(self.centralwidget)
         self.StartCarBttn.setGeometry(QtCore.QRect(1020, 860, 170, 48))
