@@ -45,8 +45,8 @@ class Ui_MainWindow(object):
     def startSimBttnAction(self):
         # This is executed when the button is pressed
         #print('Run Sim Button Pressed')
-        self.Console.append("Simulator RUNNING....")
         subprocess.call(['./runSim.sh >> logfile_sim.txt &', ROSWorkspacePath], shell=True)
+        self.Console.append("Simulator RUNNING....")
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
