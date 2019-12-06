@@ -40,7 +40,7 @@ class Ui_MainWindow(object):
     def startCarBttnAction(self):
         # This is executed when the button is pressed
         self.Console.append("Starting Car....")
-        subprocess.call(['./autoSSH.sh'], shell=True)
+        subprocess.call(['./runCar.sh >> &'], shell=True)
 
     def startSimBttnAction(self):
         # This is executed when the button is pressed
