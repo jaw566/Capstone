@@ -51,17 +51,14 @@ class Ui_MainWindow(object):
         self.ui = Ui_profileSelect()
         self.ui.setupUi(self.window)
         self.ui.localIPAddressField.setText(localIPAddress)
+        self.ui.browseROSWSBttn.clicked.connect(self.filePicker)
         self.window.show()
 
-    def file_open(self):
-        options = QFileDialog.Options()
-        fileName, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "", "All Files (*);;Python Files (*.py)", options=options)
-        
-        self.editor()
-
-        if fileName:
-            return fileName
-
+    def filePicker(self):
+        dialog = QFileDialog()
+        fname = dialog.getOpenFileName(None, "Window name", "", "Python files (*.py)") #returns a tuple
+        #print(fname)
+        self.ui.ROSWSField.setText(fname[0]) #element 0 is our file path
 
     def editor(self):
         self.textEdit = QtGui.QTextEdit()

@@ -12,6 +12,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QFileDialog
 from profileSelect import Ui_profileSelect
 import sys
 import subprocess
@@ -57,12 +58,21 @@ class Ui_MainWindow(object):
                 line = fp.readline()
                 cnt += 1
        
+
+    def filePicker(self):
+        dialog = QFileDialog()
+        fname = dialog.getOpenFileName(None, "Window name", "", "Python files (*.py)")#returns a tuple
+        #print(fname)
+        self.ui.ROSWSField.setText(fname[0])#element 0 is our file path
+        
+
     def openProfileLoader(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_profileSelect()
         self.ui.setupUi(self.window)
         self.ui.localIPAddressField.setText(localIPAddress)
         self.window.show()
+        self.ui.browseROSWSBttn.clicked.connect(self.filePicker)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
