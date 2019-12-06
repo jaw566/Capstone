@@ -75,6 +75,7 @@ class Ui_MainWindow(object):
         self.treeView.setGeometry(QtCore.QRect(10, 0, 161, 351))
         self.treeView.setObjectName("treeView")
         #list_files(os.getcwd())
+        # BOWEN ----> look here
         startpath=os.getcwd()
         for root, dirs, files in os.walk(startpath):
             level = root.replace(startpath, '').count(os.sep)
@@ -85,6 +86,7 @@ class Ui_MainWindow(object):
             for f in files:
                 #print('{}{}'.format(subindent, f))
                 self.treeView.append('{}{}'.format(subindent, f))
+        # BOWEN ---> stop here :)
 
 
         self.StartCarBttn = QtWidgets.QPushButton(self.centralwidget)
