@@ -27,6 +27,7 @@ ROSWorkspacePath = ""
 class Ui_MainWindow(object):
     
     def list_files(self, startpath):
+        self.treeView.clear()
         for root, dirs, files in os.walk(startpath):
             level = root.replace(startpath, '').count(os.sep)
             indent = ' ' * 4 * (level)
