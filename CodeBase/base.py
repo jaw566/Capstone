@@ -71,11 +71,11 @@ class ImageDialog(QtWidgets.QMainWindow):
         myfile.open(QtCore.QIODevice.ReadOnly)
         stream = QtCore.QTextStream(myfile)
         content = stream.read(200)
-        self.Console.append("Logging Contents from Simulation")
-        self.Console.append("================================")
+        self.ui.Console.append("Logging Contents from Simulation")
+        self.ui.Console.append("================================")
         # TODO: read one line at a time and translate
         myfile.close()
-        self.Console.append(content)
+        self.ui.Console.append(content)
 
     def createProfile(self):
         robotIPAddress = self.ui.robotIPLabel.text
