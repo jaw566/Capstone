@@ -56,13 +56,13 @@ class ImageDialog(QtWidgets.QMainWindow):
 
     def startCarBttnAction(self):
         # This is executed when the button is pressed
-        self.Console.append("Starting Car....")
+        self.ui.Console.append("Starting Car....")
         subprocess.call(['./runCar.sh >> &'], shell=True)
 
     def startSimBttnAction(self):
         # This is executed when the button is pressed
         #print('Run Sim Button Pressed')
-        self.Console.append("Simulator RUNNING....")
+        self.ui.Console.append("Simulator RUNNING....")
         subprocess.call(['./runSim.sh >> logfile_sim.txt &', ROSWorkspacePath], shell=True)
 
     def logContentsFromFile(self):
