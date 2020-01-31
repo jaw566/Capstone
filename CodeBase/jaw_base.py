@@ -11,25 +11,45 @@ import signal
 
 # JAW - closure of ROS
 import atexit
+# JAW - saving config window session
+from klepto.archives import *
 
 #variables
 hostname = socket.gethostname()    
 localIPAddress = socket.gethostbyname(hostname)
 robotIPAddress = ""
 ROSWorkspacePath = ""
-proc_sim=0
+
+# JAW - BEGIN closure of ROS
+#
+# Notes - atexit functions are executed from bottom to top
+#         i.e., currently executed as nodelist, sim, core
+#
+@atexit.register
+def closeROS_core():
+    # ensure that proc_roscore was defined
+    if( 'proc_roscore' in globals()):
+        os.killpg(proc_roscore.pid, signal.SIGTERM)
 
 # JAW - closure of ROS
 @atexit.register
-def closeROS():
+def closeROS_sim():
+    # ensure that proc_sim was defined
+    if( 'proc_sim' in globals()):
+        os.killpg(proc_sim.pid, signal.SIGTERM)
+
+# JAW - closure of ROS
+@atexit.register
+def closeROS_nodelist():
     print("Begin killing program...")
     nodes = os.popen("rosnode list").readlines()
     for i in range(len(nodes)):
         nodes[i] = nodes[i].replace("\n","")
     for node in nodes:
         os.system("rosnode kill "+ node)
-    #os.killpg(proc_sim.pid,signal.SIGTERM)
-    os.killpg(proc_roscore.pid,signal.SIGTERM)
+#
+# JAW - END closure of ROS
+
 
 class ImageDialog(QtWidgets.QMainWindow):
     
@@ -77,12 +97,15 @@ class ImageDialog(QtWidgets.QMainWindow):
         subprocess.call(['./runCar.sh >> &'], shell=True)
 
     def startSimBttnAction(self):
+        global proc_sim        
         # This is executed when the button is pressed
-        #print('Run Sim Button Pressed')
         self.ui.Console.append("Simulator RUNNING....")
-        os.system('./runSim.sh >> logfile_sim.txt &')
-        #print(proc_sim)
-        #proc_sim = subprocess.Popen(['./runSim.sh >> logfile_sim.txt &',ROSWorkspacePath],shell=True,preexec_fn=os.setsid)
+        proc_sim = subprocess.Popen( ['./runSim.sh >> logfile_sim.txt &'], \
+                                   shell=True,preexec_fn=os.setsid )
+
+        # Alternative calls to command line
+        #subprocess.call(['./runSim.sh >> logfile_sim.txt &'],shell=True)
+        #os.system('./runSim.sh >> logfile_sim.txt &')
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
@@ -138,6 +161,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         
 
 if __name__ == "__main__":
+    global proc_roscore
     proc_roscore=subprocess.Popen(['roscore &'],shell=True,preexec_fn=os.setsid)
     app = QtWidgets.QApplication(sys.argv)
     window = QtWidgets.QMainWindow()
