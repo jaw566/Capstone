@@ -8,6 +8,7 @@ import subprocess
 import socket 
 import os
 import signal
+
 # JAW - closure of ROS
 import atexit
 # JAW - saving config window session
@@ -18,6 +19,11 @@ hostname = socket.gethostname()
 localIPAddress = socket.gethostbyname(hostname)
 robotIPAddress = ""
 ROSWorkspacePath = ""
+proc_sim=0
+radioBttns = []
+radioBttnsMan = ["radioButton_0", "radioButton_1", "radioButton_2",
+ "radioButton_3", "radioButton_4", "radioButton_5", "radioButton_6",
+  "radioButton_7", "radioButton_8", "radioButton_9", "radioButton_10", "radioBttns_11"]
 
 class ImageDialog(QtWidgets.QMainWindow):
     
@@ -35,6 +41,9 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
         self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
         #self.ui.treeView.clicked.connect(self.populateEditor)
+        
+        # Connect up the menu options
+        self.ui.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
       
         # JAW - console code
         # hard coded text in console      
@@ -44,8 +53,8 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append("Simulator READY.............")
         # Remember to pass the definition/method, not the return value!
 
-        # Connect up the menu options
-        self.ui.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
+        self.loadPreviousConfig()
+        
   
     def list_files(self, startpath):
         self.treeView.clear()
@@ -61,19 +70,16 @@ class ImageDialog(QtWidgets.QMainWindow):
 
     def startCarBttnAction(self):
         # This is executed when the button is pressed
-        self.ui.Console.append("Starting Car....")
+        self.Console.append("Starting Car....")
         subprocess.call(['./runCar.sh >> &'], shell=True)
 
     def startSimBttnAction(self):
-        global proc_sim        
         # This is executed when the button is pressed
+        #print('Run Sim Button Pressed')
         self.ui.Console.append("Simulator RUNNING....")
-        proc_sim = subprocess.Popen( ['./runSim.sh >> logfile_sim.txt &'], \
-                                   shell=True,preexec_fn=os.setsid )
-
-        # Alternative calls to command line
-        #subprocess.call(['./runSim.sh >> logfile_sim.txt &'],shell=True)
-        #os.system('./runSim.sh >> logfile_sim.txt &')
+        os.system('./runSim.sh >> logfile_sim.txt &')
+        #print(proc_sim)
+        #proc_sim = subprocess.Popen(['./runSim.sh >> logfile_sim.txt &',ROSWorkspacePath],shell=True,preexec_fn=os.setsid)
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
@@ -126,38 +132,36 @@ class ImageDialog(QtWidgets.QMainWindow):
         text = open(filePath, 'r').read()
         self.ui.textBrowser.setPlainText(text)
 
-    # JAW - BEGIN closure of ROS
-    #   
-    # Notes - atexit functions are executed from bottom to top
-    #         i.e., currently executed as nodelist, sim, core
-    #
-    @atexit.register
-    def closeROS_core():
-        # ensure that proc_roscore was defined
-        if('proc_roscore' in globals()):
-            os.killpg(proc_roscore.pid, signal.SIGTERM)
+    #def getRadioBttns(self, array):
+        #maybe latter
+        
+    #load previous config button options
+    def loadPreviousConfig(self):
+        try:
+            with open("saveData.txt") as savedData:
+                for line in savedData:
+                   
+                
+                self.ui.Console.append("Previous options found")
+
+
+        except FileNotFoundError:
+            self.ui.Console.append("Previous options not found")
 
     # JAW - closure of ROS
     @atexit.register
-    def closeROS_sim():
-        # ensure that proc_sim was defined
-        if('proc_sim' in globals()):
-            os.killpg(proc_sim.pid, signal.SIGTERM)
-
-    # JAW - closure of ROS
-    @atexit.register
-    def closeROS_nodelist():
+    def closeROS():
         print("Begin killing program...")
         nodes = os.popen("rosnode list").readlines()
         for i in range(len(nodes)):
-            nodes[i] = nodes[i].replace("\n", "")
+            nodes[i] = nodes[i].replace("\n","")
         for node in nodes:
-            os.system("rosnode kill " + node)
-    # JAW - END closure of ROS
-
+            os.system("rosnode kill "+ node)
+        #os.killpg(proc_sim.pid,signal.SIGTERM)
+        os.killpg(proc_roscore.pid,signal.SIGTERM)
+        
 
 if __name__ == "__main__":
-    global proc_roscore
     proc_roscore=subprocess.Popen(['roscore &'],shell=True,preexec_fn=os.setsid)
     app = QtWidgets.QApplication(sys.argv)
     window = QtWidgets.QMainWindow()
@@ -166,3 +170,6 @@ if __name__ == "__main__":
     ui.show()
     #ui.openProfileLoader()
     sys.exit(app.exec_())
+    
+
+
