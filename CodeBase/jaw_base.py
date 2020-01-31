@@ -66,6 +66,9 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
         self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
         self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
+        self.mystr = "0"
+        self.ui.radioButton.clicked.connect(self.saveOptions(self.mystr))
+
         #self.ui.treeView.clicked.connect(self.populateEditor)
       
         # JAW - console code
@@ -78,6 +81,12 @@ class ImageDialog(QtWidgets.QMainWindow):
 
         # Connect up the menu options
         self.ui.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
+
+    def saveOptions(self,num):
+        arch = file_archive('Config_options.txt')
+        print(arch.archive)
+        arch[num] = 'y'
+        arch.dump()
   
     def list_files(self, startpath):
         self.treeView.clear()
