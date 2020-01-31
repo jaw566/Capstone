@@ -7,9 +7,8 @@ import sys
 import subprocess
 import socket 
 import os
-import signal
-
 # JAW - closure of ROS
+import signal
 import atexit
 # JAW - saving config window session
 from klepto.archives import *
@@ -19,37 +18,6 @@ hostname = socket.gethostname()
 localIPAddress = socket.gethostbyname(hostname)
 robotIPAddress = ""
 ROSWorkspacePath = ""
-
-# JAW - BEGIN closure of ROS
-#
-# Notes - atexit functions are executed from bottom to top
-#         i.e., currently executed as nodelist, sim, core
-#
-@atexit.register
-def closeROS_core():
-    # ensure that proc_roscore was defined
-    if( 'proc_roscore' in globals()):
-        os.killpg(proc_roscore.pid, signal.SIGTERM)
-
-# JAW - closure of ROS
-@atexit.register
-def closeROS_sim():
-    # ensure that proc_sim was defined
-    if( 'proc_sim' in globals()):
-        os.killpg(proc_sim.pid, signal.SIGTERM)
-
-# JAW - closure of ROS
-@atexit.register
-def closeROS_nodelist():
-    print("Begin killing program...")
-    nodes = os.popen("rosnode list").readlines()
-    for i in range(len(nodes)):
-        nodes[i] = nodes[i].replace("\n","")
-    for node in nodes:
-        os.system("rosnode kill "+ node)
-#
-# JAW - END closure of ROS
-
 
 class ImageDialog(QtWidgets.QMainWindow):
     
@@ -66,9 +34,6 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
         self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
         self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
-        self.mystr = "0"
-        self.ui.radioButton.clicked.connect(self.saveOptions(self.mystr))
-
         #self.ui.treeView.clicked.connect(self.populateEditor)
       
         # JAW - console code
@@ -81,13 +46,13 @@ class ImageDialog(QtWidgets.QMainWindow):
 
         # Connect up the menu options
         self.ui.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
-
+  
     def saveOptions(self,num):
         arch = file_archive('Config_options.txt')
         print(arch.archive)
         arch[num] = 'y'
         arch.dump()
-  
+
     def list_files(self, startpath):
         self.treeView.clear()
         for root, dirs, files in os.walk(startpath):
@@ -102,7 +67,7 @@ class ImageDialog(QtWidgets.QMainWindow):
 
     def startCarBttnAction(self):
         # This is executed when the button is pressed
-        self.Console.append("Starting Car....")
+        self.ui.Console.append("Starting Car....")
         subprocess.call(['./runCar.sh >> &'], shell=True)
 
     def startSimBttnAction(self):
@@ -167,7 +132,35 @@ class ImageDialog(QtWidgets.QMainWindow):
         text = open(filePath, 'r').read()
         self.ui.textBrowser.setPlainText(text)
 
-        
+    # JAW - BEGIN closure of ROS
+    #   
+    # Notes - atexit functions are executed from bottom to top
+    #         i.e., currently executed as nodelist, sim, core
+    #
+    @atexit.register
+    def closeROS_core():
+        # ensure that proc_roscore was defined
+        if('proc_roscore' in globals()):
+            os.killpg(proc_roscore.pid, signal.SIGTERM)
+
+    # JAW - closure of ROS
+    @atexit.register
+    def closeROS_sim():
+        # ensure that proc_sim was defined
+        if('proc_sim' in globals()):
+            os.killpg(proc_sim.pid, signal.SIGTERM)
+
+    # JAW - closure of ROS
+    @atexit.register
+    def closeROS_nodelist():
+        print("Begin killing program...")
+        nodes = os.popen("rosnode list").readlines()
+        for i in range(len(nodes)):
+            nodes[i] = nodes[i].replace("\n", "")
+        for node in nodes:
+            os.system("rosnode kill " + node)
+    # JAW - END closure of ROS
+
 
 if __name__ == "__main__":
     global proc_roscore
@@ -179,6 +172,3 @@ if __name__ == "__main__":
     ui.show()
     #ui.openProfileLoader()
     sys.exit(app.exec_())
-    
-
-
