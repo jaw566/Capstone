@@ -35,23 +35,3 @@ After you have saved your UI file you cna run the following command to generate 
 
 `pyuic5 -x UI_FILE_NAME.ui -o NAME_OF_EXC.py`
 
-## Using rosnode to kill all the nodes
-If you want to kill all the node you can use:
-
-`rosnode kill --all`
-
-And if there's an error shows that "Unable to communicate with the master!" then you need to type:
-
-`export ROS_HOSTNAME=localhost`
-
-`export ROS_MASTER_URL=http://localhost:11311`
-
-after steps above open a new terminal and open the roscore, then open another terminal and type
-
-`rosnode kill --all`
-
-now you can kill all the nodes. it will show like this : 
-
-`killing /rosout`
-
-`killed`
