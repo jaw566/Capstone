@@ -13,6 +13,7 @@ import signal
 import atexit
 # JAW - saving config window session
 from klepto.archives import *
+from functools import partial
 
 #variables
 hostname = socket.gethostname()    
@@ -20,10 +21,9 @@ localIPAddress = socket.gethostbyname(hostname)
 robotIPAddress = ""
 ROSWorkspacePath = ""
 proc_sim=0
-radioBttns = []
-radioBttnsMan = ["radioButton_0", "radioButton_1", "radioButton_2",
+radioBttns = ["radioButton_0", "radioButton_1", "radioButton_2",
  "radioButton_3", "radioButton_4", "radioButton_5", "radioButton_6",
-  "radioButton_7", "radioButton_8", "radioButton_9", "radioButton_10", "radioBttns_11"]
+  "radioButton_7", "radioButton_8", "radioButton_9", "radioButton_10", "radioButton_11"]
 
 class ImageDialog(QtWidgets.QMainWindow):
     
@@ -35,13 +35,26 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         # Make local modifications.
-       
+        self.loadOptions()
         # Connect up the buttons.
         self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
         self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
         self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
         #self.ui.treeView.clicked.connect(self.populateEditor)
-        
+
+        self.ui.radioButton_0.clicked.connect(partial(self.saveOptions, radioBttns[0]))
+        self.ui.radioButton_1.clicked.connect(partial(self.saveOptions, radioBttns[1]))
+        self.ui.radioButton_2.clicked.connect(partial(self.saveOptions, radioBttns[2]))
+        self.ui.radioButton_3.clicked.connect(partial(self.saveOptions, radioBttns[3]))
+        self.ui.radioButton_4.clicked.connect(partial(self.saveOptions, radioBttns[4]))
+        self.ui.radioButton_5.clicked.connect(partial(self.saveOptions, radioBttns[5]))
+        self.ui.radioButton_6.clicked.connect(partial(self.saveOptions, radioBttns[6]))
+        self.ui.radioButton_7.clicked.connect(partial(self.saveOptions, radioBttns[7]))
+        self.ui.radioButton_8.clicked.connect(partial(self.saveOptions, radioBttns[8]))
+        self.ui.radioButton_9.clicked.connect(partial(self.saveOptions, radioBttns[9]))
+        self.ui.radioButton_10.clicked.connect(partial(self.saveOptions, radioBttns[10]))
+        self.ui.radioButton_11.clicked.connect(partial(self.saveOptions, radioBttns[11]))
+
         # Connect up the menu options
         self.ui.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
       
@@ -55,7 +68,27 @@ class ImageDialog(QtWidgets.QMainWindow):
 
         self.loadPreviousConfig()
         
-  
+    
+    def saveOptions(self, name):
+        arch = file_archive('configData.txt')
+        arch[name] = 'y'
+        arch.dump()
+        print(arch.archive)
+
+    def loadOptions(self):
+        arch = file_archive('configData.txt')
+        dictionary = arch.archive
+        print(dictionary)
+        for i in dictionary:
+            if 'y' == dictionary[i]:
+                #print(i)
+                var=getattr(self.ui, i)
+                var.toggle()
+            #dictionary[i] = 'n'
+
+        
+
+
     def list_files(self, startpath):
         self.treeView.clear()
         for root, dirs, files in os.walk(startpath):
@@ -139,11 +172,9 @@ class ImageDialog(QtWidgets.QMainWindow):
     def loadPreviousConfig(self):
         try:
             with open("saveData.txt") as savedData:
-                for line in savedData:
-                   
-                
+                #for line in savedData:   
+                    #do stuff
                 self.ui.Console.append("Previous options found")
-
 
         except FileNotFoundError:
             self.ui.Console.append("Previous options not found")
