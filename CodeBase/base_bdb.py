@@ -87,20 +87,6 @@ class ImageDialog(QtWidgets.QMainWindow):
             #dictionary[i] = 'n'
 
         
-
-
-    def list_files(self, startpath):
-        self.treeView.clear()
-        for root, dirs, files in os.walk(startpath):
-            level = root.replace(startpath, '').count(os.sep)
-            indent = ' ' * 4 * (level)
-            #print('{}{}/'.format(indent, os.path.basename(root)))
-            self.treeView.append('{}{}/'.format(indent, os.path.basename(root)))
-            subindent = ' ' * 4 * (level + 1)
-            for f in files:
-                #print('{}{}'.format(subindent, f))
-                self.treeView.append('{}{}'.format(subindent, f))
-
     def startCarBttnAction(self):
         # This is executed when the button is pressed
         self.Console.append("Starting Car....")
@@ -151,22 +137,6 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.model.setRootPath(ROSWorkspacePath)
         self.ui.treeView.setModel(self.model)
         self.ui.treeView.setRootIndex(self.model.index(QtCore.QDir.currentPath()))
-
-    @QtCore.pyqtSlot(QtCore.QModelIndex)                                                                                                                                                                            
-    def populateEditor(self, index):
-        indexItem = self.model.index(index.row(), 0, index.parent())
-
-        fileName = self.model.fileName(indexItem)
-        filePath = self.model.filePath(indexItem)
-
-        self.ui.textBrowser.setText(fileName)
-        #self.ui.textBrowser.setText(filePath)
-
-        text = open(filePath, 'r').read()
-        self.ui.textBrowser.setPlainText(text)
-
-    #def getRadioBttns(self, array):
-        #maybe latter
         
     #load previous config button options
     def loadPreviousConfig(self):
