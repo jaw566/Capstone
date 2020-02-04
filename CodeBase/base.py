@@ -34,6 +34,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
         self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
         self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
+        self.ui.stopCarBttn.clicked.connect(self.emergencyBttnAction)
         #self.ui.treeView.clicked.connect(self.populateEditor)
       
         # JAW - console code
@@ -74,6 +75,11 @@ class ImageDialog(QtWidgets.QMainWindow):
         # Alternative calls to command line
         #subprocess.call(['./runSim.sh >> logfile_sim.txt &'],shell=True)
         #os.system('./runSim.sh >> logfile_sim.txt &')
+        
+    def emergencyBttnAction(self):
+        # This is executed when the button is pressed
+        self.Console.append("Stop the Car....")
+        subprocess.call(['./stopCar.sh >> &'], shell=True)
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
