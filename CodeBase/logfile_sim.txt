@@ -314,4 +314,26 @@ log file: /home/bboyd/.ros/log/55418ef6-46a7-11ea-9330-000c293c857d/vesc-low_lev
 log file: /home/bboyd/.ros/log/55418ef6-46a7-11ea-9330-000c293c857d/vesc-mux_chainer-8*.log[0m
 [1m[vesc/mux_topic_backward_compat_navigation-11] process has finished cleanly
 log file: /home/bboyd/.ros/log/55418ef6-46a7-11ea-9330-000c293c857d/vesc-mux_topic_backward_compat_navigation-11*.log[0m
-[1m[vesc/mux_topic_backward_compat_safety-9] proc
+[1m[vesc/mux_topic_backward_compat_safety-9] proc[0m[ INFO] [1580749521.246212992]: Finished loading Gazebo ROS API Plugin.[0m
+[0m[ INFO] [1580749521.277642365]: waitForService: Service [/gazebo/set_physics_properties] has not been advertised, waiting...[0m
+[0m[ INFO] [1580749527.795318672, 0.001000000]: Laser Plugin: Using the 'robotNamespace' param: '/'[0m
+[0m[ INFO] [1580749527.795605910, 0.001000000]: Starting Laser Plugin (ns = /)[0m
+[0m[ INFO] [1580749527.834630609, 0.001000000]: Laser Plugin (ns = /)  <tf_prefix_>, set to ""[0m
+[0m[ INFO] [1580749528.841319146, 0.001000000]: Camera Plugin: Using the 'robotNamespace' param: '/'[0m
+[0m[ INFO] [1580749528.873125621, 0.001000000]: Camera Plugin (ns = /)  <tf_prefix_>, set to ""[0m
+[0m[ INFO] [1580749529.229316486, 0.001000000]: Loading gazebo_ros_control plugin[0m
+[0m[ INFO] [1580749529.229697942, 0.001000000]: Starting gazebo_ros_control plugin in namespace: /racecar[0m
+[0m[ INFO] [1580749529.238769202, 0.001000000]: gazebo_ros_control plugin is waiting for model URDF in parameter [/robot_description] on the ROS param server.[0m
+[0m[ INFO] [1580749529.476981180, 0.001000000]: Loaded gazebo_ros_control.[0m
+[0m[ INFO] [1580749529.584437265, 0.025000000]: waitForService: Service [/gazebo/set_physics_properties] is now available.[0m
+[0m[ INFO] [1580749530.222411684, 0.081000000]: Physics dynamic reconfigure ready.[0m
+ess has finished cleanly
+log file: /home/bboyd/.ros/log/55418ef6-46a7-11ea-9330-000c293c857d/vesc-mux_topic_backward_compat_safety-9*.log[0m
+[1m[vesc/mux_topic_backward_compat_teleop-10] process has finished cleanly
+log file: /home/bboyd/.ros/log/55418ef6-46a7-11ea-9330-000c293c857d/vesc-mux_topic_backward_compat_teleop-10*.log[0m
+[1m[vesc/zero_ackermann_cmd-12] process has finished cleanly
+log file: /home/bboyd/.ros/log/55418ef6-46a7-11ea-9330-000c293c857d/vesc-zero_ackermann_cmd-12*.log[0m
+[gazebo-1] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

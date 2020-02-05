@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QFileSystemModel
+import sys
+
 from profileSelect import Ui_ProfileSelect
 from clientUI import Ui_MainWindow
-import sys
+
 import subprocess
 import socket 
 import os
@@ -42,17 +44,17 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
         #self.ui.treeView.clicked.connect(self.populateEditor)
 
-        self.ui.radioButton_0.clicked.connect(partial(self.saveOptions, radioBttns[0]))
-        self.ui.radioButton_1.clicked.connect(partial(self.saveOptions, radioBttns[1]))
-        self.ui.radioButton_2.clicked.connect(partial(self.saveOptions, radioBttns[2]))
-        self.ui.radioButton_3.clicked.connect(partial(self.saveOptions, radioBttns[3]))
-        self.ui.radioButton_4.clicked.connect(partial(self.saveOptions, radioBttns[4]))
-        self.ui.radioButton_5.clicked.connect(partial(self.saveOptions, radioBttns[5]))
-        self.ui.radioButton_6.clicked.connect(partial(self.saveOptions, radioBttns[6]))
-        self.ui.radioButton_7.clicked.connect(partial(self.saveOptions, radioBttns[7]))
-        self.ui.radioButton_8.clicked.connect(partial(self.saveOptions, radioBttns[8]))
-        self.ui.radioButton_9.clicked.connect(partial(self.saveOptions, radioBttns[9]))
-        self.ui.radioButton_10.clicked.connect(partial(self.saveOptions, radioBttns[10]))
+        self.ui.radioButton_0.clicked.connect(partial(self.saveSelectedOptions, radioBttns[0]))
+        self.ui.radioButton_1.clicked.connect(partial(self.saveSelectedOptions, radioBttns[1]))
+        self.ui.radioButton_2.clicked.connect(partial(self.saveSelectedOptions, radioBttns[2]))
+        self.ui.radioButton_3.clicked.connect(partial(self.saveSelectedOptions, radioBttns[3]))
+        self.ui.radioButton_4.clicked.connect(partial(self.saveSelectedOptions, radioBttns[4]))
+        self.ui.radioButton_5.clicked.connect(partial(self.saveSelectedOptions, radioBttns[5]))
+        self.ui.radioButton_6.clicked.connect(partial(self.saveSelectedOptions, radioBttns[6]))
+        self.ui.radioButton_7.clicked.connect(partial(self.saveSelectedOptions, radioBttns[7]))
+        self.ui.radioButton_8.clicked.connect(partial(self.saveSelectedOptions, radioBttns[8]))
+        self.ui.radioButton_9.clicked.connect(partial(self.saveSelectedOptions, radioBttns[9]))
+        self.ui.radioButton_10.clicked.connect(partial(self.saveSelectedOptions, radioBttns[10]))
         self.ui.radioButton_11.clicked.connect(partial(self.saveOptions, radioBttns[11]))
 
         # Connect up the menu options
@@ -66,16 +68,18 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append("Simulator READY.............")
         # Remember to pass the definition/method, not the return value!
 
-        self.loadPreviousConfig()
+        self.loadPreviousOptions()
         
-    
-    def saveOptions(self, name):
+    def loadConfiguration(self):
+        #this is where the config fill will be read in and radio buttons remnamed
+
+    def saveSelectedOptions(self, name):
         arch = file_archive('configData.txt')
         arch[name] = 'y'
         arch.dump()
         print(arch.archive)
 
-    def loadOptions(self):
+    def loadPreviousOptions(self):
         arch = file_archive('configData.txt')
         dictionary = arch.archive
         print(dictionary)
@@ -138,16 +142,6 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.treeView.setModel(self.model)
         self.ui.treeView.setRootIndex(self.model.index(QtCore.QDir.currentPath()))
         
-    #load previous config button options
-    def loadPreviousConfig(self):
-        try:
-            with open("saveData.txt") as savedData:
-                #for line in savedData:   
-                    #do stuff
-                self.ui.Console.append("Previous options found")
-
-        except FileNotFoundError:
-            self.ui.Console.append("Previous options not found")
 
     # JAW - closure of ROS
     @atexit.register
