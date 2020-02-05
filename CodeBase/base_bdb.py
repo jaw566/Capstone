@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QFileSystemModel
+import sys
+
 from profileSelect import Ui_ProfileSelect
 from clientUI import Ui_MainWindow
-import sys
+
 import subprocess
 import socket 
 import os
@@ -13,6 +15,7 @@ import signal
 import atexit
 # JAW - saving config window session
 from klepto.archives import *
+from functools import partial
 
 #variables
 hostname = socket.gethostname()    
@@ -20,10 +23,9 @@ localIPAddress = socket.gethostbyname(hostname)
 robotIPAddress = ""
 ROSWorkspacePath = ""
 proc_sim=0
-radioBttns = []
-radioBttnsMan = ["radioButton_0", "radioButton_1", "radioButton_2",
+radioBttns = ["radioButton_0", "radioButton_1", "radioButton_2",
  "radioButton_3", "radioButton_4", "radioButton_5", "radioButton_6",
-  "radioButton_7", "radioButton_8", "radioButton_9", "radioButton_10", "radioBttns_11"]
+  "radioButton_7", "radioButton_8", "radioButton_9", "radioButton_10", "radioButton_11"]
 
 class ImageDialog(QtWidgets.QMainWindow):
     
@@ -35,13 +37,26 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         # Make local modifications.
-       
+        self.loadOptions()
         # Connect up the buttons.
         self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
         self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
         self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
         #self.ui.treeView.clicked.connect(self.populateEditor)
-        
+
+        self.ui.radioButton_0.clicked.connect(partial(self.saveSelectedOptions, radioBttns[0]))
+        self.ui.radioButton_1.clicked.connect(partial(self.saveSelectedOptions, radioBttns[1]))
+        self.ui.radioButton_2.clicked.connect(partial(self.saveSelectedOptions, radioBttns[2]))
+        self.ui.radioButton_3.clicked.connect(partial(self.saveSelectedOptions, radioBttns[3]))
+        self.ui.radioButton_4.clicked.connect(partial(self.saveSelectedOptions, radioBttns[4]))
+        self.ui.radioButton_5.clicked.connect(partial(self.saveSelectedOptions, radioBttns[5]))
+        self.ui.radioButton_6.clicked.connect(partial(self.saveSelectedOptions, radioBttns[6]))
+        self.ui.radioButton_7.clicked.connect(partial(self.saveSelectedOptions, radioBttns[7]))
+        self.ui.radioButton_8.clicked.connect(partial(self.saveSelectedOptions, radioBttns[8]))
+        self.ui.radioButton_9.clicked.connect(partial(self.saveSelectedOptions, radioBttns[9]))
+        self.ui.radioButton_10.clicked.connect(partial(self.saveSelectedOptions, radioBttns[10]))
+        self.ui.radioButton_11.clicked.connect(partial(self.saveOptions, radioBttns[11]))
+
         # Connect up the menu options
         self.ui.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
       
@@ -53,21 +68,29 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append("Simulator READY.............")
         # Remember to pass the definition/method, not the return value!
 
-        self.loadPreviousConfig()
+        self.loadPreviousOptions()
         
-  
-    def list_files(self, startpath):
-        self.treeView.clear()
-        for root, dirs, files in os.walk(startpath):
-            level = root.replace(startpath, '').count(os.sep)
-            indent = ' ' * 4 * (level)
-            #print('{}{}/'.format(indent, os.path.basename(root)))
-            self.treeView.append('{}{}/'.format(indent, os.path.basename(root)))
-            subindent = ' ' * 4 * (level + 1)
-            for f in files:
-                #print('{}{}'.format(subindent, f))
-                self.treeView.append('{}{}'.format(subindent, f))
+    def loadConfiguration(self):
+        #this is where the config fill will be read in and radio buttons remnamed
 
+    def saveSelectedOptions(self, name):
+        arch = file_archive('configData.txt')
+        arch[name] = 'y'
+        arch.dump()
+        print(arch.archive)
+
+    def loadPreviousOptions(self):
+        arch = file_archive('configData.txt')
+        dictionary = arch.archive
+        print(dictionary)
+        for i in dictionary:
+            if 'y' == dictionary[i]:
+                #print(i)
+                var=getattr(self.ui, i)
+                var.toggle()
+            #dictionary[i] = 'n'
+
+        
     def startCarBttnAction(self):
         # This is executed when the button is pressed
         self.Console.append("Starting Car....")
@@ -118,35 +141,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.model.setRootPath(ROSWorkspacePath)
         self.ui.treeView.setModel(self.model)
         self.ui.treeView.setRootIndex(self.model.index(QtCore.QDir.currentPath()))
-
-    @QtCore.pyqtSlot(QtCore.QModelIndex)                                                                                                                                                                            
-    def populateEditor(self, index):
-        indexItem = self.model.index(index.row(), 0, index.parent())
-
-        fileName = self.model.fileName(indexItem)
-        filePath = self.model.filePath(indexItem)
-
-        self.ui.textBrowser.setText(fileName)
-        #self.ui.textBrowser.setText(filePath)
-
-        text = open(filePath, 'r').read()
-        self.ui.textBrowser.setPlainText(text)
-
-    #def getRadioBttns(self, array):
-        #maybe latter
         
-    #load previous config button options
-    def loadPreviousConfig(self):
-        try:
-            with open("saveData.txt") as savedData:
-                for line in savedData:
-                   
-                
-                self.ui.Console.append("Previous options found")
-
-
-        except FileNotFoundError:
-            self.ui.Console.append("Previous options not found")
 
     # JAW - closure of ROS
     @atexit.register
