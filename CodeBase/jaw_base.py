@@ -1,23 +1,31 @@
 #!/usr/bin/env python3
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QFileSystemModel
+import sys
+
 from profileSelect import Ui_ProfileSelect
 from clientUI import Ui_MainWindow
-import sys
+
 import subprocess
 import socket 
 import os
-# JAW - closure of ROS
 import signal
+
+# JAW - closure of ROS
 import atexit
 # JAW - saving config window session
 from klepto.archives import *
+from functools import partial
 
 #variables
 hostname = socket.gethostname()    
 localIPAddress = socket.gethostbyname(hostname)
 robotIPAddress = ""
 ROSWorkspacePath = ""
+proc_sim=0
+radioBttns = ["radioButton_0", "radioButton_1", "radioButton_2",
+ "radioButton_3", "radioButton_4", "radioButton_5", "radioButton_6",
+  "radioButton_7", "radioButton_8", "radioButton_9", "radioButton_10", "radioButton_11"]
 
 class ImageDialog(QtWidgets.QMainWindow):
     
@@ -29,12 +37,28 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         # Make local modifications.
-       
+        self.loadOptions()
         # Connect up the buttons.
         self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
         self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
         self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
         #self.ui.treeView.clicked.connect(self.populateEditor)
+
+        self.ui.radioButton_0.clicked.connect(partial(self.saveSelectedOptions, radioBttns[0]))
+        self.ui.radioButton_1.clicked.connect(partial(self.saveSelectedOptions, radioBttns[1]))
+        self.ui.radioButton_2.clicked.connect(partial(self.saveSelectedOptions, radioBttns[2]))
+        self.ui.radioButton_3.clicked.connect(partial(self.saveSelectedOptions, radioBttns[3]))
+        self.ui.radioButton_4.clicked.connect(partial(self.saveSelectedOptions, radioBttns[4]))
+        self.ui.radioButton_5.clicked.connect(partial(self.saveSelectedOptions, radioBttns[5]))
+        self.ui.radioButton_6.clicked.connect(partial(self.saveSelectedOptions, radioBttns[6]))
+        self.ui.radioButton_7.clicked.connect(partial(self.saveSelectedOptions, radioBttns[7]))
+        self.ui.radioButton_8.clicked.connect(partial(self.saveSelectedOptions, radioBttns[8]))
+        self.ui.radioButton_9.clicked.connect(partial(self.saveSelectedOptions, radioBttns[9]))
+        self.ui.radioButton_10.clicked.connect(partial(self.saveSelectedOptions, radioBttns[10]))
+        self.ui.radioButton_11.clicked.connect(partial(self.saveOptions, radioBttns[11]))
+
+        # Connect up the menu options
+        self.ui.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
       
         # JAW - console code
         # hard coded text in console      
@@ -44,42 +68,41 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append("Simulator READY.............")
         # Remember to pass the definition/method, not the return value!
 
-        # Connect up the menu options
-        self.ui.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
-  
-    def saveOptions(self,num):
-        arch = file_archive('Config_options.txt')
-        print(arch.archive)
-        arch[num] = 'y'
+        self.loadPreviousOptions()
+        
+    def loadConfiguration(self):
+        #this is where the config fill will be read in and radio buttons remnamed
+
+    def saveSelectedOptions(self, name):
+        arch = file_archive('configData.txt')
+        arch[name] = 'y'
         arch.dump()
+        print(arch.archive)
 
-    def list_files(self, startpath):
-        self.treeView.clear()
-        for root, dirs, files in os.walk(startpath):
-            level = root.replace(startpath, '').count(os.sep)
-            indent = ' ' * 4 * (level)
-            #print('{}{}/'.format(indent, os.path.basename(root)))
-            self.treeView.append('{}{}/'.format(indent, os.path.basename(root)))
-            subindent = ' ' * 4 * (level + 1)
-            for f in files:
-                #print('{}{}'.format(subindent, f))
-                self.treeView.append('{}{}'.format(subindent, f))
+    def loadPreviousOptions(self):
+        arch = file_archive('configData.txt')
+        dictionary = arch.archive
+        print(dictionary)
+        for i in dictionary:
+            if 'y' == dictionary[i]:
+                #print(i)
+                var=getattr(self.ui, i)
+                var.toggle()
+            #dictionary[i] = 'n'
 
+        
     def startCarBttnAction(self):
         # This is executed when the button is pressed
-        self.ui.Console.append("Starting Car....")
+        self.Console.append("Starting Car....")
         subprocess.call(['./runCar.sh >> &'], shell=True)
 
     def startSimBttnAction(self):
-        global proc_sim        
         # This is executed when the button is pressed
+        #print('Run Sim Button Pressed')
         self.ui.Console.append("Simulator RUNNING....")
-        proc_sim = subprocess.Popen( ['./runSim.sh >> logfile_sim.txt &'], \
-                                   shell=True,preexec_fn=os.setsid )
-
-        # Alternative calls to command line
-        #subprocess.call(['./runSim.sh >> logfile_sim.txt &'],shell=True)
-        #os.system('./runSim.sh >> logfile_sim.txt &')
+        os.system('./runSim.sh >> logfile_sim.txt &')
+        #print(proc_sim)
+        #proc_sim = subprocess.Popen(['./runSim.sh >> logfile_sim.txt &',ROSWorkspacePath],shell=True,preexec_fn=os.setsid)
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
@@ -118,52 +141,22 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.model.setRootPath(ROSWorkspacePath)
         self.ui.treeView.setModel(self.model)
         self.ui.treeView.setRootIndex(self.model.index(QtCore.QDir.currentPath()))
-
-    @QtCore.pyqtSlot(QtCore.QModelIndex)                                                                                                                                                                            
-    def populateEditor(self, index):
-        indexItem = self.model.index(index.row(), 0, index.parent())
-
-        fileName = self.model.fileName(indexItem)
-        filePath = self.model.filePath(indexItem)
-
-        self.ui.textBrowser.setText(fileName)
-        #self.ui.textBrowser.setText(filePath)
-
-        text = open(filePath, 'r').read()
-        self.ui.textBrowser.setPlainText(text)
-
-    # JAW - BEGIN closure of ROS
-    #   
-    # Notes - atexit functions are executed from bottom to top
-    #         i.e., currently executed as nodelist, sim, core
-    #
-    @atexit.register
-    def closeROS_core():
-        # ensure that proc_roscore was defined
-        if('proc_roscore' in globals()):
-            os.killpg(proc_roscore.pid, signal.SIGTERM)
+        
 
     # JAW - closure of ROS
     @atexit.register
-    def closeROS_sim():
-        # ensure that proc_sim was defined
-        if('proc_sim' in globals()):
-            os.killpg(proc_sim.pid, signal.SIGTERM)
-
-    # JAW - closure of ROS
-    @atexit.register
-    def closeROS_nodelist():
+    def closeROS():
         print("Begin killing program...")
         nodes = os.popen("rosnode list").readlines()
         for i in range(len(nodes)):
-            nodes[i] = nodes[i].replace("\n", "")
+            nodes[i] = nodes[i].replace("\n","")
         for node in nodes:
-            os.system("rosnode kill " + node)
-    # JAW - END closure of ROS
-
+            os.system("rosnode kill "+ node)
+        #os.killpg(proc_sim.pid,signal.SIGTERM)
+        os.killpg(proc_roscore.pid,signal.SIGTERM)
+        
 
 if __name__ == "__main__":
-    global proc_roscore
     proc_roscore=subprocess.Popen(['roscore &'],shell=True,preexec_fn=os.setsid)
     app = QtWidgets.QApplication(sys.argv)
     window = QtWidgets.QMainWindow()
@@ -172,3 +165,6 @@ if __name__ == "__main__":
     ui.show()
     #ui.openProfileLoader()
     sys.exit(app.exec_())
+    
+
+
