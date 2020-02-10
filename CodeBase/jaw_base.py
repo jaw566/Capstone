@@ -16,13 +16,13 @@ import atexit
 # JAW - saving config window session
 from klepto.archives import *
 from functools import partial
+import configparser
 
 #variables
 hostname = socket.gethostname()    
 localIPAddress = socket.gethostbyname(hostname)
 robotIPAddress = ""
 ROSWorkspacePath = ""
-proc_sim=0
 radioBttns = ["radioButton_0", "radioButton_1", "radioButton_2",
  "radioButton_3", "radioButton_4", "radioButton_5", "radioButton_6",
   "radioButton_7", "radioButton_8", "radioButton_9", "radioButton_10", "radioButton_11"]
@@ -37,25 +37,29 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         # Make local modifications.
-        self.loadOptions()
+        #self.loadOptions()
+
         # Connect up the buttons.
         self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
         self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
         self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
         #self.ui.treeView.clicked.connect(self.populateEditor)
 
-        self.ui.radioButton_0.clicked.connect(partial(self.saveSelectedOptions, radioBttns[0]))
-        self.ui.radioButton_1.clicked.connect(partial(self.saveSelectedOptions, radioBttns[1]))
-        self.ui.radioButton_2.clicked.connect(partial(self.saveSelectedOptions, radioBttns[2]))
-        self.ui.radioButton_3.clicked.connect(partial(self.saveSelectedOptions, radioBttns[3]))
-        self.ui.radioButton_4.clicked.connect(partial(self.saveSelectedOptions, radioBttns[4]))
-        self.ui.radioButton_5.clicked.connect(partial(self.saveSelectedOptions, radioBttns[5]))
-        self.ui.radioButton_6.clicked.connect(partial(self.saveSelectedOptions, radioBttns[6]))
-        self.ui.radioButton_7.clicked.connect(partial(self.saveSelectedOptions, radioBttns[7]))
-        self.ui.radioButton_8.clicked.connect(partial(self.saveSelectedOptions, radioBttns[8]))
-        self.ui.radioButton_9.clicked.connect(partial(self.saveSelectedOptions, radioBttns[9]))
-        self.ui.radioButton_10.clicked.connect(partial(self.saveSelectedOptions, radioBttns[10]))
-        self.ui.radioButton_11.clicked.connect(partial(self.saveOptions, radioBttns[11]))
+        self.ui.radioButton_0.clicked.connect(partial(self.saveSelectedOptions, radioBttns[0],0))
+        self.ui.radioButton_1.clicked.connect(partial(self.saveSelectedOptions, radioBttns[1],1))
+        self.ui.radioButton_2.clicked.connect(partial(self.saveSelectedOptions, radioBttns[2],2))
+
+        self.ui.radioButton_3.clicked.connect(partial(self.saveSelectedOptions, radioBttns[3],3))
+        self.ui.radioButton_4.clicked.connect(partial(self.saveSelectedOptions, radioBttns[4],4))
+        self.ui.radioButton_5.clicked.connect(partial(self.saveSelectedOptions, radioBttns[5],5))
+
+        self.ui.radioButton_6.clicked.connect(partial(self.saveSelectedOptions, radioBttns[6],6))
+        self.ui.radioButton_7.clicked.connect(partial(self.saveSelectedOptions, radioBttns[7],7))
+        self.ui.radioButton_8.clicked.connect(partial(self.saveSelectedOptions, radioBttns[8],8))
+
+        self.ui.radioButton_9.clicked.connect(partial(self.saveSelectedOptions, radioBttns[9],9))
+        self.ui.radioButton_10.clicked.connect(partial(self.saveSelectedOptions, radioBttns[10],10))
+        self.ui.radioButton_11.clicked.connect(partial(self.saveSelectedOptions, radioBttns[11],11))
 
         # Connect up the menu options
         self.ui.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
@@ -70,19 +74,92 @@ class ImageDialog(QtWidgets.QMainWindow):
 
         self.loadPreviousOptions()
         
-    def loadConfiguration(self):
-        #this is where the config fill will be read in and radio buttons remnamed
 
-    def saveSelectedOptions(self, name):
-        arch = file_archive('configData.txt')
+    #def loadConfiguration(self):
+    #    #this is where the config fill will be read in and radio buttons remnamed
+
+
+    def saveSelectedOptions(self, name, rank):
+        tmp="radioButton_"
+        arch = file_archive('configData.txt', serialized=True)
+        print(name)
+        mapp = arch.archive
+        if rank==1 or rank==4 or rank==7 or rank==10:
+            if tmp+str(rank+1) in mapp:
+                mapp.pop(tmp+str(rank+1))
+            if tmp+str(rank-1) in mapp:
+                mapp.pop(tmp+str(rank-1))
+        elif rank==0 or rank==3 or rank==6 or rank==9:
+            if tmp+str(rank+1) in mapp:
+                mapp.pop(tmp+str(rank+1))
+            if tmp+str(rank+2) in mapp:
+                mapp.pop(tmp+str(rank+2))
+        else:
+            if tmp+str(rank-1) in mapp:
+                mapp.pop(tmp+str(rank-1))
+            if tmp+str(rank-2) in mapp:
+                mapp.pop(tmp+str(rank-2))
         arch[name] = 'y'
         arch.dump()
-        print(arch.archive)
+        print(mapp)
 
+        #arch = configparser.ConfigParser()
+        #arch.read('configData.ini')
+
+        #try:
+        #    arch = configparser.ConfigParser()
+        #    with open("configData.ini", "r+") as f:
+        #        arch.readfp(f)
+        #except:
+        #    arch = configparser.ConfigParser()
+        #    #with open("configData.ini", "a") as f:
+        #    #    arch.readfp(f)
+        #if rank==1 or rank==4 or rank==7 or rank==10:
+        #    if arch.has_section(name) == False:
+        #        if arch.has_section(tmp+str(rank+1)):
+        #            arch.remove_section(tmp+str(rank+1))
+        #        if arch.has_section(tmp+str(rank-1)):
+        #            print("\n\nhere\n\n")
+        #            arch.remove_section(tmp+str(rank-1))
+        #        arch.add_section(name)
+        #        arch.set(name,'is_on','y')
+        #        try:
+        #            print("\n\nalso here\n\n")
+        #            f.seek(0)
+        #            arch.write(f)
+        #            f.truncate()
+        #            f.close()
+        #        except:
+        #            with open('configData.ini', 'a') as configfile:
+        #                arch.write(configfile)
+        #                    
+        #elif rank==0 or rank==3 or rank==6 or rank==9:
+        #    if arch.has_section(name) == False:
+        #        if arch.has_section(tmp+str(rank+1)):
+        #            arch.remove_section(tmp+str(rank+1))
+        #        if arch.has_section(tmp+str(rank+2)):
+        #            arch.remove_section(tmp+str(rank+2))
+        #        arch.add_section(name)
+        #        arch.set(name,'is_on','y')
+        #        with open('configData.ini', 'a') as configfile:
+        #            arch.write(configfile)
+        #        configfile.close()
+        #else: #rank==2 or rank==5 or rank==8 or rank==11
+        #    if arch.has_section(name) == False:
+        #        if arch.has_section(tmp+str(rank-1)):
+        #            arch.remove_section(tmp+str(rank-1))
+        #        if arch.has_section(tmp+str(rank-2)):
+        #            arch.remove_section(tmp+str(rank-2))
+        #        arch.add_section(name)
+        #        arch.set(name,'is_on','y')
+        #        with open('configData.ini', 'a') as configfile:
+        #            arch.write(configfile)
+        #        configfile.close()
+           
     def loadPreviousOptions(self):
         arch = file_archive('configData.txt')
         dictionary = arch.archive
-        print(dictionary)
+        #print(dictionary)
         for i in dictionary:
             if 'y' == dictionary[i]:
                 #print(i)
@@ -90,19 +167,31 @@ class ImageDialog(QtWidgets.QMainWindow):
                 var.toggle()
             #dictionary[i] = 'n'
 
+
+        #config = configparser.ConfigParser()
+        #config.read('configData.ini')
+        #for section in config.sections():
+        #    for key in config[section]:
+        #        if config[section][key] == 'y':
+        #            var=getattr(self.ui, section)
+        #            var.toggle()
+
         
     def startCarBttnAction(self):
         # This is executed when the button is pressed
         self.Console.append("Starting Car....")
         subprocess.call(['./runCar.sh >> &'], shell=True)
 
+
     def startSimBttnAction(self):
         # This is executed when the button is pressed
         #print('Run Sim Button Pressed')
         self.ui.Console.append("Simulator RUNNING....")
-        os.system('./runSim.sh >> logfile_sim.txt &')
+        #os.system('./runSim.sh >> logfile_sim.txt &')
         #print(proc_sim)
-        #proc_sim = subprocess.Popen(['./runSim.sh >> logfile_sim.txt &',ROSWorkspacePath],shell=True,preexec_fn=os.setsid)
+        global proc_sim
+        proc_sim = subprocess.Popen(['screen -dmSL jaw ./runSim.sh &'],shell=True,preexec_fn=os.setsid)
+
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
@@ -116,10 +205,12 @@ class ImageDialog(QtWidgets.QMainWindow):
         myfile.close()
         self.ui.Console.append(content)
 
+
     def createProfile(self):
         robotIPAddress = self.ui.robotIPLabel.text
         ROSWorkspacePath = self.ui.ROSWSField.text
         self.window.close()
+
 
     def openProfileLoader(self):
         self.profile_window = QtWidgets.QMainWindow()
@@ -130,6 +221,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.profile_ui.browseROSWSBttn.clicked.connect(self.filePicker)
         self.profile_ui.createProfileBttn.clicked.connect(self.createProfile)
         self.profile_window.show()
+
 
     def filePicker(self):
         dialog = QFileDialog()
@@ -152,12 +244,17 @@ class ImageDialog(QtWidgets.QMainWindow):
             nodes[i] = nodes[i].replace("\n","")
         for node in nodes:
             os.system("rosnode kill "+ node)
-        #os.killpg(proc_sim.pid,signal.SIGTERM)
-        os.killpg(proc_roscore.pid,signal.SIGTERM)
+        if( 'proc_sim' in globals()):
+            os.system("screen -S jaw -X quit")
+        if( 'proc_roscore' in globals()):
+            os.killpg(proc_roscore.pid,signal.SIGTERM)
         
 
+# End ImageDialog Class
+
+
 if __name__ == "__main__":
-    proc_roscore=subprocess.Popen(['roscore &'],shell=True,preexec_fn=os.setsid)
+    #proc_roscore=subprocess.Popen(['roscore &'],shell=True,preexec_fn=os.setsid)
     app = QtWidgets.QApplication(sys.argv)
     window = QtWidgets.QMainWindow()
     ui = ImageDialog()
