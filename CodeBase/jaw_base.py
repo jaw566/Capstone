@@ -24,8 +24,9 @@ localIPAddress = socket.gethostbyname(hostname)
 robotIPAddress = ""
 ROSWorkspacePath = ""
 radioBttns = ["radioButton_0", "radioButton_1", "radioButton_2",
- "radioButton_3", "radioButton_4", "radioButton_5", "radioButton_6",
-  "radioButton_7", "radioButton_8", "radioButton_9", "radioButton_10", "radioButton_11"]
+              "radioButton_3", "radioButton_4", "radioButton_5", 
+              "radioButton_6", "radioButton_7", "radioButton_8", 
+              "radioButton_9", "radioButton_10","radioButton_11"]
 
 class ImageDialog(QtWidgets.QMainWindow):
     
@@ -45,24 +46,37 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
         #self.ui.treeView.clicked.connect(self.populateEditor)
 
-        self.ui.radioButton_0.clicked.connect(partial(self.saveSelectedOptions, radioBttns[0],0))
-        self.ui.radioButton_1.clicked.connect(partial(self.saveSelectedOptions, radioBttns[1],1))
-        self.ui.radioButton_2.clicked.connect(partial(self.saveSelectedOptions, radioBttns[2],2))
+        self.ui.radioButton_0.clicked.connect(partial(self.saveSelectOptions, \
+         radioBttns[0],0))
+        self.ui.radioButton_1.clicked.connect(partial(self.saveSelectOptions, \
+         radioBttns[1],1))
+        self.ui.radioButton_2.clicked.connect(partial(self.saveSelectOptions, \
+         radioBttns[2],2))
 
-        self.ui.radioButton_3.clicked.connect(partial(self.saveSelectedOptions, radioBttns[3],3))
-        self.ui.radioButton_4.clicked.connect(partial(self.saveSelectedOptions, radioBttns[4],4))
-        self.ui.radioButton_5.clicked.connect(partial(self.saveSelectedOptions, radioBttns[5],5))
+        self.ui.radioButton_3.clicked.connect(partial(self.saveSelectOptions, \
+         radioBttns[3],3))
+        self.ui.radioButton_4.clicked.connect(partial(self.saveSelectOptions, \
+         radioBttns[4],4))
+        self.ui.radioButton_5.clicked.connect(partial(self.saveSelectOptions, \
+         radioBttns[5],5))
 
-        self.ui.radioButton_6.clicked.connect(partial(self.saveSelectedOptions, radioBttns[6],6))
-        self.ui.radioButton_7.clicked.connect(partial(self.saveSelectedOptions, radioBttns[7],7))
-        self.ui.radioButton_8.clicked.connect(partial(self.saveSelectedOptions, radioBttns[8],8))
+        self.ui.radioButton_6.clicked.connect(partial(self.saveSelectOptions, \
+         radioBttns[6],6))
+        self.ui.radioButton_7.clicked.connect(partial(self.saveSelectOptions, \
+         radioBttns[7],7))
+        self.ui.radioButton_8.clicked.connect(partial(self.saveSelectOptions, \
+         radioBttns[8],8))
 
-        self.ui.radioButton_9.clicked.connect(partial(self.saveSelectedOptions, radioBttns[9],9))
-        self.ui.radioButton_10.clicked.connect(partial(self.saveSelectedOptions, radioBttns[10],10))
-        self.ui.radioButton_11.clicked.connect(partial(self.saveSelectedOptions, radioBttns[11],11))
+        self.ui.radioButton_9.clicked.connect(partial(self.saveSelectOptions, \
+         radioBttns[9],9))
+        self.ui.radioButton_10.clicked.connect(partial(self.saveSelectOptions, \
+         radioBttns[10],10))
+        self.ui.radioButton_11.clicked.connect(partial(self.saveSelectOptions, \
+         radioBttns[11],11))
 
         # Connect up the menu options
-        self.ui.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
+        self.ui.actionSelect_Profile.triggered.connect(lambda: \
+                                                     self.openProfileLoader())
       
         # JAW - console code
         # hard coded text in console      
@@ -76,10 +90,10 @@ class ImageDialog(QtWidgets.QMainWindow):
         
 
     #def loadConfiguration(self):
-    #    #this is where the config fill will be read in and radio buttons remnamed
+    #    #this is where the config will be read in and radio buttons remnamed
 
 
-    def saveSelectedOptions(self, name, rank):
+    def saveSelectOptions(self, name, rank):
         tmp="radioButton_"
         arch = file_archive('configData.txt', serialized=True)
         print(name)
@@ -188,9 +202,9 @@ class ImageDialog(QtWidgets.QMainWindow):
         #print('Run Sim Button Pressed')
         self.ui.Console.append("Simulator RUNNING....")
         #os.system('./runSim.sh >> logfile_sim.txt &')
-        #print(proc_sim)
         global proc_sim
-        proc_sim = subprocess.Popen(['screen -dmSL jaw ./runSim.sh &'],shell=True,preexec_fn=os.setsid)
+        proc_sim = subprocess.Popen(['screen -dmSL jaw ./runSim.sh &'], \
+                                            shell=True,preexec_fn=os.setsid)
 
 
     def logContentsFromFile(self):
@@ -225,14 +239,16 @@ class ImageDialog(QtWidgets.QMainWindow):
 
     def filePicker(self):
         dialog = QFileDialog()
-        fname = dialog.getExistingDirectory(None, ("Select Folder")) #returns string
+        #returns string
+        fname = dialog.getExistingDirectory(None, ("Select Folder")) 
         ROSWorkspacePath = "~" + fname
         self.profile_ui.ROSWSField.setText(fname) #element 0 is our file path
         # print(ROSWorkspacePath)
         self.model = QFileSystemModel()
         self.model.setRootPath(ROSWorkspacePath)
         self.ui.treeView.setModel(self.model)
-        self.ui.treeView.setRootIndex(self.model.index(QtCore.QDir.currentPath()))
+        self.ui.treeView.setRootIndex(self.model.index( \
+                                                    QtCore.QDir.currentPath()))
         
 
     # JAW - closure of ROS
@@ -254,7 +270,8 @@ class ImageDialog(QtWidgets.QMainWindow):
 
 
 if __name__ == "__main__":
-    #proc_roscore=subprocess.Popen(['roscore &'],shell=True,preexec_fn=os.setsid)
+    #proc_roscore=subprocess.Popen(['roscore &'], \
+    #                        shell=True,preexec_fn=os.setsid)
     app = QtWidgets.QApplication(sys.argv)
     window = QtWidgets.QMainWindow()
     ui = ImageDialog()
