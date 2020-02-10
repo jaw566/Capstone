@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QFileDialog, QFileSystemModel
 import sys
 
 from profileSelect import Ui_ProfileSelect
-from clientUI import Ui_MainWindow
+from clientUINoBttns import Ui_MainWindow
 
 import subprocess
 import socket 
@@ -17,15 +17,16 @@ import atexit
 from klepto.archives import *
 from functools import partial
 
+import yaml
+
 #variables
 hostname = socket.gethostname()    
 localIPAddress = socket.gethostbyname(hostname)
 robotIPAddress = ""
 ROSWorkspacePath = ""
 proc_sim=0
-radioBttns = ["radioButton_0", "radioButton_1", "radioButton_2",
- "radioButton_3", "radioButton_4", "radioButton_5", "radioButton_6",
-  "radioButton_7", "radioButton_8", "radioButton_9", "radioButton_10", "radioButton_11"]
+radioBttns = []
+configGroups = []
 
 class ImageDialog(QtWidgets.QMainWindow):
     
@@ -37,25 +38,12 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         # Make local modifications.
-        self.loadOptions()
+        self.loadConfiguration()
         # Connect up the buttons.
         self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
         self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
         self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
         #self.ui.treeView.clicked.connect(self.populateEditor)
-
-        self.ui.radioButton_0.clicked.connect(partial(self.saveSelectedOptions, radioBttns[0]))
-        self.ui.radioButton_1.clicked.connect(partial(self.saveSelectedOptions, radioBttns[1]))
-        self.ui.radioButton_2.clicked.connect(partial(self.saveSelectedOptions, radioBttns[2]))
-        self.ui.radioButton_3.clicked.connect(partial(self.saveSelectedOptions, radioBttns[3]))
-        self.ui.radioButton_4.clicked.connect(partial(self.saveSelectedOptions, radioBttns[4]))
-        self.ui.radioButton_5.clicked.connect(partial(self.saveSelectedOptions, radioBttns[5]))
-        self.ui.radioButton_6.clicked.connect(partial(self.saveSelectedOptions, radioBttns[6]))
-        self.ui.radioButton_7.clicked.connect(partial(self.saveSelectedOptions, radioBttns[7]))
-        self.ui.radioButton_8.clicked.connect(partial(self.saveSelectedOptions, radioBttns[8]))
-        self.ui.radioButton_9.clicked.connect(partial(self.saveSelectedOptions, radioBttns[9]))
-        self.ui.radioButton_10.clicked.connect(partial(self.saveSelectedOptions, radioBttns[10]))
-        self.ui.radioButton_11.clicked.connect(partial(self.saveOptions, radioBttns[11]))
 
         # Connect up the menu options
         self.ui.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
@@ -72,15 +60,54 @@ class ImageDialog(QtWidgets.QMainWindow):
         
     def loadConfiguration(self):
         #this is where the config fill will be read in and radio buttons remnamed
+        with open('config.yaml') as file:
+            modules = yaml.load(file, Loader=yaml.FullLoader)
+            iteration = 0
+            for module, packages in modules.items():
+                #makes a group for the currebnt module
+                self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
+                self.group.setObjectName(module) #sets the objects name to be the name module
+                if(iteration == 0):
+                    #first group added to row 0 col 0
+                    self.ui.gridLayout.addWidget(self.group, 0, 0)
+                else:
+                    #all other groups added to row 1 and then the next open col
+                    self.ui.gridLayout.addWidget(self.group, 1, iteration-1)
 
-    def saveSelectedOptions(self, name):
-        arch = file_archive('configData.txt')
+                self.group.setTitle(module) #sets the title in the UI
+
+                #each group gets its own form layout that the bttns are added to
+                self.formLayout = QtWidgets.QFormLayout(self.group)
+                self.formLayout.setObjectName("formLayout_" + module)
+                
+                #print(module, ':', packages)
+                configGroups.append(list()) #makes the array for the groupping
+                
+                for button in packages.items():
+                    #print(button)
+                    radioBttns.append(button[0]) # an array to keep track of the bttns
+                    configGroups[iteration].append(button[0]) #add bttns to thier groups
+                    #crate the button
+                    self.bttn = QtWidgets.QRadioButton(self.group)
+                    self.bttn.setObjectName(button[0]) #this is the name we use to access the object
+                    self.bttn.setText(button[1]) #the text seen in the GUI
+                    self.formLayout.addWidget(self.bttn) #add the button to the layout
+                    #connect onclicked function to the button
+                    self.bttn.clicked.connect(partial(self.saveSelectedOptions,button[0], iteration))
+                iteration+=1
+
+            #test arrays
+            print(configGroups)
+            print(radioBttns)
+
+    def saveSelectedOptions(self, name, iteration):
+        arch = file_archive('savedData.txt')
         arch[name] = 'y'
         arch.dump()
         print(arch.archive)
 
     def loadPreviousOptions(self):
-        arch = file_archive('configData.txt')
+        arch = file_archive('savedData.txt')
         dictionary = arch.archive
         print(dictionary)
         for i in dictionary:

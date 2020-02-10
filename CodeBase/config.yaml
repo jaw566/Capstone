@@ -1,0 +1,19 @@
+# config.yaml
+
+Racing Stradegy:
+  button0: Gata go fast
+  button1: Ligtning McQueen
+  button2: Vroom Vroom
+
+Perception:
+  button3: Camera
+  button4: LiDar
+
+Mapping:
+  button5: gmap
+  button6: applemaps
+  button7: areWeThierYet
+
+Planning:
+  button8: calander
+  button9: planner
