@@ -95,7 +95,7 @@ class ImageDialog(QtWidgets.QMainWindow):
 
     def saveSelectOptions(self, name, rank):
         tmp="radioButton_"
-        arch = file_archive('configData.txt', serialized=True)
+        arch = file_archive('saveConfig.txt', serialized=True)
         print(name)
         mapp = arch.archive
         if rank==1 or rank==4 or rank==7 or rank==10:
@@ -171,7 +171,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         #        configfile.close()
            
     def loadPreviousOptions(self):
-        arch = file_archive('configData.txt')
+        arch = file_archive('saveConfig.txt')
         dictionary = arch.archive
         #print(dictionary)
         for i in dictionary:
