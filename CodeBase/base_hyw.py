@@ -43,6 +43,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append("=======================") 
         self.ui.Console.append("ROS core INITIATED...........") 
         self.ui.Console.append("Simulator READY.............")
+        self.ui.Console.append("Stop car button ready")
         # Remember to pass the definition/method, not the return value!
 
         # Connect up the menu options
@@ -79,7 +80,11 @@ class ImageDialog(QtWidgets.QMainWindow):
     def emergencyBttnAction(self):
         # This is executed when the button is pressed
         self.ui.Console.append("Stop the Car....")
-        subprocess.call(['./stopCar.sh >> &'], shell=True)
+        p = subprocess.Popen(['./stopCar.sh', shell=True, stdout = subprocess.PIPE, stderr = subprocess.STDOUT)
+        while True:
+            buff = p.stdout.readline()
+            if buff =='' and p.poll() != None:
+                break
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
@@ -119,6 +124,9 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.treeView.setModel(self.model)
         self.ui.treeView.setRootIndex(self.model.index(QtCore.QDir.currentPath()))
 
+    def saveConfig(self):
+        self.radioBttn = isChecked()
+        self.radioBttn = setChecked()
     @QtCore.pyqtSlot(QtCore.QModelIndex)                                                                                                                                                                            
     def populateEditor(self, index):
         indexItem = self.model.index(index.row(), 0, index.parent())
