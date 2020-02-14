@@ -80,11 +80,7 @@ class ImageDialog(QtWidgets.QMainWindow):
     def emergencyBttnAction(self):
         # This is executed when the button is pressed
         self.ui.Console.append("Stop the Car....")
-        p = subprocess.Popen(['./stopCar.sh', shell=True, stdout = subprocess.PIPE, stderr = subprocess.STDOUT)
-        while True:
-            buff = p.stdout.readline()
-            if buff =='' and p.poll() != None:
-                break
+        subprocess.call(['./stopCar.py'])
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
