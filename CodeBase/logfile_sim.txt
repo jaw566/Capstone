@@ -337,3 +337,1267 @@ log file: /home/bboyd/.ros/log/55418ef6-46a7-11ea-9330-000c293c857d/vesc-zero_ac
 shutting down processing monitor...
 ... shutting down processing monitor complete
 [1mdone[0m
+... logging to /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/roslaunch-jordan-thinkpad-x1-carbon-3rd-27494.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch
+[1mstarted roslaunch server http://jordan-thinkpad-x1-carbon-3rd:44565/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gazebo/enable_ros_network: True
+ * /racecar/joint_state_controller/publish_rate: 50
+ * /racecar/joint_state_controller/type: joint_state_contr...
+ * /racecar/left_front_wheel_velocity_controller/joint: left_front_wheel_...
+ * /racecar/left_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/left_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_rear_wheel_velocity_controller/joint: left_rear_wheel_j...
+ * /racecar/left_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/left_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_steering_hinge_position_controller/joint: left_steering_hin...
+ * /racecar/left_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/left_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/left_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/left_steering_hinge_position_controller/type: effort_controller...
+ * /racecar/right_front_wheel_velocity_controller/joint: right_front_wheel...
+ * /racecar/right_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/right_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_rear_wheel_velocity_controller/joint: right_rear_wheel_...
+ * /racecar/right_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/right_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_steering_hinge_position_controller/joint: right_steering_hi...
+ * /racecar/right_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/right_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/right_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/right_steering_hinge_position_controller/type: effort_controller...
+ * /robot_description: <?xml version="1....
+ * /rosdistro: melodic
+ * /rosversion: 1.14.3
+ * /use_sim_time: True
+ * /vesc/high_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+ * /vesc/low_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+
+NODES
+  /racecar/
+    controller_manager (controller_manager/spawner)
+  /vesc/low_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /vesc/
+    mux_chainer (topic_tools/relay)
+    mux_topic_backward_compat_navigation (topic_tools/relay)
+    mux_topic_backward_compat_safety (topic_tools/relay)
+    mux_topic_backward_compat_teleop (topic_tools/relay)
+    zero_ackermann_cmd (rostopic/rostopic)
+  /vesc/high_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /
+    better_odom (topic_tools/relay)
+    control_node (race/control.py)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_gui (gazebo_ros/gzclient)
+    gazebo_odometry_node (racecar_gazebo/gazebo_odometry.py)
+    levine_demo_node (race/levineDemo.py)
+    racecar_spawn (gazebo_ros/spawn_model)
+    robot_state_publisher (robot_state_publisher/robot_state_Listening to error for PID
+Enter Kp Value: [INFO] [1581299713.414794, 0.000000]: Loading model XML from ros parameter robot_description
+[INFO] [1581299713.432467, 0.000000]: Waiting for service /gazebo/spawn_urdf_model
+[INFO] [1581299713.435579, 0.000000]: Calling service /gazebo/spawn_urdf_model
+[INFO] [1581299714.221934, 0.001000]: Spawn status: SpawnModel: Successfully spawned entity
+[0m[ INFO] [1581299712.905136709]: Finished loading Gazebo ROS API Plugin.[0m
+[0m[ INFO] [1581299712.907952823]: waitForService: Service [/gazebo_gui/set_physics_properties] has not been advertised, waiting...[0m
+[INFO] [1581299712.237462, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+[INFO] [1581299714.963452, 0.150000]: Controller Spawner: Waiting for service controller_manager/switch_controller
+[INFO] [1581299714.966492, 0.152000]: Controller Spawner: Waiting for service controller_manager/unload_controller
+[INFO] [1581299714.969080, 0.153000]: Loading controller: left_rear_wheel_velocity_controller
+[INFO] [1581299715.038688, 0.199000]: Loading controller: right_rear_wheel_velocity_controller
+[INFO] [1581299715.075782, 0.222000]: Loading controller: left_front_wheel_velocity_controller
+[INFO] [1581299715.123112, 0.255000]: Loading controller: right_front_wheel_velocity_controller
+[INFO] [1581299715.166653, 0.278000]: Loading controller: left_steering_hinge_position_controller
+[INFO] [1581299715.219293, 0.316000]: Loading controller: right_steering_hinge_position_controller
+[INFO] [1581299715.272543, 0.350000]: Loading controller: joint_state_controller
+[INFO] [1581299715.292194, 0.365000]: Controller Spawner: Loaded controllers: left_rear_wheel_velocity_controller, right_rear_wheel_velocity_controller, left_front_wheel_velocity_controller, right_front_wheel_velocity_controller, left_steering_hinge_position_controller, right_steering_hinge_position_controller, joint_state_controller
+[INFO] [1581299715.298083, 0.370000]: Started controllers: left_rear_wheel_velocity_controller, right_rear_wheel_velocity_controller, left_front_wheel_velocity_controller, right_front_wheel_velocity_controller, left_steering_hinge_position_controller, right_steering_hinge_position_controller, joint_state_controller
+shutdown request: user request
+[INFO] [1581299725.151827, 5.412000]: Shutting down spawner. Stopping and unloading controllers...
+[INFO] [1581299725.152916, 5.412000]: Stopping all controllers...
+shutdown request: user request
+publisher)
+    servo_commands (racecar_control/servo_commands.py)
+    sim_connector_node (race/sim_connector.py)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch http://localhost:11311
+[1mprocess[gazebo-1]: started with pid [27512][0m
+[1mprocess[gazebo_gui-2]: started with pid [27517][0m
+[1mprocess[racecar_spawn-3]: started with pid [27522][0m
+[1mprocess[racecar/controller_manager-4]: started with pid [27523][0m
+[1mprocess[robot_state_publisher-5]: started with pid [27524][0m
+[1mprocess[servo_commands-6]: started with pid [27525][0m
+[1mprocess[gazebo_odometry_node-7]: started with pid [27526][0m
+[1mprocess[vesc/mux_chainer-8]: started with pid [27531][0m
+[1mprocess[vesc/mux_topic_backward_compat_safety-9]: started with pid [27533][0m
+[1mprocess[vesc/mux_topic_backward_compat_teleop-10]: started with pid [27539][0m
+[1mprocess[vesc/mux_topic_backward_compat_navigation-11]: started with pid [27545][0m
+[1mprocess[vesc/zero_ackermann_cmd-12]: started with pid [27557][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13]: started with pid [27559][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux-14]: started with pid [27561][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15]: started with pid [27566][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux-16]: started with pid [27571][0m
+[1mprocess[better_odom-17]: started with pid [27574][0m
+[1mprocess[control_node-18]: started with pid [27589][0m
+[1mprocess[sim_connector_node-19]: started with pid [27592][0m
+[1mprocess[levine_demo_node-20]: started with pid [27598][0m
+[1m[racecar_spawn-3] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/racecar_spawn-3*.log[0m
+[1m[better_odom-17] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/better_odom-17*.log[0m
+[1m[gazebo_gui-2] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/gazebo_gui-2*.log[0m
+[1m[gazebo_odometry_node-7] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/gazebo_odometry_node-7*.log[0m
+[1m[levine_demo_node-20] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/levine_demo_node-20*.log[0m
+[1m[racecar/controller_manager-4] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/racecar-controller_manager-4*.log[0m
+[1m[robot_state_publisher-5] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/robot_state_publisher-5*.log[0m
+[1m[servo_commands-6] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/servo_commands-6*.log[0m
+[1m[sim_connector_node-19] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/sim_connector_node-19*.log[0m
+[1m[vesc/high_level/ackermann_cmd_mux-14] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/vesc-high_level-ackermann_cmd_mux-14*.log[0m
+[1m[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/vesc-high_level-ackermann_cmd_mux_nodelet_manager-13*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux-16] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/vesc-low_level-ackermann_cmd_mux-16*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/vesc-low_level-ackermann_cmd_mux_nodelet_manager-15*.log[0m
+[1m[vesc/mux_chainer-8] process has finished cleanly
+log file: /home/wright/.ros/log/5d7e739e-4ba8-11ea-aaa6-6057187e51d5/vesc-mux_chainer-8*.log[0m
+[1m[vesc/mux_topic_backward_compat_navigation-11] process has ... logging to /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/roslaunch-jordan-thinkpad-x1-carbon-3rd-28387.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch
+[1mstarted roslaunch server http://jordan-thinkpad-x1-carbon-3rd:32777/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gazebo/enable_ros_network: True
+ * /racecar/joint_state_controller/publish_rate: 50
+ * /racecar/joint_state_controller/type: joint_state_contr...
+ * /racecar/left_front_wheel_velocity_controller/joint: left_front_wheel_...
+ * /racecar/left_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/left_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_rear_wheel_velocity_controller/joint: left_rear_wheel_j...
+ * /racecar/left_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/left_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_steering_hinge_position_controller/joint: left_steering_hin...
+ * /racecar/left_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/left_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/left_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/left_steering_hinge_position_controller/type: effort_controller...
+ * /racecar/right_front_wheel_velocity_controller/joint: right_front_wheel...
+ * /racecar/right_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/right_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_rear_wheel_velocity_controller/joint: right_rear_wheel_...
+ * /racecar/right_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/right_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_steering_hinge_position_controller/joint: right_steering_hi...
+ * /racecar/right_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/right_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/right_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/right_steering_hinge_position_controller/type: effort_controller...
+ * /robot_description: <?xml version="1....
+ * /rosdistro: melodic
+ * /rosversion: 1.14.3
+ * /use_sim_time: True
+ * /vesc/high_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+ * /vesc/low_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+
+NODES
+  /racecar/
+    controller_manager (controller_manager/spawner)
+  /vesc/low_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /vesc/
+    mux_chainer (topic_tools/relay)
+    mux_topic_backward_compat_navigation (topic_tools/relay)
+    mux_topic_backward_compat_safety (topic_tools/relay)
+    mux_topic_backward_compat_teleop (topic_tools/relay)
+    zero_ackermann_cmd (rostopic/rostopic)
+  /vesc/high_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /
+    better_odom (topic_tools/relay)
+    control_node (race/control.py)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_gui (gazebo_ros/gzclient)
+    gazebo_odometry_node (racecar_gazebo/gazebo_odometry.py)
+    levine_demo_node (race/levineDemo.py)
+    racecar_spawn (gazebo_ros/spawn_model)
+    robot_state_publisher (robot_state_publisher/robot_state_Listening to error for PID
+Enter Kp Value: [INFO] [1581299806.286188, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+shutdown request: user request
+shutdown request: user request
+[0m[ INFO] [1581299807.327839317]: Finished loading Gazebo ROS API Plugin.[0m
+[0m[ INFO] [1581299807.330487608]: waitForService: Service [/gazebo_gui/set_physics_properties] has not been advertised, waiting...[0m
+publisher)
+    servo_commands (racecar_control/servo_commands.py)
+    sim_connector_node (race/sim_connector.py)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch http://localhost:11311
+[1mprocess[gazebo-1]: started with pid [28405][0m
+[1mprocess[gazebo_gui-2]: started with pid [28410][0m
+[1mprocess[racecar_spawn-3]: started with pid [28415][0m
+[1mprocess[racecar/controller_manager-4]: started with pid [28416][0m
+[1mprocess[robot_state_publisher-5]: started with pid [28417][0m
+[1mprocess[servo_commands-6]: started with pid [28418][0m
+[1mprocess[gazebo_odometry_node-7]: started with pid [28423][0m
+[1mprocess[vesc/mux_chainer-8]: started with pid [28424][0m
+[1mprocess[vesc/mux_topic_backward_compat_safety-9]: started with pid [28431][0m
+[1mprocess[vesc/mux_topic_backward_compat_teleop-10]: started with pid [28432][0m
+[1mprocess[vesc/mux_topic_backward_compat_navigation-11]: started with pid [28439][0m
+[1mprocess[vesc/zero_ackermann_cmd-12]: started with pid [28449][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13]: started with pid [28451][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux-14]: started with pid [28452][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15]: started with pid [28457][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux-16]: started with pid [28462][0m
+[1mprocess[better_odom-17]: started with pid [28468][0m
+[1mprocess[control_node-18]: started with pid [28477][0m
+[1mprocess[sim_connector_node-19]: started with pid [28478][0m
+[1mprocess[levine_demo_node-20]: started with pid [28483][0m
+[1m[better_odom-17] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/better_odom-17*.log[0m
+[1m[levine_demo_node-20] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/levine_demo_node-20*.log[0m
+[1m[racecar/controller_manager-4] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/racecar-controller_manager-4*.log[0m
+[1m[robot_state_publisher-5] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/robot_state_publisher-5*.log[0m
+[1m[servo_commands-6] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/servo_commands-6*.log[0m
+[1m[sim_connector_node-19] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/sim_connector_node-19*.log[0m
+[1m[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/vesc-high_level-ackermann_cmd_mux_nodelet_manager-13*.log[0m
+[1m[gazebo_gui-2] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/gazebo_gui-2*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/vesc-low_level-ackermann_cmd_mux_nodelet_manager-15*.log[0m
+[1m[vesc/mux_chainer-8] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/vesc-mux_chainer-8*.log[0m
+[1m[vesc/mux_topic_backward_compat_navigation-11] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_navigation-11*.log[0m
+[1m[vesc/mux_topic_backward_compat_safety-9] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_safety-9*.log[0m
+[1m[vesc/mux_topic_backward_compat_teleop-10] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_teleop-10*.log[0m
+[1m[vesc/zero_ackermann_cmd-12] process has finished cleanly
+log file: /home/wright/.ros/log/94ba5ad0-4ba8-11ea-aaa6-6057187e51d5/vesc-zero_ackerma... logging to /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/roslaunch-jordan-thinkpad-x1-carbon-3rd-29007.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch
+[1mstarted roslaunch server http://jordan-thinkpad-x1-carbon-3rd:39341/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gazebo/enable_ros_network: True
+ * /racecar/joint_state_controller/publish_rate: 50
+ * /racecar/joint_state_controller/type: joint_state_contr...
+ * /racecar/left_front_wheel_velocity_controller/joint: left_front_wheel_...
+ * /racecar/left_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/left_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_rear_wheel_velocity_controller/joint: left_rear_wheel_j...
+ * /racecar/left_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/left_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_steering_hinge_position_controller/joint: left_steering_hin...
+ * /racecar/left_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/left_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/left_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/left_steering_hinge_position_controller/type: effort_controller...
+ * /racecar/right_front_wheel_velocity_controller/joint: right_front_wheel...
+ * /racecar/right_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/right_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_rear_wheel_velocity_controller/joint: right_rear_wheel_...
+ * /racecar/right_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/right_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_steering_hinge_position_controller/joint: right_steering_hi...
+ * /racecar/right_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/right_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/right_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/right_steering_hinge_position_controller/type: effort_controller...
+ * /robot_description: <?xml version="1....
+ * /rosdistro: melodic
+ * /rosversion: 1.14.3
+ * /use_sim_time: True
+ * /vesc/high_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+ * /vesc/low_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+
+NODES
+  /racecar/
+    controller_manager (controller_manager/spawner)
+  /vesc/low_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /vesc/
+    mux_chainer (topic_tools/relay)
+    mux_topic_backward_compat_navigation (topic_tools/relay)
+    mux_topic_backward_compat_safety (topic_tools/relay)
+    mux_topic_backward_compat_teleop (topic_tools/relay)
+    zero_ackermann_cmd (rostopic/rostopic)
+  /vesc/high_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /
+    better_odom (topic_tools/relay)
+    control_node (race/control.py)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_gui (gazebo_ros/gzclient)
+    gazebo_odometry_node (racecar_gazebo/gazebo_odometry.py)
+    levine_demo_node (race/levineDemo.py)
+    racecar_spawn (gazebo_ros/spawn_model)
+    robot_state_publisher (robot_state_publisher/robot_state_Listening to error for PID
+Enter Kp Value: [INFO] [1581299895.242088, 0.000000]: Loading model XML from ros parameter robot_description
+[INFO] [1581299895.252037, 0.000000]: Waiting for service /gazebo/spawn_urdf_model
+[INFO] [1581299895.557618, 0.000000]: Calling service /gazebo/spawn_urdf_model
+[INFO] [1581299896.393229, 0.001000]: Spawn status: SpawnModel: Successfully spawned entity
+[0m[ INFO] [1581299894.873154027]: Finished loading Gazebo ROS API Plugin.[0m
+[0m[ INFO] [1581299894.876175235]: waitForService: Service [/gazebo_gui/set_physics_properties] has not been advertised, waiting...[0m
+[INFO] [1581299893.974535, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+[INFO] [1581299897.002732, 0.032000]: Controller Spawner: Waiting for service controller_manager/switch_controller
+[INFO] [1581299897.008207, 0.035000]: Controller Spawner: Waiting for service controller_manager/unload_controller
+[INFO] [1581299897.018418, 0.039000]: Loading controller: left_rear_wheel_velocity_controller
+[INFO] [1581299897.233684, 0.125000]: Loading controller: right_rear_wheel_velocity_controller
+[INFO] [1581299897.344664, 0.186000]: Loading controller: left_front_wheel_velocity_controller
+[INFO] [1581299897.487744, 0.252000]: Loading controller: right_front_wheel_velocity_controller
+[INFO] [1581299897.687014, 0.312000]: Loading controller: left_steering_hinge_position_controller
+[INFO] [1581299897.784116, 0.353000]: Loading controller: right_steering_hinge_position_controller
+[INFO] [1581299897.893383, 0.403000]: Loading controller: joint_state_controller
+[INFO] [1581299897.944684, 0.430000]: Controller Spawner: Loaded controllers: left_rear_wheel_velocity_controller, right_rear_wheel_velocity_controller, left_front_wheel_velocity_controller, right_front_wheel_velocity_controller, left_steering_hinge_position_controller, right_steering_hinge_position_controller, joint_state_controller
+[INFO] [1581299897.959917, 0.439000]: Started controllers: left_rear_wheel_velocity_controller, right_rear_wheel_velocity_controller, left_front_wheel_velocity_controller, right_front_wheel_velocity_controller, left_steering_hinge_position_controller, right_steering_hinge_position_controller, joint_state_controller
+shutdown request: user request
+[INFO] [1581299903.864885, 3.164000]: Shutting down spawner. Stopping and unloading controllers...
+[INFO] [1581299903.866162, 3.164000]: Stopping all controllers...
+shutdown request: user request
+publisher)
+    servo_commands (racecar_control/servo_commands.py)
+    sim_connector_node (race/sim_connector.py)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch http://localhost:11311
+[1mprocess[gazebo-1]: started with pid [29025][0m
+[1mprocess[gazebo_gui-2]: started with pid [29030][0m
+[1mprocess[racecar_spawn-3]: started with pid [29035][0m
+[1mprocess[racecar/controller_manager-4]: started with pid [29036][0m
+[1mprocess[robot_state_publisher-5]: started with pid [29037][0m
+[1mprocess[servo_commands-6]: started with pid [29038][0m
+[1mprocess[gazebo_odometry_node-7]: started with pid [29040][0m
+[1mprocess[vesc/mux_chainer-8]: started with pid [29045][0m
+[1mprocess[vesc/mux_topic_backward_compat_safety-9]: started with pid [29049][0m
+[1mprocess[vesc/mux_topic_backward_compat_teleop-10]: started with pid [29053][0m
+[1mprocess[vesc/mux_topic_backward_compat_navigation-11]: started with pid [29062][0m
+[1mprocess[vesc/zero_ackermann_cmd-12]: started with pid [29063][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13]: started with pid [29064][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux-14]: started with pid [29071][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15]: started with pid [29072][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux-16]: started with pid [29075][0m
+[1mprocess[better_odom-17]: started with pid [29087][0m
+[1mprocess[control_node-18]: started with pid [29093][0m
+[1mprocess[sim_connector_node-19]: started with pid [29100][0m
+[1mprocess[levine_demo_node-20]: started with pid [29101][0m
+[1m[racecar_spawn-3] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/racecar_spawn-3*.log[0m
+[1m[better_odom-17] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/better_odom-17*.log[0m
+[1m[gazebo_gui-2] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/gazebo_gui-2*.log[0m
+[1m[gazebo_odometry_node-7] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/gazebo_odometry_node-7*.log[0m
+[1m[levine_demo_node-20] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/levine_demo_node-20*.log[0m
+[1m[racecar/controller_manager-4] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/racecar-controller_manager-4*.log[0m
+[1m[robot_state_publisher-5] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/robot_state_publisher-5*.log[0m
+[1m[servo_commands-6] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/servo_commands-6*.log[0m
+[1m[sim_connector_node-19] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/sim_connector_node-19*.log[0m
+[1m[vesc/high_level/ackermann_cmd_mux-14] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/vesc-high_level-ackermann_cmd_mux-14*.log[0m
+[1m[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/vesc-high_level-ackermann_cmd_mux_nodelet_manager-13*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux-16] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/vesc-low_level-ackermann_cmd_mux-16*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/vesc-low_level-ackermann_cmd_mux_nodelet_manager-15*.log[0m
+[1m[vesc/mux_chainer-8] process has finished cleanly
+log file: /home/wright/.ros/log/c99535fe-4ba8-11ea-aaa6-6057187e51d5/vesc-mux_chainer-8*.log[0m
+[1m[vesc/mux_topic_backward_compat_navigation-11] process has ... logging to /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/roslaunch-jordan-thinkpad-x1-carbon-3rd-29835.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch
+[1mstarted roslaunch server http://jordan-thinkpad-x1-carbon-3rd:40231/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gazebo/enable_ros_network: True
+ * /racecar/joint_state_controller/publish_rate: 50
+ * /racecar/joint_state_controller/type: joint_state_contr...
+ * /racecar/left_front_wheel_velocity_controller/joint: left_front_wheel_...
+ * /racecar/left_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/left_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_rear_wheel_velocity_controller/joint: left_rear_wheel_j...
+ * /racecar/left_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/left_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_steering_hinge_position_controller/joint: left_steering_hin...
+ * /racecar/left_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/left_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/left_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/left_steering_hinge_position_controller/type: effort_controller...
+ * /racecar/right_front_wheel_velocity_controller/joint: right_front_wheel...
+ * /racecar/right_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/right_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_rear_wheel_velocity_controller/joint: right_rear_wheel_...
+ * /racecar/right_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/right_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_steering_hinge_position_controller/joint: right_steering_hi...
+ * /racecar/right_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/right_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/right_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/right_steering_hinge_position_controller/type: effort_controller...
+ * /robot_description: <?xml version="1....
+ * /rosdistro: melodic
+ * /rosversion: 1.14.3
+ * /use_sim_time: True
+ * /vesc/high_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+ * /vesc/low_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+
+NODES
+  /racecar/
+    controller_manager (controller_manager/spawner)
+  /vesc/low_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /vesc/
+    mux_chainer (topic_tools/relay)
+    mux_topic_backward_compat_navigation (topic_tools/relay)
+    mux_topic_backward_compat_safety (topic_tools/relay)
+    mux_topic_backward_compat_teleop (topic_tools/relay)
+    zero_ackermann_cmd (rostopic/rostopic)
+  /vesc/high_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /
+    better_odom (topic_tools/relay)
+    control_node (race/control.py)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_gui (gazebo_ros/gzclient)
+    gazebo_odometry_node (racecar_gazebo/gazebo_odometry.py)
+    levine_demo_node (race/levineDemo.py)
+    racecar_spawn (gazebo_ros/spawn_model)
+    robot_state_publisher (robot_state_publisher/robot_state_Listening to error for PID
+Enter Kp Value: [0m[ INFO] [1581300152.082787399]: Finished loading Gazebo ROS API Plugin.[0m
+[0m[ INFO] [1581300152.088469908]: waitForService: Service [/gazebo_gui/set_physics_properties] has not been advertised, waiting...[0m
+[INFO] [1581300151.276117, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+shutdown request: user request
+[INFO] [1581300152.501779, 0.000000]: Loading model XML from ros parameter robot_description
+[INFO] [1581300152.520715, 0.000000]: Waiting for service /gazebo/spawn_urdf_model
+shutdown request: user request
+shutdown request: user request
+publisher)
+    servo_commands (racecar_control/servo_commands.py)
+    sim_connector_node (race/sim_connector.py)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch http://localhost:11311
+[1mprocess[gazebo-1]: started with pid [29853][0m
+[1mprocess[gazebo_gui-2]: started with pid [29858][0m
+[1mprocess[racecar_spawn-3]: started with pid [29863][0m
+[1mprocess[racecar/controller_manager-4]: started with pid [29864][0m
+[1mprocess[robot_state_publisher-5]: started with pid [29865][0m
+[1mprocess[servo_commands-6]: started with pid [29866][0m
+[1mprocess[gazebo_odometry_node-7]: started with pid [29867][0m
+[1mprocess[vesc/mux_chainer-8]: started with pid [29873][0m
+[1mprocess[vesc/mux_topic_backward_compat_safety-9]: started with pid [29878][0m
+[1mprocess[vesc/mux_topic_backward_compat_teleop-10]: started with pid [29884][0m
+[1mprocess[vesc/mux_topic_backward_compat_navigation-11]: started with pid [29890][0m
+[1mprocess[vesc/zero_ackermann_cmd-12]: started with pid [29895][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13]: started with pid [29896][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux-14]: started with pid [29899][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15]: started with pid [29906][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux-16]: started with pid [29908][0m
+[1mprocess[better_odom-17]: started with pid [29910][0m
+[1mprocess[control_node-18]: started with pid [29922][0m
+[1mprocess[sim_connector_node-19]: started with pid [29927][0m
+[1mprocess[levine_demo_node-20]: started with pid [29936][0m
+[1m[better_odom-17] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/better_odom-17*.log[0m
+[1m[gazebo_gui-2] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/gazebo_gui-2*.log[0m
+[1m[gazebo_odometry_node-7] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/gazebo_odometry_node-7*.log[0m
+[1m[levine_demo_node-20] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/levine_demo_node-20*.log[0m
+[1m[racecar/controller_manager-4] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/racecar-controller_manager-4*.log[0m
+[1m[robot_state_publisher-5] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/robot_state_publisher-5*.log[0m
+[1m[servo_commands-6] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/servo_commands-6*.log[0m
+[1m[sim_connector_node-19] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/sim_connector_node-19*.log[0m
+[1m[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/vesc-high_level-ackermann_cmd_mux_nodelet_manager-13*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/vesc-low_level-ackermann_cmd_mux_nodelet_manager-15*.log[0m
+[1m[vesc/mux_chainer-8] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/vesc-mux_chainer-8*.log[0m
+[1m[vesc/mux_topic_backward_compat_navigation-11] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_navigation-11*.log[0m
+[1m[vesc/mux_topic_backward_compat_safety-9] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_safety-9*.log[0m
+[1m[vesc/mux_topic_backward_compat_teleop-10] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_teleop-10*.log[0m
+[1m[vesc/zero_ackermann_cmd-12] process has finished cleanly
+log file: /home/wright/.ros/log/6224d59a-4ba9-11ea-aaa6-6057187e51d5/vesc-zero_ackermann_cmd-12*.log[0m
+all processes on machine have died, roslaunch will exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
+... logging to /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/roslaunch-jordan-thinkpad-x1-carbon-3rd-30477.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch
+[1mstarted roslaunch server http://jordan-thinkpad-x1-carbon-3rd:45861/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gazebo/enable_ros_network: True
+ * /racecar/joint_state_controller/publish_rate: 50
+ * /racecar/joint_state_controller/type: joint_state_contr...
+ * /racecar/left_front_wheel_velocity_controller/joint: left_front_wheel_...
+ * /racecar/left_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/left_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_rear_wheel_velocity_controller/joint: left_rear_wheel_j...
+ * /racecar/left_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/left_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_steering_hinge_position_controller/joint: left_steering_hin...
+ * /racecar/left_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/left_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/left_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/left_steering_hinge_position_controller/type: effort_controller...
+ * /racecar/right_front_wheel_velocity_controller/joint: right_front_wheel...
+ * /racecar/right_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/right_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_rear_wheel_velocity_controller/joint: right_rear_wheel_...
+ * /racecar/right_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/right_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_steering_hinge_position_controller/joint: right_steering_hi...
+ * /racecar/right_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/right_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/right_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/right_steering_hinge_position_controller/type: effort_controller...
+ * /robot_description: <?xml version="1....
+ * /rosdistro: melodic
+ * /rosversion: 1.14.3
+ * /use_sim_time: True
+ * /vesc/high_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+ * /vesc/low_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+
+NODES
+  /racecar/
+    controller_manager (controller_manager/spawner)
+  /vesc/low_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /vesc/
+    mux_chainer (topic_tools/relay)
+    mux_topic_backward_compat_navigation (topic_tools/relay)
+    mux_topic_backward_compat_safety (topic_tools/relay)
+    mux_topic_backward_compat_teleop (topic_tools/relay)
+    zero_ackermann_cmd (rostopic/rostopic)
+  /vesc/high_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /
+    better_odom (topic_tools/relay)
+    control_node (race/control.py)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_gui (gazebo_ros/gzclient)
+    gazebo_odometry_node (racecar_gazebo/gazebo_odometry.py)
+    levine_demo_node (race/levineDemo.py)
+    racecar_spawn (gazebo_ros/spawn_model)
+    robot_state_publisher (robot_state_publisher/robot_state_Listening to error for PID
+Enter Kp Value: [0m[ INFO] [1581300229.228496063]: waitForService: Service [/gazebo_gui/set_physics_properties] has not been advertised, waiting...[0m
+[0m[ INFO] [1581300229.236415615]: Finished loading Gazebo ROS API Plugin.[0m
+[INFO] [1581300228.278337, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+shutdown request: user request
+[INFO] [1581300229.583562, 0.000000]: Loading model XML from ros parameter robot_description
+[INFO] [1581300229.603850, 0.000000]: Waiting for service /gazebo/spawn_urdf_model
+shutdown request: user request
+shutdown request: user request
+publisher)
+    servo_commands (racecar_control/servo_commands.py)
+    sim_connector_node (race/sim_connector.py)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch http://localhost:11311
+[1mprocess[gazebo-1]: started with pid [30495][0m
+[1mprocess[gazebo_gui-2]: started with pid [30500][0m
+[1mprocess[racecar_spawn-3]: started with pid [30505][0m
+[1mprocess[racecar/controller_manager-4]: started with pid [30506][0m
+[1mprocess[robot_state_publisher-5]: started with pid [30507][0m
+[1mprocess[servo_commands-6]: started with pid [30508][0m
+[1mprocess[gazebo_odometry_node-7]: started with pid [30509][0m
+[1mprocess[vesc/mux_chainer-8]: started with pid [30515][0m
+[1mprocess[vesc/mux_topic_backward_compat_safety-9]: started with pid [30520][0m
+[1mprocess[vesc/mux_topic_backward_compat_teleop-10]: started with pid [30522][0m
+[1mprocess[vesc/mux_topic_backward_compat_navigation-11]: started with pid [30529][0m
+[1mprocess[vesc/zero_ackermann_cmd-12]: started with pid [30535][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13]: started with pid [30539][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux-14]: started with pid [30541][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15]: started with pid [30543][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux-16]: started with pid [30545][0m
+[1mprocess[better_odom-17]: started with pid [30550][0m
+[1mprocess[control_node-18]: started with pid [30562][0m
+[1mprocess[sim_connector_node-19]: started with pid [30570][0m
+[1mprocess[levine_demo_node-20]: started with pid [30575][0m
+[1m[better_odom-17] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/better_odom-17*.log[0m
+[1m[gazebo_gui-2] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/gazebo_gui-2*.log[0m
+[1m[gazebo_odometry_node-7] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/gazebo_odometry_node-7*.log[0m
+[1m[levine_demo_node-20] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/levine_demo_node-20*.log[0m
+[1m[racecar/controller_manager-4] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/racecar-controller_manager-4*.log[0m
+[1m[robot_state_publisher-5] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/robot_state_publisher-5*.log[0m
+[1m[servo_commands-6] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/servo_commands-6*.log[0m
+[1m[sim_connector_node-19] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/sim_connector_node-19*.log[0m
+[1m[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/vesc-high_level-ackermann_cmd_mux_nodelet_manager-13*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/vesc-low_level-ackermann_cmd_mux_nodelet_manager-15*.log[0m
+[1m[vesc/mux_chainer-8] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/vesc-mux_chainer-8*.log[0m
+[1m[vesc/mux_topic_backward_compat_navigation-11] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_navigation-11*.log[0m
+[1m[vesc/mux_topic_backward_compat_safety-9] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_safety-9*.log[0m
+[1m[vesc/mux_topic_backward_compat_teleop-10] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_teleop-10*.log[0m
+[1m[vesc/zero_ackermann_cmd-12] process has finished cleanly
+log file: /home/wright/.ros/log/8f2ce32a-4ba9-11ea-aaa6-6057187e51d5/vesc-zero_ackermann_cmd-12*.log[0m
+all processes on machine have died, roslaunch will exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
+... logging to /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/roslaunch-jordan-thinkpad-x1-carbon-3rd-31101.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch
+[1mstarted roslaunch server http://jordan-thinkpad-x1-carbon-3rd:37471/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gazebo/enable_ros_network: True
+ * /racecar/joint_state_controller/publish_rate: 50
+ * /racecar/joint_state_controller/type: joint_state_contr...
+ * /racecar/left_front_wheel_velocity_controller/joint: left_front_wheel_...
+ * /racecar/left_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/left_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_rear_wheel_velocity_controller/joint: left_rear_wheel_j...
+ * /racecar/left_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/left_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_steering_hinge_position_controller/joint: left_steering_hin...
+ * /racecar/left_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/left_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/left_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/left_steering_hinge_position_controller/type: effort_controller...
+ * /racecar/right_front_wheel_velocity_controller/joint: right_front_wheel...
+ * /racecar/right_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/right_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_rear_wheel_velocity_controller/joint: right_rear_wheel_...
+ * /racecar/right_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/right_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_steering_hinge_position_controller/joint: right_steering_hi...
+ * /racecar/right_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/right_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/right_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/right_steering_hinge_position_controller/type: effort_controller...
+ * /robot_description: <?xml version="1....
+ * /rosdistro: melodic
+ * /rosversion: 1.14.3
+ * /use_sim_time: True
+ * /vesc/high_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+ * /vesc/low_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+
+NODES
+  /racecar/
+    controller_manager (controller_manager/spawner)
+  /vesc/low_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /vesc/
+    mux_chainer (topic_tools/relay)
+    mux_topic_backward_compat_navigation (topic_tools/relay)
+    mux_topic_backward_compat_safety (topic_tools/relay)
+    mux_topic_backward_compat_teleop (topic_tools/relay)
+    zero_ackermann_cmd (rostopic/rostopic)
+  /vesc/high_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /
+    better_odom (topic_tools/relay)
+    control_node (race/control.py)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_gui (gazebo_ros/gzclient)
+    gazebo_odometry_node (racecar_gazebo/gazebo_odometry.py)
+    levine_demo_node (race/levineDemo.py)
+    racecar_spawn (gazebo_ros/spawn_model)
+    robot_state_publisher (robot_state_publisher/robot_state_Listening to error for PID
+Enter Kp Value: [INFO] [1581300261.289586, 0.000000]: Loading model XML from ros parameter robot_description
+[INFO] [1581300261.302220, 0.000000]: Waiting for service /gazebo/spawn_urdf_model
+[INFO] [1581300261.606358, 0.000000]: Calling service /gazebo/spawn_urdf_model
+[INFO] [1581300262.358177, 0.001000]: Spawn status: SpawnModel: Successfully spawned entity
+[0m[ INFO] [1581300261.024178981]: waitForService: Service [/gazebo_gui/set_physics_properties] has not been advertised, waiting...[0m
+[0m[ INFO] [1581300261.025702968]: Finished loading Gazebo ROS API Plugin.[0m
+[INFO] [1581300260.208230, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+[INFO] [1581300262.929071, 0.009000]: Controller Spawner: Waiting for service controller_manager/switch_controller
+[INFO] [1581300262.932834, 0.014000]: Controller Spawner: Waiting for service controller_manager/unload_controller
+[INFO] [1581300262.936438, 0.018000]: Loading controller: left_rear_wheel_velocity_controller
+[INFO] [1581300263.089008, 0.120000]: Loading controller: right_rear_wheel_velocity_controller
+[INFO] [1581300263.162148, 0.175000]: Loading controller: left_front_wheel_velocity_controller
+[INFO] [1581300263.206071, 0.209000]: Loading controller: right_front_wheel_velocity_controller
+[INFO] [1581300263.262537, 0.236000]: Loading controller: left_steering_hinge_position_controller
+[INFO] [1581300263.313881, 0.281000]: Loading controller: right_steering_hinge_position_controller
+[INFO] [1581300263.397921, 0.333000]: Loading controller: joint_state_controller
+[INFO] [1581300263.429788, 0.354000]: Controller Spawner: Loaded controllers: left_rear_wheel_velocity_controller, right_rear_wheel_velocity_controller, left_front_wheel_velocity_controller, right_front_wheel_velocity_controller, left_steering_hinge_position_controller, right_steering_hinge_position_controller, joint_state_controller
+[INFO] [1581300263.444789, 0.356000]: Started controllers: left_rear_wheel_velocity_controller, right_rear_wheel_velocity_controller, left_front_wheel_velocity_controller, right_front_wheel_velocity_controller, left_steering_hinge_position_controller, right_steering_hinge_position_controller, joint_state_controller
+shutdown request: user request
+[INFO] [1581300268.258806, 2.292000]: Shutting down spawner. Stopping and unloading controllers...
+[INFO] [1581300268.260334, 2.292000]: Stopping all controllers...
+shutdown request: user request
+publisher)
+    servo_commands (racecar_control/servo_commands.py)
+    sim_connector_node (race/sim_connector.py)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch http://localhost:11311
+[1mprocess[gazebo-1]: started with pid [31119][0m
+[1mprocess[gazebo_gui-2]: started with pid [31124][0m
+[1mprocess[racecar_spawn-3]: started with pid [31129][0m
+[1mprocess[racecar/controller_manager-4]: started with pid [31130][0m
+[1mprocess[robot_state_publisher-5]: started with pid [31131][0m
+[1mprocess[servo_commands-6]: started with pid [31132][0m
+[1mprocess[gazebo_odometry_node-7]: started with pid [31133][0m
+[1mprocess[vesc/mux_chainer-8]: started with pid [31139][0m
+[1mprocess[vesc/mux_topic_backward_compat_safety-9]: started with pid [31145][0m
+[1mprocess[vesc/mux_topic_backward_compat_teleop-10]: started with pid [31148][0m
+[1mprocess[vesc/mux_topic_backward_compat_navigation-11]: started with pid [31150][0m
+[1mprocess[vesc/zero_ackermann_cmd-12]: started with pid [31161][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13]: started with pid [31162][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux-14]: started with pid [31164][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15]: started with pid [31165][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux-16]: started with pid [31172][0m
+[1mprocess[better_odom-17]: started with pid [31173][0m
+[1mprocess[control_node-18]: started with pid [31179][0m
+[1mprocess[sim_connector_node-19]: started with pid [31186][0m
+[1mprocess[levine_demo_node-20]: started with pid [31189][0m
+[1m[racecar_spawn-3] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/racecar_spawn-3*.log[0m
+[1m[better_odom-17] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/better_odom-17*.log[0m
+[1m[gazebo_gui-2] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/gazebo_gui-2*.log[0m
+[1m[gazebo_odometry_node-7] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/gazebo_odometry_node-7*.log[0m
+[1m[levine_demo_node-20] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/levine_demo_node-20*.log[0m
+[1m[racecar/controller_manager-4] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/racecar-controller_manager-4*.log[0m
+[1m[robot_state_publisher-5] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/robot_state_publisher-5*.log[0m
+[1m[servo_commands-6] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/servo_commands-6*.log[0m
+[1m[sim_connector_node-19] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/sim_connector_node-19*.log[0m
+[1m[vesc/high_level/ackermann_cmd_mux-14] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/vesc-high_level-ackermann_cmd_mux-14*.log[0m
+[1m[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/vesc-high_level-ackermann_cmd_mux_nodelet_manager-13*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux-16] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/vesc-low_level-ackermann_cmd_mux-16*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/vesc-low_level-ackermann_cmd_mux_nodelet_manager-15*.log[0m
+[1m[vesc/mux_chainer-8] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/vesc-mux_chainer-8*.log[0m
+[1m[vesc/mux_topic_backward_compat_navigation-11] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_navigation-11*.log[0m
+[1m[vesc/mux_topic_backward_compat_safety-9] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_safety-9*.log[0m
+[1m[vesc/mux_topic_backward_compat_teleop-10] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_teleop-10*.log[0m
+[1m[vesc/zero_ackermann_cmd-12] process has finished cleanly
+log file: /home/wright/.ros/log/a3e141da-4ba9-11ea-aaa6-6057187e51d5/vesc-zero_ackermann_cmd-12*.log[0m
+[gazebo-1] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
+... logging to /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/roslaunch-jordan-thinkpad-x1-carbon-3rd-1965.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch
+[1mstarted roslaunch server http://jordan-thinkpad-x1-carbon-3rd:42393/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gazebo/enable_ros_network: True
+ * /racecar/joint_state_controller/publish_rate: 50
+ * /racecar/joint_state_controller/type: joint_state_contr...
+ * /racecar/left_front_wheel_velocity_controller/joint: left_front_wheel_...
+ * /racecar/left_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/left_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_rear_wheel_velocity_controller/joint: left_rear_wheel_j...
+ * /racecar/left_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/left_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_steering_hinge_position_controller/joint: left_steering_hin...
+ * /racecar/left_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/left_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/left_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/left_steering_hinge_position_controller/type: effort_controller...
+ * /racecar/right_front_wheel_velocity_controller/joint: right_front_wheel...
+ * /racecar/right_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/right_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_rear_wheel_velocity_controller/joint: right_rear_wheel_...
+ * /racecar/right_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/right_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_steering_hinge_position_controller/joint: right_steering_hi...
+ * /racecar/right_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/right_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/right_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/right_steering_hinge_position_controller/type: effort_controller...
+ * /robot_description: <?xml version="1....
+ * /rosdistro: melodic
+ * /rosversion: 1.14.3
+ * /use_sim_time: True
+ * /vesc/high_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+ * /vesc/low_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+
+NODES
+  /racecar/
+    controller_manager (controller_manager/spawner)
+  /vesc/low_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /vesc/
+    mux_chainer (topic_tools/relay)
+    mux_topic_backward_compat_navigation (topic_tools/relay)
+    mux_topic_backward_compat_safety (topic_tools/relay)
+    mux_topic_backward_compat_teleop (topic_tools/relay)
+    zero_ackermann_cmd (rostopic/rostopic)
+  /vesc/high_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /
+    better_odom (topic_tools/relay)
+    control_node (race/control.py)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_gui (gazebo_ros/gzclient)
+    gazebo_odometry_node (racecar_gazebo/gazebo_odometry.py)
+    levine_demo_node (race/levineDemo.py)
+    racecar_spawn (gazebo_ros/spawn_model)
+    robot_state_publisher (robot_state_publisher/robot_state_pListening to error for PID
+Enter Kp Value: [INFO] [1581302440.520018, 0.000000]: Loading model XML from ros parameter robot_description
+[INFO] [1581302440.535140, 0.000000]: Waiting for service /gazebo/spawn_urdf_model
+[INFO] [1581302440.537260, 0.000000]: Calling service /gazebo/spawn_urdf_model
+[INFO] [1581302441.526135, 0.001000]: Spawn status: SpawnModel: Successfully spawned entity
+[0m[ INFO] [1581302440.157930974]: Finished loading Gazebo ROS API Plugin.[0m
+[0m[ INFO] [1581302440.161858733]: waitForService: Service [/gazebo_gui/set_physics_properties] has not been advertised, waiting...[0m
+[INFO] [1581302439.540832, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+[INFO] [1581302442.264220, 0.095000]: Controller Spawner: Waiting for service controller_manager/switch_controller
+[INFO] [1581302442.292224, 0.103000]: Controller Spawner: Waiting for service controller_manager/unload_controller
+[INFO] [1581302442.314576, 0.107000]: Loading controller: left_rear_wheel_velocity_controller
+[INFO] [1581302442.523424, 0.183000]: Loading controller: right_rear_wheel_velocity_controller
+[INFO] [1581302442.673879, 0.258000]: Loading controller: left_front_wheel_velocity_controller
+[INFO] [1581302442.746926, 0.301000]: Loading controller: right_front_wheel_velocity_controller
+[INFO] [1581302442.951139, 0.366000]: Loading controller: left_steering_hinge_position_controller
+[INFO] [1581302443.101253, 0.424000]: Loading controller: right_steering_hinge_position_controller
+[INFO] [1581302443.234564, 0.473000]: Loading controller: joint_state_controller
+[INFO] [1581302443.303415, 0.484000]: Controller Spawner: Loaded controllers: left_rear_wheel_velocity_controller, right_rear_wheel_velocity_controller, left_front_wheel_velocity_controller, right_front_wheel_velocity_controller, left_steering_hinge_position_controller, right_steering_hinge_position_controller, joint_state_controller
+[INFO] [1581302443.340938, 0.504000]: Started controllers: left_rear_wheel_velocity_controller, right_rear_wheel_velocity_controller, left_front_wheel_velocity_controller, right_front_wheel_velocity_controller, left_steering_hinge_position_controller, right_steering_hinge_position_controller, joint_state_controller
+shutdown request: user request
+[INFO] [1581302481.409783, 27.575000]: Shutting down spawner. Stopping and unloading controllers...
+[INFO] [1581302481.410961, 27.575000]: Stopping all controllers...
+shutdown request: user request
+ublisher)
+    servo_commands (racecar_control/servo_commands.py)
+    sim_connector_node (race/sim_connector.py)
+
+auto-starting new master
+[1mprocess[master]: started with pid [1985][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch http://localhost:11311
+[1msetting /run_id to b804fbfc-4bae-11ea-aaa6-6057187e51d5[0m
+[1mprocess[rosout-1]: started with pid [1996][0m
+started core service [/rosout]
+[1mprocess[gazebo-2]: started with pid [2003][0m
+[1mprocess[gazebo_gui-3]: started with pid [2008][0m
+[1mprocess[racecar_spawn-4]: started with pid [2013][0m
+[1mprocess[racecar/controller_manager-5]: started with pid [2014][0m
+[1mprocess[robot_state_publisher-6]: started with pid [2015][0m
+[1mprocess[servo_commands-7]: started with pid [2016][0m
+[1mprocess[gazebo_odometry_node-8]: started with pid [2017][0m
+[1mprocess[vesc/mux_chainer-9]: started with pid [2023][0m
+[1mprocess[vesc/mux_topic_backward_compat_safety-10]: started with pid [2028][0m
+[1mprocess[vesc/mux_topic_backward_compat_teleop-11]: started with pid [2032][0m
+[1mprocess[vesc/mux_topic_backward_compat_navigation-12]: started with pid [2036][0m
+[1mprocess[vesc/zero_ackermann_cmd-13]: started with pid [2042][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux_nodelet_manager-14]: started with pid [2047][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux-15]: started with pid [2050][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux_nodelet_manager-16]: started with pid [2053][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux-17]: started with pid [2062][0m
+[1mprocess[better_odom-18]: started with pid [2072][0m
+[1mprocess[control_node-19]: started with pid [2076][0m
+[1mprocess[sim_connector_node-20]: started with pid [2077][0m
+[1mprocess[levine_demo_node-21]: started with pid [2082][0m
+[1m[racecar_spawn-4] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/racecar_spawn-4*.log[0m
+[1m[better_odom-18] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/better_odom-18*.log[0m
+[1m[gazebo_gui-3] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/gazebo_gui-3*.log[0m
+[1m[gazebo_odometry_node-8] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/gazebo_odometry_node-8*.log[0m
+[1m[levine_demo_node-21] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/levine_demo_node-21*.log[0m
+[1m[racecar/controller_manager-5] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/racecar-controller_manager-5*.log[0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/robot_state_publisher-6*.log[0m
+[1m[rosout-1] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/rosout-1*.log[0m
+[rosout-1] restarting process
+[1mprocess[rosout-1]: started with pid [2645][0m
+[1m[servo_commands-7] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/servo_commands-7*.log[0m
+[1m[sim_connector_node-20] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/sim_connector_node-20*.log[0m
+[1m[vesc/high_level/ackermann_cmd_mux-15] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/vesc-high_level-ackermann_cmd_mux-15*.log[0m
+[1m[vesc/high_level/ackermann_cmd_mux_nodelet_manager-14] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/vesc-high_level-ackermann_cmd_mux_nodelet_manager-14*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux-17] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/vesc-low_level-ackermann_cmd_mux-17*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux_nodelet_manager-16] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/vesc-low_level-ackermann_cmd_mux_nodelet_manager-16*.log[0m
+[1m[vesc/mux_chainer-9] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/vesc-mux_chainer-9*.log[0m
+[1m[vesc/mux_topic_backward_compat_navigation-12] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_navigation-12*.log[0m
+[1m[vesc/mux_topic_backward_compat_safety-10] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_safety-10*.log[0m
+[1m[vesc/mux_topic_backward_compat_teleop-11] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_teleop-11*.log[0m
+[1m[vesc/zero_ackermann_cmd-13] process has finished cleanly
+log file: /home/wright/.ros/log/b804fbfc-4bae-11ea-aaa6-6057187e51d5/vesc-zero_ackermann_cmd-13*.log[0m
+[gazebo-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
+... logging to /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/roslaunch-jordan-thinkpad-x1-carbon-3rd-2966.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch
+[1mstarted roslaunch server http://jordan-thinkpad-x1-carbon-3rd:45417/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gazebo/enable_ros_network: True
+ * /racecar/joint_state_controller/publish_rate: 50
+ * /racecar/joint_state_controller/type: joint_state_contr...
+ * /racecar/left_front_wheel_velocity_controller/joint: left_front_wheel_...
+ * /racecar/left_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/left_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_rear_wheel_velocity_controller/joint: left_rear_wheel_j...
+ * /racecar/left_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/left_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_steering_hinge_position_controller/joint: left_steering_hin...
+ * /racecar/left_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/left_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/left_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/left_steering_hinge_position_controller/type: effort_controller...
+ * /racecar/right_front_wheel_velocity_controller/joint: right_front_wheel...
+ * /racecar/right_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/right_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_rear_wheel_velocity_controller/joint: right_rear_wheel_...
+ * /racecar/right_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/right_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_steering_hinge_position_controller/joint: right_steering_hi...
+ * /racecar/right_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/right_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/right_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/right_steering_hinge_position_controller/type: effort_controller...
+ * /robot_description: <?xml version="1....
+ * /rosdistro: melodic
+ * /rosversion: 1.14.3
+ * /use_sim_time: True
+ * /vesc/high_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+ * /vesc/low_level/ackermann_cmd_mux/yaml_cfg_file: /home/wright/f110...
+
+NODES
+  /racecar/
+    controller_manager (controller_manager/spawner)
+  /vesc/low_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /vesc/
+    mux_chainer (topic_tools/relay)
+    mux_topic_backward_compat_navigation (topic_tools/relay)
+    mux_topic_backward_compat_safety (topic_tools/relay)
+    mux_topic_backward_compat_teleop (topic_tools/relay)
+    zero_ackermann_cmd (rostopic/rostopic)
+  /vesc/high_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /
+    better_odom (topic_tools/relay)
+    control_node (race/control.py)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_gui (gazebo_ros/gzclient)
+    gazebo_odometry_node (racecar_gazebo/gazebo_odometry.py)
+    levine_demo_node (race/levineDemo.py)
+    racecar_spawn (gazebo_ros/spawn_model)
+    robot_state_publisher (robot_state_publisher/robot_state_pListening to error for PID
+Enter Kp Value: [INFO] [1581302594.779300, 0.000000]: Loading model XML from ros parameter robot_description
+[INFO] [1581302594.795893, 0.000000]: Waiting for service /gazebo/spawn_urdf_model
+[INFO] [1581302595.104699, 0.000000]: Calling service /gazebo/spawn_urdf_model
+[INFO] [1581302595.719567, 0.001000]: Spawn status: SpawnModel: Successfully spawned entity
+[0m[ INFO] [1581302594.461103516]: Finished loading Gazebo ROS API Plugin.[0m
+[0m[ INFO] [1581302594.463911519]: waitForService: Service [/gazebo_gui/set_physics_properties] has not been advertised, waiting...[0m
+[INFO] [1581302593.887893, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+[INFO] [1581302596.303745, 0.026000]: Controller Spawner: Waiting for service controller_manager/switch_controller
+[INFO] [1581302596.323862, 0.034000]: Controller Spawner: Waiting for service controller_manager/unload_controller
+[INFO] [1581302596.328500, 0.038000]: Loading controller: left_rear_wheel_velocity_controller
+[INFO] [1581302596.494415, 0.152000]: Loading controller: right_rear_wheel_velocity_controller
+[INFO] [1581302596.543986, 0.188000]: Loading controller: left_front_wheel_velocity_controller
+[INFO] [1581302596.595579, 0.225000]: Loading controller: right_front_wheel_velocity_controller
+[INFO] [1581302596.647836, 0.261000]: Loading controller: left_steering_hinge_position_controller
+[INFO] [1581302596.704270, 0.300000]: Loading controller: right_steering_hinge_position_controller
+[INFO] [1581302596.746566, 0.326000]: Loading controller: joint_state_controller
+[INFO] [1581302596.763874, 0.339000]: Controller Spawner: Loaded controllers: left_rear_wheel_velocity_controller, right_rear_wheel_velocity_controller, left_front_wheel_velocity_controller, right_front_wheel_velocity_controller, left_steering_hinge_position_controller, right_steering_hinge_position_controller, joint_state_controller
+[INFO] [1581302596.770420, 0.344000]: Started controllers: left_rear_wheel_velocity_controller, right_rear_wheel_velocity_controller, left_front_wheel_velocity_controller, right_front_wheel_velocity_controller, left_steering_hinge_position_controller, right_steering_hinge_position_controller, joint_state_controller
+shutdown request: user request
+[INFO] [1581302614.973485, 13.185000]: Shutting down spawner. Stopping and unloading controllers...
+[INFO] [1581302614.974466, 13.185000]: Stopping all controllers...
+shutdown request: user request
+ublisher)
+    servo_commands (racecar_control/servo_commands.py)
+    sim_connector_node (race/sim_connector.py)
+
+auto-starting new master
+[1mprocess[master]: started with pid [2979][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/wright/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch http://localhost:11311
+[1msetting /run_id to 14124a26-4baf-11ea-aaa6-6057187e51d5[0m
+[1mprocess[rosout-1]: started with pid [2990][0m
+started core service [/rosout]
+[1mprocess[gazebo-2]: started with pid [2997][0m
+[1mprocess[gazebo_gui-3]: started with pid [3002][0m
+[1mprocess[racecar_spawn-4]: started with pid [3007][0m
+[1mprocess[racecar/controller_manager-5]: started with pid [3008][0m
+[1mprocess[robot_state_publisher-6]: started with pid [3009][0m
+[1mprocess[servo_commands-7]: started with pid [3011][0m
+[1mprocess[gazebo_odometry_node-8]: started with pid [3015][0m
+[1mprocess[vesc/mux_chainer-9]: started with pid [3017][0m
+[1mprocess[vesc/mux_topic_backward_compat_safety-10]: started with pid [3022][0m
+[1mprocess[vesc/mux_topic_backward_compat_teleop-11]: started with pid [3027][0m
+[1mprocess[vesc/mux_topic_backward_compat_navigation-12]: started with pid [3034][0m
+[1mprocess[vesc/zero_ackermann_cmd-13]: started with pid [3039][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux_nodelet_manager-14]: started with pid [3041][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux-15]: started with pid [3042][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux_nodelet_manager-16]: started with pid [3053][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux-17]: started with pid [3054][0m
+[1mprocess[better_odom-18]: started with pid [3061][0m
+[1mprocess[control_node-19]: started with pid [3074][0m
+[1mprocess[sim_connector_node-20]: started with pid [3083][0m
+[1mprocess[levine_demo_node-21]: started with pid [3084][0m
+[1m[racecar_spawn-4] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/racecar_spawn-4*.log[0m
+[1m[better_odom-18] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/better_odom-18*.log[0m
+[1m[gazebo_gui-3] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/gazebo_gui-3*.log[0m
+[1m[gazebo_odometry_node-8] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/gazebo_odometry_node-8*.log[0m
+[1m[levine_demo_node-21] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/levine_demo_node-21*.log[0m
+[1m[racecar/controller_manager-5] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/racecar-controller_manager-5*.log[0m
+[1m[robot_state_publisher-6] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/robot_state_publisher-6*.log[0m
+[1m[rosout-1] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/rosout-1*.log[0m
+[rosout-1] restarting process
+[1mprocess[rosout-1]: started with pid [3608][0m
+[1m[servo_commands-7] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/servo_commands-7*.log[0m
+[1m[sim_connector_node-20] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/sim_connector_node-20*.log[0m
+[1m[vesc/high_level/ackermann_cmd_mux-15] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/vesc-high_level-ackermann_cmd_mux-15*.log[0m
+[1m[vesc/high_level/ackermann_cmd_mux_nodelet_manager-14] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/vesc-high_level-ackermann_cmd_mux_nodelet_manager-14*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux-17] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/vesc-low_level-ackermann_cmd_mux-17*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux_nodelet_manager-16] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/vesc-low_level-ackermann_cmd_mux_nodelet_manager-16*.log[0m
+[1m[vesc/mux_chainer-9] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/vesc-mux_chainer-9*.log[0m
+[1m[vesc/mux_topic_backward_compat_navigation-12] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_navigation-12*.log[0m
+[1m[vesc/mux_topic_backward_compat_safety-10] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_safety-10*.log[0m
+[1m[vesc/mux_topic_backward_compat_teleop-11] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/vesc-mux_topic_backward_compat_teleop-11*.log[0m
+[1m[vesc/zero_ackermann_cmd-13] process has finished cleanly
+log file: /home/wright/.ros/log/14124a26-4baf-11ea-aaa6-6057187e51d5/vesc-zero_ackermann_cmd-13*.log[0m
+[gazebo-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
