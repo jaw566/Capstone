@@ -63,6 +63,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         with open('config.yaml') as file:
             modules = yaml.load(file, Loader=yaml.FullLoader)
             iteration = 0
+            rank_in_grp=0
             for module, packages in modules.items():
                 #makes a group for the currebnt module
                 self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
@@ -93,18 +94,42 @@ class ImageDialog(QtWidgets.QMainWindow):
                     self.bttn.setText(button[1]) #the text seen in the GUI
                     self.formLayout.addWidget(self.bttn) #add the button to the layout
                     #connect onclicked function to the button
-                    self.bttn.clicked.connect(partial(self.saveSelectedOptions,button[0], iteration))
+                    self.bttn.clicked.connect(partial(self.saveSelectedOptions,button[0],iteration,rank_in_grp))
+                    rank_in_grp+=1
                 iteration+=1
 
             #test arrays
             print(configGroups)
             print(radioBttns)
 
-    def saveSelectedOptions(self, name, iteration):
-        arch = file_archive('savedData.txt')
+    def saveSelectedOptions(self, name, iteration, rank):
+        tmp='button'
+        arch = file_archive('savedData.txt', serialized=True)
+        print(name)
+        mapp = arch.archive
+        if rank==1 or rank==4 or rank==7 or rank==10:
+            if tmp+str(rank+1) in mapp:
+                mapp.pop(tmp+str(rank+1))
+            if tmp+str(rank-1) in mapp:
+                mapp.pop(tmp+str(rank-1))
+        elif rank==0 or rank==3 or rank==6 or rank==9:
+            if tmp+str(rank+1) in mapp:
+                mapp.pop(tmp+str(rank+1))
+            if tmp+str(rank+2) in mapp:
+                mapp.pop(tmp+str(rank+2))
+        else:
+            if tmp+str(rank-1) in mapp:
+                mapp.pop(tmp+str(rank-1))
+            if tmp+str(rank-2) in mapp:
+                mapp.pop(tmp+str(rank-2))
         arch[name] = 'y'
         arch.dump()
-        print(arch.archive)
+        print(mapp)
+
+        #arch = file_archive('savedData.txt')
+        #arch[name] = 'y'
+        #arch.dump()
+        #print(arch.archive)
 
     def loadPreviousOptions(self):
         arch = file_archive('savedData.txt')
