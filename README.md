@@ -11,6 +11,14 @@ PyQt5 is the core of our software so we need to install that
 
 `pip3 install pyqt5`
 
+For our configuration system we need PyYaml to parse our .yaml files
+
+`pip3 install pyyaml`
+
+For saving user selections on exit and relaoding then on launch we are using Klepto
+
+`pip3 install klepto`
+
 We will also need Sphinx
 
 `sudo apt-get install python3-sphinx`
