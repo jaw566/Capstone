@@ -1,0 +1,38 @@
+# config.yaml
+
+#Button Group:
+  #variable: varName  //gets passed to lauch file = to choice
+  #Choices:
+    #variable:
+        #title:
+        #dependecies:
+          #variable name of dep
+
+Racing Stradegy:
+  variable: racing
+
+  choices:
+    - New Name
+    - Lighting
+    - 
+    strat1: "New Name", "dep" 
+    button1: Ligtning McQueen
+      title: Li
+      depend: 
+        -name
+        -name2
+    button2: Vroom Vroom
+    button11: Test button
+
+Perception:
+  button3: Camera
+  button4: LiDar
+
+Mapping:
+  button5: "gmap","",""
+  button6: applemaps
+  button7: areWeThierYet
+
+Planning:
+  button8: calander
+  button9: planner
