@@ -56,7 +56,6 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append("Simulator READY.............")
         # Remember to pass the definition/method, not the return value!
 
-        self.loadPreviousOptions()
         
     def loadConfiguration(self):
         #this is where the config fill will be read in and radio buttons remnamed
@@ -88,7 +87,7 @@ class ImageDialog(QtWidgets.QMainWindow):
                     #print(button)
                     radioBttns.append(button[0]) # an array to keep track of the bttns
                     configGroups[iteration].append(button[0]) #add bttns to thier groups
-                    #crate the button
+                    #create the button
                     self.bttn = QtWidgets.QRadioButton(self.group)
                     self.bttn.setObjectName(button[0]) #this is the name we use to access the object
                     self.bttn.setText(button[1]) #the text seen in the GUI
@@ -101,6 +100,7 @@ class ImageDialog(QtWidgets.QMainWindow):
             #test arrays
             print(configGroups)
             print(radioBttns)
+            self.loadPreviousOptions()
 
     def saveSelectedOptions(self, name, iteration, rank):
         tmp='button'
@@ -134,11 +134,12 @@ class ImageDialog(QtWidgets.QMainWindow):
     def loadPreviousOptions(self):
         arch = file_archive('savedData.txt')
         dictionary = arch.archive
+        cw = self.ui.centralwidget
         print(dictionary)
         for i in dictionary:
             if 'y' == dictionary[i]:
-                #print(i)
-                var=getattr(self.ui, i)
+                print(i)
+                var=cw.findChild(QtWidgets.QRadioButton, i)
                 var.toggle()
             #dictionary[i] = 'n'
 
