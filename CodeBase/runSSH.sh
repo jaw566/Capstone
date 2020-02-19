@@ -8,3 +8,5 @@ sshpass -p 'Doan1234' ssh -T nvidia@10.18.92.118 'screen -dmS ssh; pwd'  #create
 
 sshpass -p 'Doan1234' ssh -T nvidia@10.18.92.118 'cd ~/Documents; screen -r ssh; ./sshTest.sh >> kpw_logfile.txt'  #replace with a launch file 
 
+sshpass -p 'Doan1234' ssh -T nvidia@10.18.92.118 'cd ~/Documents; screen -r roscore; roscore >> kpw_logfile.txt'  #replace with a launch file
+
