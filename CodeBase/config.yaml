@@ -1,19 +1,37 @@
 # config.yaml
 
 Racing Stradegy:
-  button0: racing
-  button1: Lightning McQueen
-  button2: Vroom Vroom
+  variable: strat
+  choices:  
+    button0: 
+      title: racing
+    button1: 
+      title: Lightning McQueen
+    button2: 
+      title: Vroom Vroom
 
 Perception:
-  button3: Camera
-  button4: LiDar
+  variable: eyes
+  choices:
+    button3: 
+      title: Camera
+    button4: 
+      title: LiDar
 
 Mapping:
-  button5: gmap
-  button6: applemaps
-  button7: areWeTheirYet
+  variable: mapper
+  choices:
+    button5: 
+      title: gmap
+    button6: 
+      title: applemaps
+    button7: 
+      title: areWeTheirYet
 
 Planning:
-  button8: calander
-  button9: planner
+  variable: planner
+  choices:
+    button8: 
+      title: calander
+    button9: 
+      title: planner
