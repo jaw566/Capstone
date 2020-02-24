@@ -19,6 +19,10 @@ For saving user selections on exit and relaoding then on launch we are using Kle
 
 `pip3 install klepto`
 
+We will also need Screen
+
+`sudo apt-get install screen`
+
 We will also need Sphinx
 
 `sudo apt-get install python3-sphinx`
