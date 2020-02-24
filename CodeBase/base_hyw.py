@@ -64,18 +64,18 @@ class ImageDialog(QtWidgets.QMainWindow):
     def startCarBttnAction(self):
         # This is executed when the button is pressed
         self.ui.Console.append("Starting Car....")
-        subprocess.call(['./runCar.sh >> &'], shell=True)
+        subprocess.call(['Scripts/./runCar.sh >> &'], shell=True)
 
     def startSimBttnAction(self):
         global proc_sim        
         # This is executed when the button is pressed
         self.ui.Console.append("Simulator RUNNING....")
-        proc_sim = subprocess.Popen( ['./runSim.sh >> logfile_sim.txt &'], \
+        proc_sim = subprocess.Popen( ['Scripts/./runSim.sh >> logfile_sim.txt &'], \
                                    shell=True,preexec_fn=os.setsid )
 
         # Alternative calls to command line
-        #subprocess.call(['./runSim.sh >> logfile_sim.txt &'],shell=True)
-        #os.system('./runSim.sh >> logfile_sim.txt &')
+        #subprocess.call(['Scripts/./runSim.sh >> logfile_sim.txt &'],shell=True)
+        #os.system('Scripts/./runSim.sh >> logfile_sim.txt &')
         
     def emergencyBttnAction(self):
         # This is executed when the button is pressed

@@ -82,7 +82,7 @@ class ImageDialog(QtWidgets.QMainWindow):
                 self.formLayout = QtWidgets.QFormLayout(self.group)
                 self.formLayout.setObjectName("formLayout_" + module[0])
                     
-                #print(module)
+                print(module)
                 configGroups.append(list()) #makes the array for the groupping
             
                 for choice in module[1]["choices"].items():
@@ -149,13 +149,13 @@ class ImageDialog(QtWidgets.QMainWindow):
     def startCarBttnAction(self):
         # This is executed when the button is pressed
         self.Console.append("Starting Car....")
-        subprocess.call(['./runCar.sh >> &'], shell=True)
+        subprocess.call(['Scripts/./runCar.sh >> &'], shell=True)
 
     def startSimBttnAction(self):
         # This is executed when the button is pressed
         #print('Run Sim Button Pressed')
         self.ui.Console.append("Simulator RUNNING....")
-        os.system('./runSim.sh >> logfile_sim.txt &')
+        os.system('Scripts/./runSim.sh >> logfile_sim.txt &')
         #print(proc_sim)
         #proc_sim = subprocess.Popen(['./runSim.sh >> logfile_sim.txt &',ROSWorkspacePath],shell=True,preexec_fn=os.setsid)
 
@@ -222,6 +222,4 @@ if __name__ == "__main__":
     ui.show()
     #ui.openProfileLoader()
     sys.exit(app.exec_())
-    
-
 

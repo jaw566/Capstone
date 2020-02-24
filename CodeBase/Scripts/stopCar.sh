@@ -1,5 +1,5 @@
 #!/bin/bash
-sshpass -p 'Doan1234' ssh -T nvidia@10.18.92.118 'cd ~/Documents; screen -r ssh; ./runStop.sh >> kpw_logfile.txt'  #replace with a launch file  
+sshpass -p 'Doan1234' ssh -T nvidia@10.18.92.118 'cd ~/Documents; screen -r ssh; ./runStop.sh >> kpw_logfile.txt' 
 
 PROC_NAME=$1  
 ProcNumber=`ps -ef |grep -w $PROC_NAME|grep -v grep|wc -l`  

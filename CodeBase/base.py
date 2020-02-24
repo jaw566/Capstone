@@ -142,16 +142,16 @@ class ImageDialog(QtWidgets.QMainWindow):
         
     def startCarBttnAction(self):
         # This is executed when the button is pressed
-        self.Console.append("Starting Car....")
-        subprocess.call(['./runCar.sh >> &'], shell=True)
+        self.ui.Console.append("Starting Car....")
+        subprocess.call(['Scripts/./runCar.sh >> &'], shell=True)
 
     def startSimBttnAction(self):
         # This is executed when the button is pressed
         #print('Run Sim Button Pressed')
         self.ui.Console.append("Simulator RUNNING....")
-        os.system('./runSim.sh >> logfile_sim.txt &')
+        os.system('Scripts/./runSim.sh >> logfile_sim.txt &')
         #print(proc_sim)
-        #proc_sim = subprocess.Popen(['./runSim.sh >> logfile_sim.txt &',ROSWorkspacePath],shell=True,preexec_fn=os.setsid)
+        #proc_sim = subprocess.Popen(['scripts/./runSim.sh >> logfile_sim.txt &',ROSWorkspacePath],shell=True,preexec_fn=os.setsid)
 
     def emergencyBttnAction(self):
         # This is executed when the button is pressed
@@ -211,7 +211,11 @@ class ImageDialog(QtWidgets.QMainWindow):
         if( 'proc_roscore' in globals()):
             os.killpg(proc_roscore.pid,signal.SIGTERM)
 
-
+    # KPW - Begin closing of screen 
+    @atexit.register
+    def closeScreen():
+        print("Begin killing screen on car")
+        #subprocess.call(['Scripts/./closeScreen.sh >> kpw_logFile.txt'], shell=True)
 
 if __name__ == "__main__":
 #    proc_roscore=subprocess.Popen(['roscore &'],shell=True,preexec_fn=os.setsid)

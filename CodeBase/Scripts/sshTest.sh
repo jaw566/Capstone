@@ -4,4 +4,3 @@
 #done
 
 echo "Running on car"
-roscore >> kpw_logfile.txt
