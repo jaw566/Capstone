@@ -24,7 +24,6 @@ hostname = socket.gethostname()
 localIPAddress = socket.gethostbyname(hostname)
 robotIPAddress = ""
 ROSWorkspacePath = ""
-proc_sim=0
 radioBttns = []
 configGroups = []
 
