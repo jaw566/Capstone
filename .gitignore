@@ -2,4 +2,4 @@ CodeBase/.vscode/*
 __pycache__/
 *.pyc
 
-.0
+*.0
