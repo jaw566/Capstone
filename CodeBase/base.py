@@ -26,6 +26,7 @@ robotIPAddress = ""
 ROSWorkspacePath = ""
 radioBttns = []
 configGroups = []
+versionNum=0
 
 class ImageDialog(QtWidgets.QMainWindow):
     
@@ -160,7 +161,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         #print('Run Sim Button Pressed')
         self.ui.Console.append("Simulator RUNNING....")
         global proc_sim
-        proc_sim = subprocess.Popen(['cd Scripts; screen -dmSL jaw ./runSim.sh &'], \
+        proc_sim = subprocess.Popen(['cd Scripts; screen -dmS jaw ./runSim.sh &'], \
                                             shell=True,preexec_fn=os.setsid)        
 
     def emergencyBttnAction(self):
