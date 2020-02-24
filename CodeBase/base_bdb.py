@@ -53,7 +53,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         # hard coded text in console      
         self.ui.Console.append("Starting RosLaunch Console") 
         self.ui.Console.append("=======================") 
-        self.ui.Console.append("ROS core INITIATED...........") 
+        #self.ui.Console.append("ROS core INITIATED...........") 
         self.ui.Console.append("Simulator READY.............")
         # Remember to pass the definition/method, not the return value!
    
@@ -158,13 +158,13 @@ class ImageDialog(QtWidgets.QMainWindow):
     def startCarBttnAction(self):
         # This is executed when the button is pressed
         self.Console.append("Starting Car....")
-        subprocess.call(['./runCar.sh >> &'], shell=True)
+        subprocess.call(['Scripts/./runCar.sh >> &'], shell=True)
 
     def startSimBttnAction(self):
         # This is executed when the button is pressed
         #print('Run Sim Button Pressed')
         self.ui.Console.append("Simulator RUNNING....")
-        os.system('./runSim.sh >> logfile_sim.txt &')
+        os.system('Scripts/./runSim.sh >> logfile_sim.txt &')
         #print(proc_sim)
         #proc_sim = subprocess.Popen(['./runSim.sh >> logfile_sim.txt &',ROSWorkspacePath],shell=True,preexec_fn=os.setsid)
 
@@ -217,11 +217,13 @@ class ImageDialog(QtWidgets.QMainWindow):
             nodes[i] = nodes[i].replace("\n","")
         for node in nodes:
             os.system("rosnode kill "+ node)
-        #os.killpg(proc_sim.pid,signal.SIGTERM)
-        os.killpg(proc_roscore.pid,signal.SIGTERM)
+        if( 'proc_sim' in globals()):
+            os.system("screen -S jaw -X quit")
+        if( 'proc_roscore' in globals()):
+            os.killpg(proc_roscore.pid,signal.SIGTERM)
         
 if __name__ == "__main__":
-    proc_roscore=subprocess.Popen(['roscore &'],shell=True,preexec_fn=os.setsid)
+#    proc_roscore=subprocess.Popen(['roscore &'],shell=True,preexec_fn=os.setsid)
     app = QtWidgets.QApplication(sys.argv)
     window = QtWidgets.QMainWindow()
     ui = ImageDialog()
