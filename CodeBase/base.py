@@ -41,7 +41,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         # Connect up the buttons.
         self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
         self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
-        self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
+        #self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
         #self.ui.treeView.clicked.connect(self.populateEditor)
 
         # Connect up the menu options
@@ -160,7 +160,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         #print('Run Sim Button Pressed')
         self.ui.Console.append("Simulator RUNNING....")
         global proc_sim
-        proc_sim = subprocess.Popen(['screen -dmSL jaw Scripts/./runSim.sh &'], \
+        proc_sim = subprocess.Popen(['cd Scripts; screen -dmSL jaw ./runSim.sh &'], \
                                             shell=True,preexec_fn=os.setsid)        
 
     def emergencyBttnAction(self):
