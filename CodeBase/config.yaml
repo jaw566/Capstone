@@ -1,5 +1,5 @@
 # config.yaml
-#Version: 20200221 #used to kepp track of diffrent configs and relate to saved profiles
+Version: 20200221 #used to kepp track of diffrent configs and relate to saved profiles
 
 Racing Stradegy: #module name
   variable: strat #varname that gets passed in string

@@ -1,0 +1,957 @@
+... logging to /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/roslaunch-ubuntu-7780.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch
+/opt/ros/melodic/lib/python2.7/dist-packages/roslaunch/loader.py:412: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  data = yaml.load(text)
+[1mstarted roslaunch server http://ubuntu:43413/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gazebo/enable_ros_network: True
+ * /racecar/joint_state_controller/publish_rate: 50
+ * /racecar/joint_state_controller/type: joint_state_contr...
+ * /racecar/left_front_wheel_velocity_controller/joint: left_front_wheel_...
+ * /racecar/left_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/left_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_rear_wheel_velocity_controller/joint: left_rear_wheel_j...
+ * /racecar/left_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/left_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_steering_hinge_position_controller/joint: left_steering_hin...
+ * /racecar/left_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/left_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/left_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/left_steering_hinge_position_controller/type: effort_controller...
+ * /racecar/right_front_wheel_velocity_controller/joint: right_front_wheel...
+ * /racecar/right_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/right_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_rear_wheel_velocity_controller/joint: right_rear_wheel_...
+ * /racecar/right_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/right_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_steering_hinge_position_controller/joint: right_steering_hi...
+ * /racecar/right_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/right_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/right_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/right_steering_hinge_position_controller/type: effort_controller...
+ * /robot_description: <?xml version="1....
+ * /rosdistro: melodic
+ * /rosversion: 1.14.3
+ * /use_sim_time: True
+ * /vesc/high_level/ackermann_cmd_mux/yaml_cfg_file: /home/bboyd/ROSWS...
+ * /vesc/low_level/ackermann_cmd_mux/yaml_cfg_file: /home/bboyd/ROSWS...
+
+NODES
+  /racecar/
+    controller_manager (controller_manager/spawner)
+  /vesc/low_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /vesc/
+    mux_chainer (topic_tools/relay)
+    mux_topic_backward_compat_navigation (topic_tools/relay)
+    mux_topic_backward_compat_safety (topic_tools/relay)
+    mux_topic_backward_compat_teleop (topic_tools/relay)
+    zero_ackermann_cmd (rostopic/rostopic)
+  /vesc/high_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /
+    better_odom (topic_tools/relay)
+    control_node (race/control.py)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_gui (gazebo_ros/gzclient)
+    gazebo_odometry_node (racecar_gazebo/gazebo_odometry.py)
+    levine_demo_node (race/levineDemo.py)
+    racecar_spawn (gazebo_ros/spawn_model)
+    robot_state_publisher (robot_state_publisher/robot_state_publisher)
+    servo_commands (racecar_control/servo_commands.py)
+    sim_connector_node (race/sim_connector.py)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch http://localhost:11311
+[1mprocess[gazebo-1]: started with pid [7799][0m
+[1mprocess[gazebo_gui-2]: started with pid [7804][0m
+[1mprocess[racecar_spawn-3]: started with pid [7809][0m
+[1mprocess[racecar/controller_manager-4]: started with pid [7810][0m
+[1mprocess[robot_state_publisher-5]: started with pid [7811][0m
+[1mprocess[servo_commands-6]: started with pid [7812][0m
+[1mprocess[gazebo_odometry_node-7]: started with pid [7813][0m
+[1mprocess[vesc/mux_chainer-8]: started with pid [7818][0m
+[1mprocess[vesc/mux_topic_backward_compat_safety-9]: started with pid [7825][0m
+[1mprocess[vesc/mux_topic_backward_compat_teleop-10]: started with pid [7827][0m
+[1mprocess[vesc/mux_topic_backward_compat_navigation-11]: started with pid [7833][0m
+[1mprocess[vesc/zero_ackermann_cmd-12]: started with pid [7840][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13]: started with pid [7847][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux-14]: started with pid [7850][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15]: started with pid [7851][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux-16]: started with pid [7852][0m
+[1mprocess[better_odom-17]: started with pid [7858][0m
+[1mprocess[control_node-18]: started with pid [7859][0m
+[1mprocess[sim_connector_node-19]: started with pid [7879][0m
+[1mprocess[levine_demo_node-20]: started with pid [7880][0m
+... logging to /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/roslaunch-ubuntu-7993.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch
+/opt/ros/melodic/lib/python2.7/dist-packages/roslaunch/loader.py:412: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  data = yaml.load(text)
+[1mstarted roslaunch server http://ubuntu:37461/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gazebo/enable_ros_network: True
+ * /racecar/joint_state_controller/publish_rate: 50
+ * /racecar/joint_state_controller/type: joint_state_contr...
+ * /racecar/left_front_wheel_velocity_controller/joint: left_front_wheel_...
+ * /racecar/left_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/left_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_rear_wheel_velocity_controller/joint: left_rear_wheel_j...
+ * /racecar/left_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/left_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_steering_hinge_position_controller/joint: left_steering_hin...
+ * /racecar/left_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/left_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/left_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/left_steering_hinge_position_controller/type: effort_controller...
+ * /racecar/right_front_wheel_velocity_controller/joint: right_front_wheel...
+ * /racecar/right_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/right_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_rear_wheel_velocity_controller/joint: right_rear_wheel_...
+ * /racecar/right_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/right_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_steering_hinge_position_controller/joint: right_steering_hi...
+ * /racecar/right_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/right_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/right_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/right_steering_hinge_position_controller/type: effort_controller...
+ * /robot_description: <?xml version="1....
+ * /rosdistro: melodic
+ * /rosversion: 1.14.3
+ * /use_sim_time: True
+ * /vesc/high_level/ackermann_cmd_mux/yaml_cfg_file: /home/bboyd/ROSWS...
+ * /vesc/low_level/ackermann_cmd_mux/yaml_cfg_file: /home/bboyd/ROSWS...
+
+NODES
+  /racecar/
+    controller_manager (controller_manager/spawner)
+  /vesc/low_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /vesc/
+    mux_chainer (topic_tools/relay)
+    mux_topic_backward_compat_navigation (topic_tools/relay)
+    mux_topic_backward_compat_safety (topic_tools/relay)
+    mux_topic_backward_compat_teleop (topic_tools/relay)
+    zero_ackermann_cmd (rostopic/rostopic)
+  /vesc/high_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /
+    better_odom (topic_tools/relay)
+    control_node (race/c[INFO] [1582562727.752425, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+[31m[gazebo-1] process has died [pid 7799, exit code 255, cmd /opt/ros/melodic/lib/gazebo_ros/gzserver -e ode /home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/racecar-simulator/racecar_gazebo/worlds/track_barca.world __name:=gazebo __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo-1.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo-1*.log[0m
+Listening to error for PID
+/opt/ros/melodic/lib/python2.7/dist-packages/rostopic/__init__.py:1782: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  pub_args.append(yaml.load(arg))
+[0m[ INFO] [1582562728.128792041]: Finished loading Gazebo ROS API Plugin.[0m
+[0m[ INFO] [1582562728.136159756]: waitForService: Service [/gazebo_gui/set_physics_properties] has not been advertised, waiting...[0m
+Enter Kp Value: [INFO] [1582562729.333469, 0.000000]: Loading model XML from ros parameter robot_description
+[INFO] [1582562729.438754, 0.000000]: Waiting for service /gazebo/spawn_urdf_model
+[1;31m[Err] [0m[1;31m[[0m[1;31mREST.cc[0m[1;31m:[0m[1;31m205[0m[1;31m] [0m[1;31mError in REST request[0m[1;31m[0m
+
+libcurl: (51) SSL: no alternative certificate subject name matches target host name 'api.ignitionfuel.org'
+[33m[ WARN] [1582562732.994376677]: Shutdown request received.[0m
+[33m[ WARN] [1582562733.002207110]: Reason given for shutdown: [new node registered with same name][0m
+[1m[robot_state_publisher-5] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/robot_state_publisher-5*.log[0m
+[33m[ WARN] [1582562733.337039720]: Shutdown request received.[0m
+[33m[ WARN] [1582562733.340476025]: Reason given for shutdown: [new node registered with same name][0m
+[33m[ WARN] [1582562733.347491816]: Shutdown request received.[0m
+[33m[ WARN] [1582562733.440818013]: Shutdown request received.[0m
+[33m[ WARN] [1582562733.444911454]: Reason given for shutdown: [new node registered with same name][0m
+[1m[vesc/mux_chainer-8] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_chainer-8*.log[0m
+[33m[ WARN] [1582562733.643839475]: Shutdown request received.[0m
+[33m[ WARN] [1582562733.647297306]: Reason given for shutdown: [new node registered with same name][0m
+[33m[ WARN] [1582562733.655851247]: Shutdown request received.[0m
+[1m[vesc/mux_topic_backward_compat_safety-9] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_safety-9*.log[0m
+[33m[ WARN] [1582562733.854049473]: Shutdown request received.[0m
+[33m[ WARN] [1582562733.855864914]: Reason given for shutdown: [new node registered with same name][0m
+[33m[ WARN] [1582562733.863960081]: Shutdown request received.[0m
+[1m[vesc/mux_topic_backward_compat_teleop-10] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_teleop-10*.log[0m
+[1m[vesc/mux_topic_backward_compat_navigation-11] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_navigation-11*.log[0m
+[33m[ WARN] [1582562734.266178419]: Shutdown request received.[0m
+[33m[ WARN] [1582562734.266494404]: Reason given for shutdown: [new node registered with same name][0m
+[31m[vesc/high_level/ackermann_cmd_mux-14] process has died [pid 7850, exit code 255, cmd /opt/ros/melodic/lib/nodelet/nodelet load ackermann_cmd_mux/AckermannCmdMuxNodelet ackermann_cmd_mux_nodelet_manager __name:=ackermann_cmd_mux __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux-14.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux-14*.log[0m
+[33m[ WARN] [1582562734.779758969]: Shutdown request received.[0m
+[33m[ WARN] [1582562734.779897865]: Reason given for shutdown: [new node registered with same name][0m
+[33m[ WARN] [1582562734.882577652]: Shutdown request received.[0m
+[33m[ WARN] [1582562734.886717104]: Reason given for shutdown: [new node registered with same name][0m
+[33m[ WARN] [1582562734.911721110]: Shutdown request received.[0m
+[31m[vesc/low_level/ackermann_cmd_mux-16] process has died [pid 7852, exit code 255, cmd /opt/ros/melodic/lib/nodelet/nodelet load ackermann_cmd_mux/AckermannCmdMuxNodelet ackermann_cmd_mux_nodelet_manager __name:=ackermann_cmd_mux __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux-16.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux-16*.log[0m
+[33m[ WARN] [1582562735.024898457]: Shutdown request received.[0m
+[33m[ WARN] [1582562735.025034102]: Reason given for shutdown: [new node registered with same name][0m
+[1m[better_odom-17] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/better_odom-17*.log[0m
+[33m[ WARN] [1582562735.450137333]: Shutdown request received.[0m
+[33m[ WARN] [1582562735.450475825]: Reason given for shutdown: [new node registered with same name][0m
+[1m[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux_nodelet_manager-13*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux_nodelet_manager-15*.log[0m
+ontrol.py)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_gui (gazebo_ros/gzclient)
+    gazebo_odometry_node (racecar_gazebo/gazebo_odometry.py)
+    levine_demo_node (race/levineDemo.py)
+    racecar_spawn (gazebo_ros/spawn_model)
+    robot_state_publisher (robot_state_publisher/robot_state_publisher)
+    servo_commands (racecar_control/servo_commands.py)
+    sim_connector_node (race/sim_connector.py)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch http://localhost:11311
+[1mprocess[gazebo-1]: started with pid [8141][0m
+[1mprocess[gazebo_gui-2]: started with pid [8146][0m
+[1mprocess[racecar_spawn-3]: started with pid [8152][0m
+[1mprocess[racecar/controller_manager-4]: started with pid [8153][0m
+[1mprocess[robot_state_publisher-5]: started with pid [8154][0m
+[1mprocess[servo_commands-6]: started with pid [8155][0m
+[33m[ WARN] [1582562733.015857840]: Shutdown request received.[0m
+[33m[ WARN] [1582562733.024670689]: Reason given for shutdown: [new node registered with same name][0m
+[1mprocess[gazebo_odometry_node-7]: started with pid [8162][0m
+[1mprocess[vesc/mux_chainer-8]: started with pid [8166][0m
+[33m[ WARN] [1582562733.341584501]: Shutdown request received.[0m
+[33m[ WARN] [1582562733.343032657]: Reason given for shutdown: [new node registered with same name][0m
+[1mprocess[vesc/mux_topic_backward_compat_safety-9]: started with pid [8167][0m
+[33m[ WARN] [1582562733.452548315]: Shutdown request received.[0m
+[33m[ WARN] [1582562733.457369222]: Reason given for shutdown: [new node registered with same name][0m
+[1mprocess[vesc/mux_topic_backward_compat_teleop-10]: started with pid [8175][0m
+[1m[robot_state_publisher-5] process has finished cleanly
+[33m[ WARN] [1582562733.652806577]: Shutdown request received.[0m
+[33m[ WARN] [1582562733.654627464]: Reason given for shutdown: [new node registered with same name][0m
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/robot_state_publisher-5*.log[0m
+[1m[vesc/mux_chainer-8] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_chainer-8*.log[0m
+[1mprocess[vesc/mux_topic_backward_compat_navigation-11]: started with pid [8190][0m
+[1mprocess[vesc/zero_ackermann_cmd-12]: started with pid [8195][0m
+[1m[vesc/mux_topic_backward_compat_safety-9] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_safety-9*.log[0m
+[1m[vesc/mux_topic_backward_compat_teleop-10] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_teleop-10*.log[0m
+[33m[ WARN] [1582562733.860137674]: Shutdown request received.[0m
+[33m[ WARN] [1582562733.862665966]: Reason given for shutdown: [new node registered with same name][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13]: started with pid [8201][0m
+[1m[vesc/mux_topic_backward_compat_navigation-11] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_navigation-11*.log[0m[1mprocess[vesc/high_level/ackermann_cmd_mux-14]: started with pid [8203][0m
+
+[1mprocess[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15]: started with pid [8207][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux-16]: started with pid [8215][0m
+[1mprocess[better_odom-17]: started with pid [8220][0m
+[33m[ WARN] [1582562734.889529355]: Shutdown request received.[0m
+[33m[ WARN] [1582562734.910490130]: Reason given for shutdown: [new node registered with same name][0m
+[1mprocess[control_node-18]: started with pid [8226][0m
+[1mprocess[sim_connector_node-19]: started with pid [8237][0m
+[1mprocess[levine_demo_node-20]: started with pid [8247][0m
+shutdown request: new node registered with same name
+[33m[WARN] [1582562738.405715, 0.000000]: Controller Spawner couldn't find the expected controller_manager ROS interface.
+[0m[1m[racecar/controller_manager-4] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar-controller_manager-4*.log[0m
+shutdown request: new node registered with same name
+[1m[servo_commands-6] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/servo_commands-6*.log[0m
+[33m[ WARN] [1582562739.590990681]: Shutdown request received.[0m
+[33m[ WARN] [1582562739.591119069]: Reason given for shutdown: [new node registered with same name][0m
+[1m[vesc/zero_ackermann_cmd-12] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-zero_ackermann_cmd-12*.log[0m
+shutdown request: new node registered with same name
+[1m[sim_connector_node-19] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/sim_connector_node-19*.log[0m
+[1m[levine_demo_node-20] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/levine_demo_node-20*.log[0m
+shutdown request: new node registered with same name
+[1m[gazebo_odometry_node-7] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_odometry_node-7*.log[0m
+Traceback (most recent call last):
+  File "/opt/ros/melodic/lib/gazebo_ros/spawn_model", line 239, in <module>
+    exit_code = sm.run()
+  File "/opt/ros/melodic/lib/gazebo_ros/spawn_model", line 185, in run
+    self.args.gazebo_namespace)
+  File "/opt/ros/melodic/lib/python2.7/dist-packages/gazebo_ros/gazebo_interface.py", line 28, in spawn_urdf_model_client
+    rospy.wait_for_service(gazebo_namespace+'/spawn_urdf_model')
+  File "/opt/ros/melodic/lib/python2.7/dist-packages/rospy/impl/tcpros_service.py", line 163, in wait_for_service
+    raise ROSInterruptException("rospy shutdown")
+rospy.exceptions.ROSInterruptException: rospy shutdown
+[31m[racecar_spawn-3] process has died [pid 7809, exit code 1, cmd /opt/ros/melodic/lib/gazebo_ros/spawn_model -urdf -param robot_description -model racecar -z 0.05 __name:=racecar_spawn __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar_spawn-3.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar_spawn-3*.log[0m
+[INFO] [1582562738.246631, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+[31m[gazebo-1] process has died [pid 8141, exit code 255, cmd /opt/ros/melodic/lib/gazebo_ros/gzserver -e ode /home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/racecar-simulator/racecar_gazebo/worlds/track_barca.world __name:=gazebo __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo-1.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo-1*.log[0m
+/opt/ros/melodic/lib/python2.7/dist-packages/rostopic/__init__.py:1782: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  pub_args.append(yaml.load(arg))
+[0m[ INFO] [1582562739.605117007]: Finished loading Gazebo ROS API Plugin.[0m
+[0m[ INFO] [1582562739.612425200]: waitForService: Service [/gazebo_gui/set_physics_properties] has not been advertised, waiting...[0m
+Listening to error for PID
+Enter Kp Value: [INFO] [1582562740.885209, 0.000000]: Loading model XML from ros parameter robot_description
+[INFO] [1582562740.898284, 0.000000]: Waiting for service /gazebo/spawn_urdf_model
+[1;31m[Err] [0m[1;31m[[0m[1;31mREST.cc[0m[1;31m:[0m[1;31m205[0m[1;31m] [0m[1;31mError in REST request[0m[1;31m[0m
+
+libcurl: (51) SSL: no alternative certificate subject name matches target host name 'api.ignitionfuel.org'
+[1m[vesc/high_level/ackermann_cmd_mux-14] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux-14*.log[0m
+[1m[vesc/low_level/ackermann_cmd_mux-16] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux-16*.log[0m
+[33m[WARN] [1582562768.273265, 0.000000]: Controller Spawner couldn't find the expected controller_manager ROS interface.
+[0m[1m[racecar/controller_manager-4] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar-controller_manager-4*.log[0m
+VMware: vmw_ioctl_command error Invalid argument.
+Aborted (core dumped)
+[31m[gazebo_gui-2] process has died [pid 7804, exit code 134, cmd /opt/ros/melodic/lib/gazebo_ros/gzclient __name:=gazebo_gui __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_gui-2.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_gui-2*.log[0m
+shutdown request: user request
+[33m[ WARN] [1582562794.509050775]: Shutdown request received.[0m
+[33m[ WARN] [1582562794.509150397]: Reason given for shutdown: [user request][0m
+[1m[gazebo_gui-2] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_gui-2*.log[0m
+[1m[gazebo_odometry_node-7] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_odometry_node-7*.log[0m
+[1m[levine_demo_node-20] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/levine_demo_node-20*.log[0m
+shutdown request: user request
+Traceback (most recent call last):
+  File "/opt/ros/melodic/lib/gazebo_ros/spawn_model", line 239, in <module>
+    exit_code = sm.run()
+  File "/opt/ros/melodic/lib/gazebo_ros/spawn_model", line 185, in run
+    self.args.gazebo_namespace)
+  File "/opt/ros/melodic/lib/python2.7/dist-packages/gazebo_ros/gazebo_interface.py", line 28, in spawn_urdf_model_client
+    rospy.wait_for_service(gazebo_namespace+'/spawn_urdf_model')
+  File "/opt/ros/melodic/lib/python2.7/dist-packages/rospy/impl/tcpros_service.py", line 163, in wait_for_service
+    raise ROSInterruptException("rospy shutdown")
+rospy.exceptions.ROSInterruptException: rospy shutdown
+[31m[racecar_spawn-3] process has died [pid 8152, exit code 1, cmd /opt/ros/melodic/lib/gazebo_ros/spawn_model -urdf -param robot_description -model racecar -z 0.05 __name:=racecar_spawn __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar_spawn-3.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar_spawn-3*.log[0m
+shutdown request: user request
+[1m[servo_commands-6] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/servo_commands-6*.log[0m
+[1m[sim_connector_node-19] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/sim_connector_node-19*.log[0m
+[33m[ WARN] [1582562798.556574510]: Shutdown request received.[0m
+[33m[ WARN] [1582562798.556754098]: Reason given for shutdown: [user request][0m
+[1m[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux_nodelet_manager-13*.log[0m
+[33m[ WARN] [1582562799.172950629]: Shutdown request received.[0m
+[33m[ WARN] [1582562799.173136893]: Reason given for shutdown: [user request][0m
+[1m[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux_nodelet_manager-15*.log[0m
+[1m[vesc/zero_ackermann_cmd-12] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-zero_ackermann_cmd-12*.log[0m
+... logging to /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/roslaunch-ubuntu-9174.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch
+/opt/ros/melodic/lib/python2.7/dist-packages/roslaunch/loader.py:412: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  data = yaml.load(text)
+[1mstarted roslaunch server http://ubuntu:34975/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gazebo/enable_ros_network: True
+ * /racecar/joint_state_controller/publish_rate: 50
+ * /racecar/joint_state_controller/type: joint_state_contr...
+ * /racecar/left_front_wheel_velocity_controller/joint: left_front_wheel_...
+ * /racecar/left_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/left_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_rear_wheel_velocity_controller/joint: left_rear_wheel_j...
+ * /racecar/left_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/left_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_steering_hinge_position_controller/joint: left_steering_hin...
+ * /racecar/left_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/left_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/left_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/left_steering_hinge_position_controller/type: effort_controller...
+ * /racecar/right_front_wheel_velocity_controller/joint: right_front_wheel...
+ * /racecar/right_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/right_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_rear_wheel_velocity_controller/joint: right_rear_wheel_...
+ * /racecar/right_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/right_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_steering_hinge_position_controller/joint: right_steering_hi...
+ * /racecar/right_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/right_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/right_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/right_steering_hinge_position_controller/type: effort_controller...
+ * /robot_description: <?xml version="1....
+ * /rosdistro: melodic
+ * /rosversion: 1.14.3
+ * /use_sim_time: True
+ * /vesc/high_level/ackermann_cmd_mux/yaml_cfg_file: /home/bboyd/ROSWS...
+ * /vesc/low_level/ackermann_cmd_mux/yaml_cfg_file: /home/bboyd/ROSWS...
+
+NODES
+  /racecar/
+    controller_manager (controller_manager/spawner)
+  /vesc/low_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /vesc/
+    mux_chainer (topic_tools/relay)
+    mux_topic_backward_compat_navigation (topic_tools/relay)
+    mux_topic_backward_compat_safety (topic_tools/relay)
+    mux_topic_backward_compat_teleop (topic_tools/relay)
+    zero_ackermann_cmd (rostopic/rostopic)
+  /vesc/high_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /
+    better_odom (topic_tools/relay)
+    control_node (race/control.py)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_gui (gazebo_ros/gzclient)
+    gazebo_odometry_node (racecar_gazebo/gazebo_odometry.py)
+    levine_demo_node (race/levineDemo.py)
+    racecar_spawn (gazebo_ros/spawn_model)
+    robot_state_publisher (robot_state_publisher/robot_state_publisher)
+    servo_commands (racecar_control/servo_commands.py)
+    sim_connector_node (race/sim_connector.py)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch http://localhost:11311
+[1mprocess[gazebo-1]: started with pid [9193][0m
+[1mprocess[gazebo_gui-2]: started with pid [9198][0m
+[1mprocess[racecar_spawn-3]: started with pid [9203][0m
+[1mprocess[racecar/controller_manager-4]: started with pid [9204][0m
+[1mprocess[robot_state_publisher-5]: started with pid [9205][0m
+[1mprocess[servo_commands-6]: started with pid [9206][0m
+[1mprocess[gazebo_odometry_node-7]: started with pid [9207][0m
+[1mprocess[vesc/mux_chainer-8]: started with pid [9213][0m
+[1mprocess[vesc/mux_topic_backward_compat_safety-9]: started with pid [9214][0m
+[1mprocess[vesc/mux_topic_backward_compat_teleop-10]: started with pid [9221][0m
+[1mprocess[vesc/mux_topic_backward_compat_navigation-11]: started with pid [9228][0m
+[1mprocess[vesc/zero_ackermann_cmd-12]: started with pid [9232][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13]: started with pid [9238][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux-14]: started with pid [9239][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15]: started with pid [9241][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux-16]: started with pid [9248][0m
+[1mprocess[better_odom-17]: started with pid [9250][0m
+[1mprocess[control_node-18]: started with pid [9257][0m
+[1mprocess[sim_connector_node-19]: started with pid [9267][0m
+[1mprocess[levine_demo_node-20]: started with pid [9268][0m
+/opt/ros/melodic/lib/python2.7/dist-packages/rostopic/__init__.py:1782: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  pub_args.append(yaml.load(arg))
+[INFO] [1582562880.193322, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+Listening to error for PID
+Enter Kp Value: [31m[gazebo-1] process has died [pid 9193, exit code 255, cmd /opt/ros/melodic/lib/gazebo_ros/gzserver -e ode /home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/racecar-simulator/racecar_gazebo/worlds/track_barca.world __name:=gazebo __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo-1.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo-1*.log[0m
+[0m[ INFO] [1582562881.097554610]: Finished loading Gazebo ROS API Plugin.[0m
+[0m[ INFO] [1582562881.103666483]: waitForService: Service [/gazebo_gui/set_physics_properties] has not been advertised, waiting...[0m
+[INFO] [1582562881.934141, 0.000000]: Loading model XML from ros parameter robot_description
+[INFO] [1582562881.963149, 0.000000]: Waiting for service /gazebo/spawn_urdf_model
+[1;31m[Err] [0m[1;31m[[0m[1;31mREST.cc[0m[1;31m:[0m[1;31m205[0m[1;31m] [0m[1;31mError in REST request[0m[1;31m[0m
+
+libcurl: (51) SSL: no alternative certificate subject name matches target host name 'api.ignitionfuel.org'
+[33m[WARN] [1582562910.199478, 0.000000]: Controller Spawner couldn't find the expected controller_manager ROS interface.
+[0m[1m[racecar/controller_manager-4] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar-controller_manager-4*.log[0m
+VMware: vmw_ioctl_command error Invalid argument.
+Aborted (core dumped)
+[31m[gazebo_gui-2] process has died [pid 9198, exit code 134, cmd /opt/ros/melodic/lib/gazebo_ros/gzclient __name:=gazebo_gui __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_gui-2.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_gui-2*.log[0m
+[33m[ WARN] [1582562960.323317082]: Shutdown request received.[0m
+[33m[ WARN] [1582562960.325470124]: Reason given for shutdown: [user request][0m
+[1m[better_odom-17] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/better_odom-17*.log[0m
+shutdown request: user request
+[1m[gazebo_odometry_node-7] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_odometry_node-7*.log[0m
+[1m[levine_demo_node-20] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/levine_demo_node-20*.log[0m
+shutdown request: user request
+Traceback (most recent call last):
+  File "/opt/ros/melodic/lib/gazebo_ros/spawn_model", line 239, in <module>
+    exit_code = sm.run()
+  File "/opt/ros/melodic/lib/gazebo_ros/spawn_model", line 185, in run
+    self.args.gazebo_namespace)
+  File "/opt/ros/melodic/lib/python2.7/dist-packages/gazebo_ros/gazebo_interface.py", line 28, in spawn_urdf_model_client
+    rospy.wait_for_service(gazebo_namespace+'/spawn_urdf_model')
+  File "/opt/ros/melodic/lib/python2.7/dist-packages/rospy/impl/tcpros_service.py", line 163, in wait_for_service
+    raise ROSInterruptException("rospy shutdown")
+rospy.exceptions.ROSInterruptException: rospy shutdown
+[31m[racecar_spawn-3] process has died [pid 9203, exit code 1, cmd /opt/ros/melodic/lib/gazebo_ros/spawn_model -urdf -param robot_description -model racecar -z 0.05 __name:=racecar_spawn __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar_spawn-3.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar_spawn-3*.log[0m
+[33m[ WARN] [1582562965.366805351]: Shutdown request received.[0m
+[33m[ WARN] [1582562965.369157868]: Reason given for shutdown: [user request][0m
+[1m[robot_state_publisher-5] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/robot_state_publisher-5*.log[0m
+shutdown request: user request
+[1m[servo_commands-6] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/servo_commands-6*.log[0m
+[1m[sim_connector_node-19] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/sim_connector_node-19*.log[0m
+[33m[ WARN] [1582562968.146383345]: Shutdown request received.[0m
+[33m[ WARN] [1582562968.146507025]: Reason given for shutdown: [user request][0m
+[31m[vesc/high_level/ackermann_cmd_mux-14] process has died [pid 9239, exit code 255, cmd /opt/ros/melodic/lib/nodelet/nodelet load ackermann_cmd_mux/AckermannCmdMuxNodelet ackermann_cmd_mux_nodelet_manager __name:=ackermann_cmd_mux __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux-14.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux-14*.log[0m
+[33m[ WARN] [1582562968.616147894]: Shutdown request received.[0m
+[33m[ WARN] [1582562968.616260965]: Reason given for shutdown: [user request][0m
+[1m[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux_nodelet_manager-13*.log[0m
+[33m[ WARN] [1582562969.062451169]: Shutdown request received.[0m
+[33m[ WARN] [1582562969.062542008]: Reason given for shutdown: [user request][0m
+[31m[vesc/low_level/ackermann_cmd_mux-16] process has died [pid 9248, exit code 255, cmd /opt/ros/melodic/lib/nodelet/nodelet load ackermann_cmd_mux/AckermannCmdMuxNodelet ackermann_cmd_mux_nodelet_manager __name:=ackermann_cmd_mux __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux-16.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux-16*.log[0m
+[33m[ WARN] [1582562969.499440207]: Shutdown request received.[0m
+[33m[ WARN] [1582562969.499592903]: Reason given for shutdown: [user request][0m
+[1m[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux_nodelet_manager-15*.log[0m
+[33m[ WARN] [1582562969.918584550]: Shutdown request received.[0m
+[33m[ WARN] [1582562969.920147616]: Reason given for shutdown: [user request][0m
+[1m[vesc/mux_chainer-8] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_chainer-8*.log[0m
+[33m[ WARN] [1582562970.340649827]: Shutdown request received.[0m
+[33m[ WARN] [1582562970.341799832]: Reason given for shutdown: [user request][0m
+[1m[vesc/mux_topic_backward_compat_navigation-11] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_navigation-11*.log[0m
+[33m[ WARN] [1582562970.717352051]: Shutdown request received.[0m
+[33m[ WARN] [1582562970.719063364]: Reason given for shutdown: [user request][0m
+[1m[vesc/mux_topic_backward_compat_safety-9] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_safety-9*.log[0m
+[33m[ WARN] [1582562971.095569580]: Shutdown request received.[0m
+[33m[ WARN] [1582562971.096754870]: Reason given for shutdown: [user request][0m
+[1m[vesc/mux_topic_backward_compat_teleop-10] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_teleop-10*.log[0m
+[1m[vesc/zero_ackermann_cmd-12] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-zero_ackermann_cmd-12*.log[0m
+... logging to /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/roslaunch-ubuntu-10071.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch
+/opt/ros/melodic/lib/python2.7/dist-packages/roslaunch/loader.py:412: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  data = yaml.load(text)
+[1mstarted roslaunch server http://ubuntu:32875/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gazebo/enable_ros_network: True
+ * /racecar/joint_state_controller/publish_rate: 50
+ * /racecar/joint_state_controller/type: joint_state_contr...
+ * /racecar/left_front_wheel_velocity_controller/joint: left_front_wheel_...
+ * /racecar/left_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/left_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_rear_wheel_velocity_controller/joint: left_rear_wheel_j...
+ * /racecar/left_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/left_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_steering_hinge_position_controller/joint: left_steering_hin...
+ * /racecar/left_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/left_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/left_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/left_steering_hinge_position_controller/type: effort_controller...
+ * /racecar/right_front_wheel_velocity_controller/joint: right_front_wheel...
+ * /racecar/right_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/right_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_rear_wheel_velocity_controller/joint: right_rear_wheel_...
+ * /racecar/right_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/right_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_steering_hinge_position_controller/joint: right_steering_hi...
+ * /racecar/right_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/right_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/right_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/right_steering_hinge_position_controller/type: effort_controller...
+ * /robot_description: <?xml version="1....
+ * /rosdistro: melodic
+ * /rosversion: 1.14.3
+ * /use_sim_time: True
+ * /vesc/high_level/ackermann_cmd_mux/yaml_cfg_file: /home/bboyd/ROSWS...
+ * /vesc/low_level/ackermann_cmd_mux/yaml_cfg_file: /home/bboyd/ROSWS...
+
+NODES
+  /racecar/
+    controller_manager (controller_manager/spawner)
+  /vesc/low_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /vesc/
+    mux_chainer (topic_tools/relay)
+    mux_topic_backward_compat_navigation (topic_tools/relay)
+    mux_topic_backward_compat_safety (topic_tools/relay)
+    mux_topic_backward_compat_teleop (topic_tools/relay)
+    zero_ackermann_cmd (rostopic/rostopic)
+  /vesc/high_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /
+    better_odom (topic_tools/relay)
+    control_node (race/control.py)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_gui (gazebo_ros/gzclient)
+    gazebo_odometry_node (racecar_gazebo/gazebo_odometry.py)
+    levine_demo_node (race/levineDemo.py)
+    racecar_spawn (gazebo_ros/spawn_model)
+    robot_state_publisher (robot_state_publisher/robot_state_publisher)
+    servo_commands (racecar_control/servo_commands.py)
+    sim_connector_node (race/sim_connector.py)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch http://localhost:11311
+[1mprocess[gazebo-1]: started with pid [10089][0m
+[1mprocess[gazebo_gui-2]: started with pid [10093][0m
+[1mprocess[racecar_spawn-3]: started with pid [10099][0m
+[1mprocess[racecar/controller_manager-4]: started with pid [10100][0m
+[1mprocess[robot_state_publisher-5]: started with pid [10101][0m
+[1mprocess[servo_commands-6]: started with pid [10102][0m
+[1mprocess[gazebo_odometry_node-7]: started with pid [10103][0m
+[1mprocess[vesc/mux_chainer-8]: started with pid [10108][0m
+[1mprocess[vesc/mux_topic_backward_compat_safety-9]: started with pid [10110][0m
+[1mprocess[vesc/mux_topic_backward_compat_teleop-10]: started with pid [10118][0m
+[1mprocess[vesc/mux_topic_backward_compat_navigation-11]: started with pid [10123][0m
+[1mprocess[vesc/zero_ackermann_cmd-12]: started with pid [10128][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13]: started with pid [10134][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux-14]: started with pid [10135][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15]: started with pid [10137][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux-16]: started with pid [10142][0m
+[1mprocess[better_odom-17]: started with pid [10145][0m
+[1mprocess[control_node-18]: started with pid [10148][0m
+[1mprocess[sim_connector_node-19]: started with pid [10156][0m
+[1mprocess[levine_demo_node-20]: started with pid [10165][0m
+/opt/ros/melodic/lib/python2.7/dist-packages/rostopic/__init__.py:1782: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  pub_args.append(yaml.load(arg))
+[INFO] [1582563112.857622, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+Listening to error for PID
+Enter Kp Value: [31m[gazebo-1] process has died [pid 10089, exit code 255, cmd /opt/ros/melodic/lib/gazebo_ros/gzserver -e ode /home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/racecar-simulator/racecar_gazebo/worlds/track_barca.world __name:=gazebo __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo-1.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo-1*.log[0m
+[0m[ INFO] [1582563113.790587230]: Finished loading Gazebo ROS API Plugin.[0m
+[0m[ INFO] [1582563113.794284319]: waitForService: Service [/gazebo_gui/set_physics_properties] has not been advertised, waiting...[0m
+[INFO] [1582563114.247594, 0.000000]: Loading model XML from ros parameter robot_description
+[INFO] [1582563114.271826, 0.000000]: Waiting for service /gazebo/spawn_urdf_model
+[1;31m[Err] [0m[1;31m[[0m[1;31mREST.cc[0m[1;31m:[0m[1;31m205[0m[1;31m] [0m[1;31mError in REST request[0m[1;31m[0m
+
+libcurl: (51) SSL: no alternative certificate subject name matches target host name 'api.ignitionfuel.org'
+VMware: vmw_ioctl_command error Invalid argument.
+Aborted (core dumped)
+[31m[gazebo_gui-2] process has died [pid 10093, exit code 134, cmd /opt/ros/melodic/lib/gazebo_ros/gzclient __name:=gazebo_gui __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_gui-2.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_gui-2*.log[0m
+[33m[ WARN] [1582563126.907241920]: Shutdown request received.[0m
+[33m[ WARN] [1582563126.909119664]: Reason given for shutdown: [user request][0m
+[1m[better_odom-17] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/better_odom-17*.log[0m
+shutdown request: user request
+[1m[gazebo_odometry_node-7] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_odometry_node-7*.log[0m
+[1m[levine_demo_node-20] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/levine_demo_node-20*.log[0m
+shutdown request: user request
+[33m[WARN] [1582563130.404720, 0.000000]: Controller Spawner couldn't find the expected controller_manager ROS interface.
+[0m[1m[racecar/controller_manager-4] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar-controller_manager-4*.log[0m
+shutdown request: user request
+Traceback (most recent call last):
+  File "/opt/ros/melodic/lib/gazebo_ros/spawn_model", line 239, in <module>
+    exit_code = sm.run()
+  File "/opt/ros/melodic/lib/gazebo_ros/spawn_model", line 185, in run
+    self.args.gazebo_namespace)
+  File "/opt/ros/melodic/lib/python2.7/dist-packages/gazebo_ros/gazebo_interface.py", line 28, in spawn_urdf_model_client
+    rospy.wait_for_service(gazebo_namespace+'/spawn_urdf_model')
+  File "/opt/ros/melodic/lib/python2.7/dist-packages/rospy/impl/tcpros_service.py", line 163, in wait_for_service
+    raise ROSInterruptException("rospy shutdown")
+rospy.exceptions.ROSInterruptException: rospy shutdown
+[31m[racecar_spawn-3] process has died [pid 10099, exit code 1, cmd /opt/ros/melodic/lib/gazebo_ros/spawn_model -urdf -param robot_description -model racecar -z 0.05 __name:=racecar_spawn __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar_spawn-3.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar_spawn-3*.log[0m
+[33m[ WARN] [1582563131.456473393]: Shutdown request received.[0m
+[33m[ WARN] [1582563131.458428006]: Reason given for shutdown: [user request][0m
+[1m[robot_state_publisher-5] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/robot_state_publisher-5*.log[0m
+shutdown request: user request
+[1m[servo_commands-6] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/servo_commands-6*.log[0m
+[1m[sim_connector_node-19] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/sim_connector_node-19*.log[0m
+[33m[ WARN] [1582563134.518308976]: Shutdown request received.[0m
+[33m[ WARN] [1582563134.518470177]: Reason given for shutdown: [user request][0m
+[31m[vesc/high_level/ackermann_cmd_mux-14] process has died [pid 10135, exit code 255, cmd /opt/ros/melodic/lib/nodelet/nodelet load ackermann_cmd_mux/AckermannCmdMuxNodelet ackermann_cmd_mux_nodelet_manager __name:=ackermann_cmd_mux __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux-14.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux-14*.log[0m
+[33m[ WARN] [1582563135.203643541]: Shutdown request received.[0m
+[33m[ WARN] [1582563135.203798645]: Reason given for shutdown: [user request][0m
+[1m[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux_nodelet_manager-13*.log[0m
+[33m[ WARN] [1582563135.869728186]: Shutdown request received.[0m
+[33m[ WARN] [1582563135.869801956]: Reason given for shutdown: [user request][0m
+[31m[vesc/low_level/ackermann_cmd_mux-16] process has died [pid 10142, exit code 255, cmd /opt/ros/melodic/lib/nodelet/nodelet load ackermann_cmd_mux/AckermannCmdMuxNodelet ackermann_cmd_mux_nodelet_manager __name:=ackermann_cmd_mux __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux-16.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux-16*.log[0m
+[33m[ WARN] [1582563136.445070140]: Shutdown request received.[0m
+[33m[ WARN] [1582563136.445179682]: Reason given for shutdown: [user request][0m
+[1m[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux_nodelet_manager-15*.log[0m
+[33m[ WARN] [1582563136.974095217]: Shutdown request received.[0m
+[33m[ WARN] [1582563136.975589003]: Reason given for shutdown: [user request][0m
+[1m[vesc/mux_chainer-8] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_chainer-8*.log[0m
+[33m[ WARN] [1582563137.518904396]: Shutdown request received.[0m
+[33m[ WARN] [1582563137.520064157]: Reason given for shutdown: [user request][0m
+[1m[vesc/mux_topic_backward_compat_navigation-11] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_navigation-11*.log[0m
+[33m[ WARN] [1582563137.992855886]: Shutdown request received.[0m
+[33m[ WARN] [1582563137.994311051]: Reason given for shutdown: [user request][0m
+[1m[vesc/mux_topic_backward_compat_safety-9] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_safety-9*.log[0m
+[33m[ WARN] [1582563138.439525187]: Shutdown request received.[0m
+[33m[ WARN] [1582563138.440961660]: Reason given for shutdown: [user request][0m
+[1m[vesc/mux_topic_backward_compat_teleop-10] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_teleop-10*.log[0m
+[1m[vesc/zero_ackermann_cmd-12] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-zero_ackermann_cmd-12*.log[0m
+... logging to /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/roslaunch-ubuntu-10646.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch
+/opt/ros/melodic/lib/python2.7/dist-packages/roslaunch/loader.py:412: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  data = yaml.load(text)
+[1mstarted roslaunch server http://ubuntu:34353/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gazebo/enable_ros_network: True
+ * /racecar/joint_state_controller/publish_rate: 50
+ * /racecar/joint_state_controller/type: joint_state_contr...
+ * /racecar/left_front_wheel_velocity_controller/joint: left_front_wheel_...
+ * /racecar/left_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/left_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_rear_wheel_velocity_controller/joint: left_rear_wheel_j...
+ * /racecar/left_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/left_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/left_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/left_steering_hinge_position_controller/joint: left_steering_hin...
+ * /racecar/left_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/left_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/left_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/left_steering_hinge_position_controller/type: effort_controller...
+ * /racecar/right_front_wheel_velocity_controller/joint: right_front_wheel...
+ * /racecar/right_front_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_front_wheel_velocity_controller/pid/p: 0.5
+ * /racecar/right_front_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_rear_wheel_velocity_controller/joint: right_rear_wheel_...
+ * /racecar/right_rear_wheel_velocity_controller/pid/d: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/i_clamp: 0.0
+ * /racecar/right_rear_wheel_velocity_controller/pid/p: 1.0
+ * /racecar/right_rear_wheel_velocity_controller/type: effort_controller...
+ * /racecar/right_steering_hinge_position_controller/joint: right_steering_hi...
+ * /racecar/right_steering_hinge_position_controller/pid/d: 0.5
+ * /racecar/right_steering_hinge_position_controller/pid/i: 0.0
+ * /racecar/right_steering_hinge_position_controller/pid/p: 10.0
+ * /racecar/right_steering_hinge_position_controller/type: effort_controller...
+ * /robot_description: <?xml version="1....
+ * /rosdistro: melodic
+ * /rosversion: 1.14.3
+ * /use_sim_time: True
+ * /vesc/high_level/ackermann_cmd_mux/yaml_cfg_file: /home/bboyd/ROSWS...
+ * /vesc/low_level/ackermann_cmd_mux/yaml_cfg_file: /home/bboyd/ROSWS...
+
+NODES
+  /racecar/
+    controller_manager (controller_manager/spawner)
+  /vesc/low_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /vesc/
+    mux_chainer (topic_tools/relay)
+    mux_topic_backward_compat_navigation (topic_tools/relay)
+    mux_topic_backward_compat_safety (topic_tools/relay)
+    mux_topic_backward_compat_teleop (topic_tools/relay)
+    zero_ackermann_cmd (rostopic/rostopic)
+  /vesc/high_level/
+    ackermann_cmd_mux (nodelet/nodelet)
+    ackermann_cmd_mux_nodelet_manager (nodelet/nodelet)
+  /
+    better_odom (topic_tools/relay)
+    control_node (race/control.py)
+    gazebo (gazebo_ros/gzserver)
+    gazebo_gui (gazebo_ros/gzclient)
+    gazebo_odometry_node (racecar_gazebo/gazebo_odometry.py)
+    levine_demo_node (race/levineDemo.py)
+    racecar_spawn (gazebo_ros/spawn_model)
+    robot_state_publisher (robot_state_publisher/robot_state_publisher)
+    servo_commands (racecar_control/servo_commands.py)
+    sim_connector_node (race/sim_connector.py)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/f1_10_sim/race/launch/f1_tenth.launch http://localhost:11311
+[1mprocess[gazebo-1]: started with pid [10664][0m
+[1mprocess[gazebo_gui-2]: started with pid [10669][0m
+[1mprocess[racecar_spawn-3]: started with pid [10674][0m
+[1mprocess[racecar/controller_manager-4]: started with pid [10675][0m
+[1mprocess[robot_state_publisher-5]: started with pid [10676][0m
+[1mprocess[servo_commands-6]: started with pid [10677][0m
+[1mprocess[gazebo_odometry_node-7]: started with pid [10678][0m
+[1mprocess[vesc/mux_chainer-8]: started with pid [10684][0m
+[1mprocess[vesc/mux_topic_backward_compat_safety-9]: started with pid [10690][0m
+[1mprocess[vesc/mux_topic_backward_compat_teleop-10]: started with pid [10696][0m
+[1mprocess[vesc/mux_topic_backward_compat_navigation-11]: started with pid [10697][0m
+[1mprocess[vesc/zero_ackermann_cmd-12]: started with pid [10704][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13]: started with pid [10708][0m
+[1mprocess[vesc/high_level/ackermann_cmd_mux-14]: started with pid [10711][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15]: started with pid [10712][0m
+[1mprocess[vesc/low_level/ackermann_cmd_mux-16]: started with pid [10717][0m
+[1mprocess[better_odom-17]: started with pid [10720][0m
+[1mprocess[control_node-18]: started with pid [10722][0m
+[1mprocess[sim_connector_node-19]: started with pid [10732][0m
+[1mprocess[levine_demo_node-20]: started with pid [10735][0m
+/opt/ros/melodic/lib/python2.7/dist-packages/rostopic/__init__.py:1782: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  pub_args.append(yaml.load(arg))
+[INFO] [1582563198.852544, 0.000000]: Controller Spawner: Waiting for service controller_manager/load_controller
+Listening to error for PID
+Enter Kp Value: [31m[gazebo-1] process has died [pid 10664, exit code 255, cmd /opt/ros/melodic/lib/gazebo_ros/gzserver -e ode /home/bboyd/ROSWS/f110_ws/src/f110-fall2018-skeletons/simulator/racecar-simulator/racecar_gazebo/worlds/track_barca.world __name:=gazebo __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo-1.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo-1*.log[0m
+[0m[ INFO] [1582563199.534713876]: Finished loading Gazebo ROS API Plugin.[0m
+[0m[ INFO] [1582563199.537662842]: waitForService: Service [/gazebo_gui/set_physics_properties] has not been advertised, waiting...[0m
+[INFO] [1582563200.225740, 0.000000]: Loading model XML from ros parameter robot_description
+[INFO] [1582563200.244477, 0.000000]: Waiting for service /gazebo/spawn_urdf_model
+[1;31m[Err] [0m[1;31m[[0m[1;31mREST.cc[0m[1;31m:[0m[1;31m205[0m[1;31m] [0m[1;31mError in REST request[0m[1;31m[0m
+
+libcurl: (51) SSL: no alternative certificate subject name matches target host name 'api.ignitionfuel.org'
+VMware: vmw_ioctl_command error Invalid argument.
+Aborted (core dumped)
+[31m[gazebo_gui-2] process has died [pid 10669, exit code 134, cmd /opt/ros/melodic/lib/gazebo_ros/gzclient __name:=gazebo_gui __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_gui-2.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_gui-2*.log[0m
+[33m[WARN] [1582563228.934977, 0.000000]: Controller Spawner couldn't find the expected controller_manager ROS interface.
+[0m[1m[racecar/controller_manager-4] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar-controller_manager-4*.log[0m
+[33m[ WARN] [1582563231.295800173]: Shutdown request received.[0m
+[33m[ WARN] [1582563231.299150686]: Reason given for shutdown: [user request][0m
+[1m[better_odom-17] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/better_odom-17*.log[0m
+shutdown request: user request
+[1m[gazebo_odometry_node-7] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/gazebo_odometry_node-7*.log[0m
+[1m[levine_demo_node-20] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/levine_demo_node-20*.log[0m
+shutdown request: user request
+Traceback (most recent call last):
+  File "/opt/ros/melodic/lib/gazebo_ros/spawn_model", line 239, in <module>
+    exit_code = sm.run()
+  File "/opt/ros/melodic/lib/gazebo_ros/spawn_model", line 185, in run
+    self.args.gazebo_namespace)
+  File "/opt/ros/melodic/lib/python2.7/dist-packages/gazebo_ros/gazebo_interface.py", line 28, in spawn_urdf_model_client
+    rospy.wait_for_service(gazebo_namespace+'/spawn_urdf_model')
+  File "/opt/ros/melodic/lib/python2.7/dist-packages/rospy/impl/tcpros_service.py", line 163, in wait_for_service
+    raise ROSInterruptException("rospy shutdown")
+rospy.exceptions.ROSInterruptException: rospy shutdown
+[31m[racecar_spawn-3] process has died [pid 10674, exit code 1, cmd /opt/ros/melodic/lib/gazebo_ros/spawn_model -urdf -param robot_description -model racecar -z 0.05 __name:=racecar_spawn __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar_spawn-3.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/racecar_spawn-3*.log[0m
+[33m[ WARN] [1582563236.211246935]: Shutdown request received.[0m
+[33m[ WARN] [1582563236.213886813]: Reason given for shutdown: [user request][0m
+[1m[robot_state_publisher-5] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/robot_state_publisher-5*.log[0m
+shutdown request: user request
+[1m[servo_commands-6] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/servo_commands-6*.log[0m
+[1m[sim_connector_node-19] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/sim_connector_node-19*.log[0m
+[33m[ WARN] [1582563239.062993629]: Shutdown request received.[0m
+[33m[ WARN] [1582563239.063103431]: Reason given for shutdown: [user request][0m
+[31m[vesc/high_level/ackermann_cmd_mux-14] process has died [pid 10711, exit code 255, cmd /opt/ros/melodic/lib/nodelet/nodelet load ackermann_cmd_mux/AckermannCmdMuxNodelet ackermann_cmd_mux_nodelet_manager __name:=ackermann_cmd_mux __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux-14.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux-14*.log[0m
+[33m[ WARN] [1582563239.568612691]: Shutdown request received.[0m
+[33m[ WARN] [1582563239.568743583]: Reason given for shutdown: [user request][0m
+[1m[vesc/high_level/ackermann_cmd_mux_nodelet_manager-13] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-high_level-ackermann_cmd_mux_nodelet_manager-13*.log[0m
+[33m[ WARN] [1582563240.080681956]: Shutdown request received.[0m
+[33m[ WARN] [1582563240.081328991]: Reason given for shutdown: [user request][0m
+[31m[vesc/low_level/ackermann_cmd_mux-16] process has died [pid 10717, exit code 255, cmd /opt/ros/melodic/lib/nodelet/nodelet load ackermann_cmd_mux/AckermannCmdMuxNodelet ackermann_cmd_mux_nodelet_manager __name:=ackermann_cmd_mux __log:=/home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux-16.log].
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux-16*.log[0m
+[33m[ WARN] [1582563240.542786099]: Shutdown request received.[0m
+[33m[ WARN] [1582563240.542892440]: Reason given for shutdown: [user request][0m
+[1m[vesc/low_level/ackermann_cmd_mux_nodelet_manager-15] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-low_level-ackermann_cmd_mux_nodelet_manager-15*.log[0m
+[33m[ WARN] [1582563240.980971796]: Shutdown request received.[0m
+[33m[ WARN] [1582563240.982149850]: Reason given for shutdown: [user request][0m
+[1m[vesc/mux_chainer-8] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_chainer-8*.log[0m
+[33m[ WARN] [1582563241.404989083]: Shutdown request received.[0m
+[33m[ WARN] [1582563241.406222659]: Reason given for shutdown: [user request][0m
+[1m[vesc/mux_topic_backward_compat_navigation-11] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_navigation-11*.log[0m
+[33m[ WARN] [1582563241.788225640]: Shutdown request received.[0m
+[33m[ WARN] [1582563241.789653033]: Reason given for shutdown: [user request][0m
+[1m[vesc/mux_topic_backward_compat_safety-9] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_safety-9*.log[0m
+[33m[ WARN] [1582563242.159096051]: Shutdown request received.[0m
+[33m[ WARN] [1582563242.160150751]: Reason given for shutdown: [user request][0m
+[1m[vesc/mux_topic_backward_compat_teleop-10] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-mux_topic_backward_compat_teleop-10*.log[0m
+[1m[vesc/zero_ackermann_cmd-12] process has finished cleanly
+log file: /home/bboyd/.ros/log/18fc89e8-5721-11ea-8780-000c293c857d/vesc-zero_ackermann_cmd-12*.log[0m

@@ -3,8 +3,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QFileSystemModel
 import sys
 
-from profileSelect import Ui_ProfileSelect
-from clientUINoBttns import Ui_MainWindow
+from UI.profileSelect import Ui_ProfileSelect
+from UI.testCL import Ui_MainWindow
 
 import subprocess
 import socket 
@@ -46,7 +46,8 @@ class ImageDialog(QtWidgets.QMainWindow):
         #self.ui.treeView.clicked.connect(self.populateEditor)
 
         # Connect up the menu options
-        self.ui.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
+        self.ui.actionLoad_Profile.triggered.connect(lambda: self.loadProfile())
+        self.ui.actionSave_Profile.triggered.connect(lambda: self.saveProfile())
       
         # JAW - console code
         # hard coded text in console      
@@ -64,40 +65,50 @@ class ImageDialog(QtWidgets.QMainWindow):
             iteration = 0
             rank_in_grp=0
             for module in modules.items():
-                #print(module, ':', packages)
-                #makes a group for the currebnt module
-                self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
-                self.group.setObjectName(module[1]["variable"]) #sets the objects name to be the name module
+                #print(modules)
                 
                 if(iteration == 0):
-                    #first group added to row 0 col 0
-                    self.ui.gridLayout.addWidget(self.group, 0, 0)
-                else:
-                    #all other groups added to row 1 and then the next open col
-                    self.ui.gridLayout.addWidget(self.group, 1, iteration-1)
+                    #iteration zero is our version number
+                    #print(module[1])
+                    versionNum = module[1]
 
-                self.group.setTitle(module[0]) #sets the title in the UI
-                    
-                #each group gets its own form layout that the bttns are added to
-                self.formLayout = QtWidgets.QFormLayout(self.group)
-                self.formLayout.setObjectName("formLayout_" + module[0])
-                    
-                #print(module)
-                configGroups.append(list()) #makes the array for the groupping
-            
-                for choice in module[1]["choices"].items():
-                    #print(choice[0]) var name of choice
-                    #print(choice[1]["title"]) title of var thats seen in the GUI
-                    radioBttns.append(choice[0]) # an array to keep track of the bttns
-                    configGroups[iteration].append(choice[0]) #add bttns to thier groups
-                    #create the button
-                    self.bttn = QtWidgets.QRadioButton(self.group)
-                    self.bttn.setObjectName(choice[0]) #this is the name we use to access the object
-                    self.bttn.setText(choice[1]["title"]) #the text seen in the GUI
-                    self.formLayout.addWidget(self.bttn) #add the button to the layout
-                    #connect onclicked function to the button
-                    self.bttn.clicked.connect(partial(self.saveSelectedOptions,choice[0],iteration,rank_in_grp))
-                    rank_in_grp+=1
+                elif(iteration == 1):
+                    #first group added to row 0 col 0
+                    #makes a group for the currebnt module
+                    self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
+                    self.group.setObjectName(module[1]["variable"]) #sets the objects name to be the name module
+                    self.ui.gridLayout.addWidget(self.group, 0, 0, 1, 3)
+                else:
+                    #makes a group for the currebnt module
+                    self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
+                    self.group.setObjectName(module[1]["variable"]) #sets the objects name to be the name module
+                    self.ui.gridLayout.addWidget(self.group, 1, iteration-2, 1, 1)
+                    #all other groups added to row 1 and then the next open col
+                    self.ui.gridLayout.addWidget(self.group, 1, iteration-2)
+
+                if(iteration >= 1):
+                    self.group.setTitle(module[0]) #sets the title in the UI
+                        
+                    #each group gets its own form layout that the bttns are added to
+                    self.formLayout = QtWidgets.QFormLayout(self.group)
+                    self.formLayout.setObjectName("formLayout_" + module[0])
+                        
+                    #print(module)
+                    configGroups.append(list()) #makes the array for the groupping
+                
+                    for choice in module[1]["choices"].items():
+                        #print(choice[0]) var name of choice
+                        #print(choice[1]["title"]) title of var thats seen in the GUI
+                        radioBttns.append(choice[0]) # an array to keep track of the bttns
+                        configGroups[iteration-1].append(choice[0]) #add bttns to thier groups
+                        #create the button
+                        self.bttn = QtWidgets.QRadioButton(self.group)
+                        self.bttn.setObjectName(choice[0]) #this is the name we use to access the object
+                        self.bttn.setText(choice[1]["title"]) #the text seen in the GUI
+                        self.formLayout.addWidget(self.bttn) #add the button to the layout
+                        #connect onclicked function to the button
+                        self.bttn.clicked.connect(partial(self.saveSelectedOptions,choice[0],iteration,rank_in_grp))
+                        rank_in_grp+=1
                 iteration+=1
         #test arrays
         print(configGroups)
@@ -149,9 +160,9 @@ class ImageDialog(QtWidgets.QMainWindow):
         # This is executed when the button is pressed
         #print('Run Sim Button Pressed')
         self.ui.Console.append("Simulator RUNNING....")
-        os.system('Scripts/./runSim.sh >> logfile_sim.txt &')
-        #print(proc_sim)
-        #proc_sim = subprocess.Popen(['scripts/./runSim.sh >> logfile_sim.txt &',ROSWorkspacePath],shell=True,preexec_fn=os.setsid)
+        global proc_sim
+        proc_sim = subprocess.Popen(['screen -dmSL jaw Scripts/./runSim.sh &'], \
+                                            shell=True,preexec_fn=os.setsid)        
 
     def emergencyBttnAction(self):
         # This is executed when the button is pressed
@@ -170,32 +181,18 @@ class ImageDialog(QtWidgets.QMainWindow):
         myfile.close()
         self.ui.Console.append(content)
 
-    def createProfile(self):
-        robotIPAddress = self.ui.robotIPLabel.text
-        ROSWorkspacePath = self.ui.ROSWSField.text
-        self.window.close()
+    def loadProfile(self):
+        dialog = QFileDialog()
+        fname = dialog.getOpenFileName(None, ("Select File"), ".txt") #returns string
+        #print(fname)
+        with open(fname[0]) as file:
+            #do stuff with the file
+            print(file.read())
 
-    def openProfileLoader(self):
-        self.profile_window = QtWidgets.QMainWindow()
-        self.profile_ui = Ui_ProfileSelect()
-        self.profile_ui.setupUi(self.profile_window)
-        
-        self.profile_ui.localIPAddressField.setText(localIPAddress)
-        self.profile_ui.browseROSWSBttn.clicked.connect(self.filePicker)
-        self.profile_ui.createProfileBttn.clicked.connect(self.createProfile)
-        self.profile_window.show()
-
-    def filePicker(self):
+    def saveProfile(self):
         dialog = QFileDialog()
         fname = dialog.getExistingDirectory(None, ("Select Folder")) #returns string
-        ROSWorkspacePath = "~" + fname
-        self.profile_ui.ROSWSField.setText(fname) #element 0 is our file path
-        # print(ROSWorkspacePath)
-        self.model = QFileSystemModel()
-        self.model.setRootPath(ROSWorkspacePath)
-        self.ui.treeView.setModel(self.model)
-        self.ui.treeView.setRootIndex(self.model.index(QtCore.QDir.currentPath()))
-        
+        #ROSWorkspacePath = "~" + fname
 
     # JAW - closure of ROS
     @atexit.register

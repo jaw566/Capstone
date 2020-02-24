@@ -92,7 +92,7 @@ class ImageDialog(QtWidgets.QMainWindow):
                     self.formLayout = QtWidgets.QFormLayout(self.group)
                     self.formLayout.setObjectName("formLayout_" + module[0])
                         
-                    print(module)
+                    #print(module)
                     configGroups.append(list()) #makes the array for the groupping
                 
                     for choice in module[1]["choices"].items():
@@ -179,11 +179,6 @@ class ImageDialog(QtWidgets.QMainWindow):
         # TODO: read one line at a time and translate
         myfile.close()
         self.ui.Console.append(content)
-
-    def createProfile(self):
-        robotIPAddress = self.ui.robotIPLabel.text
-        ROSWorkspacePath = self.ui.ROSWSField.text
-        self.window.close()
 
     def openProfileLoader(self):
         self.profile_window = QtWidgets.QMainWindow()

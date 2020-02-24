@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'TestCL.ui'
 #
-# Created by: PyQt5 UI code generator 5.14.0
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -37,10 +35,10 @@ class Ui_MainWindow(object):
         self.stopCarBttn = QtWidgets.QPushButton(self.groupBox)
         self.stopCarBttn.setObjectName("stopCarBttn")
         self.gridLayout_2.addWidget(self.stopCarBttn, 2, 0, 1, 1)
-        self.gridLayout.addWidget(self.groupBox, 3, 2, 1, 1)
+        self.gridLayout.addWidget(self.groupBox, 2, 2, 1, 1)
         self.Console = QtWidgets.QTextEdit(self.centralwidget)
         self.Console.setObjectName("Console")
-        self.gridLayout.addWidget(self.Console, 3, 0, 1, 2)
+        self.gridLayout.addWidget(self.Console, 2, 0, 1, 2)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem, 1, 0, 1, 1)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -70,10 +68,11 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "ROSConnect"))
         self.StartCarBttn.setText(_translate("MainWindow", "Start Car"))
         self.runSimBttn.setText(_translate("MainWindow", "Run Sim"))
         self.stopCarBttn.setText(_translate("MainWindow", "Stop Car"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.actionLoad_Profile.setText(_translate("MainWindow", "Load Profile"))
         self.actionSave_Profile.setText(_translate("MainWindow", "Save Profile"))
+
