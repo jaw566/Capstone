@@ -52,7 +52,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         # hard coded text in console      
         self.ui.Console.append("Starting RosLaunch Console") 
         self.ui.Console.append("=======================") 
-        self.ui.Console.append("ROS core INITIATED...........") 
+        #self.ui.Console.append("ROS core INITIATED...........") 
         self.ui.Console.append("Simulator READY.............")
         # Remember to pass the definition/method, not the return value!
 
@@ -64,7 +64,7 @@ class ImageDialog(QtWidgets.QMainWindow):
             iteration = 0
             rank_in_grp=0
             for module in modules.items():
-                #print(module, ':', packages
+                #print(module, ':', packages)
                 #makes a group for the currebnt module
                 self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
                 self.group.setObjectName(module[1]["variable"]) #sets the objects name to be the name module
@@ -207,12 +207,14 @@ class ImageDialog(QtWidgets.QMainWindow):
             nodes[i] = nodes[i].replace("\n","")
         for node in nodes:
             os.system("rosnode kill "+ node)
-        #os.killpg(proc_sim.pid,signal.SIGTERM)
-        os.killpg(proc_roscore.pid,signal.SIGTERM)
+        if( 'proc_sim' in globals()):
+            os.system("screen -S jaw -X quit")
+        if( 'proc_roscore' in globals()):
+            os.killpg(proc_roscore.pid,signal.SIGTERM)
         
 
 if __name__ == "__main__":
-    proc_roscore=subprocess.Popen(['roscore &'],shell=True,preexec_fn=os.setsid)
+#    proc_roscore=subprocess.Popen(['roscore &'],shell=True,preexec_fn=os.setsid)
     app = QtWidgets.QApplication(sys.argv)
     window = QtWidgets.QMainWindow()
     ui = ImageDialog()
