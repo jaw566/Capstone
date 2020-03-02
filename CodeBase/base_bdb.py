@@ -200,9 +200,8 @@ class ImageDialog(QtWidgets.QMainWindow):
         f = open(name[0],'w')
         arch = file_archive('savedData.txt')
         dictionary = arch.archive
-        print(dictionary[1])
-        print(yaml.dump(arch.archive))
-        f.write(yaml.dump(dictionary))
+        for i in dictionary:
+            f.write("%s: %s\n" % (i,dictionary[i]))
         f.close()
 
     # JAW - closure of ROS
