@@ -26,7 +26,7 @@ robotIPAddress = ""
 ROSWorkspacePath = ""
 radioBttns = []
 configGroups = []
-versionNum=0
+versionNum = 0
 
 class ImageDialog(QtWidgets.QMainWindow):
     
