@@ -5,7 +5,7 @@ Racing Stradegy: #module name
   variable: strat #varname that gets passed in string
   choices:  #list of buttons and thier values
     button0: #button value passed to the string
-      title: racing #title of the button in the GUI
+      title: Racing #title of the button in the GUI
       dependencies: #list of other choices that
         #button3 for exaple
     button1: 
