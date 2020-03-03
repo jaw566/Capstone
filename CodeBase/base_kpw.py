@@ -3,8 +3,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QFileSystemModel
 import sys
 
-from profileSelect import Ui_ProfileSelect
-from clientUINoBttns import Ui_MainWindow
+from UI.profileSelect import Ui_ProfileSelect
+from UI.testCL import Ui_MainWindow
 
 import subprocess
 import socket 
@@ -24,9 +24,11 @@ hostname = socket.gethostname()
 localIPAddress = socket.gethostbyname(hostname)
 robotIPAddress = ""
 ROSWorkspacePath = ""
-proc_sim=0
 radioBttns = []
 configGroups = []
+variables = []
+versionNum = 0
+param = ""
 
 class ImageDialog(QtWidgets.QMainWindow):
     
@@ -37,18 +39,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        # Make local modifications.
-        self.loadConfiguration()
-        # Connect up the buttons.
-        self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
-        self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
-        self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
-        #self.ui.treeView.clicked.connect(self.populateEditor)
-
-        # Connect up the menu options
-        self.ui.actionSelect_Profile.triggered.connect(lambda: self.openProfileLoader())
-      
-        # JAW - console code
+         # JAW - console code
         # hard coded text in console      
         self.ui.Console.append("Starting RosLaunch Console") 
         self.ui.Console.append("=======================") 
@@ -56,134 +47,156 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append("Simulator READY.............")
         # Remember to pass the definition/method, not the return value!
 
+        # Make local modifications.
+        self.loadConfiguration()
+        # Connect up the buttons.
+        self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
+        self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
+        #self.ui.runSimBttn.clicked.connect(self.logContentsFromFile)
+        #self.ui.treeView.clicked.connect(self.populateEditor)
+
+        # Connect up the menu options
+        self.ui.actionLoad_Profile.triggered.connect(lambda: self.loadProfile())
+        self.ui.actionSave_Profile.triggered.connect(lambda: self.saveProfile())
+      
+       
+
         
     def loadConfiguration(self):
         #this is where the config fill will be read in and radio buttons remnamed
         with open('config.yaml') as file:
             modules = yaml.load(file, Loader=yaml.FullLoader)
             iteration = 0
-            rank_in_grp=0
             for module in modules.items():
-                #print(module, ':', packages)
-                #makes a group for the currebnt module
-                self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
-                self.group.setObjectName(module[1]["variable"]) #sets the objects name to be the name module
+                #print(modules)
                 
                 if(iteration == 0):
-                    #first group added to row 0 col 0
-                    self.ui.gridLayout.addWidget(self.group, 0, 0)
-                else:
-                    #all other groups added to row 1 and then the next open col
-                    self.ui.gridLayout.addWidget(self.group, 1, iteration-1)
+                    #iteration zero is our version number
+                    #print(module[1])
+                    global versionNum
+                    versionNum = module[1]
 
-                self.group.setTitle(module[0]) #sets the title in the UI
-                    
-                #each group gets its own form layout that the bttns are added to
-                self.formLayout = QtWidgets.QFormLayout(self.group)
-                self.formLayout.setObjectName("formLayout_" + module[0])
-                    
-                #print(module)
-                configGroups.append(list()) #makes the array for the groupping
-            
-                for choice in module[1]["choices"].items():
-                    #print(choice[0]) var name of choice
-                    #print(choice[1]["title"]) title of var thats seen in the GUI
-                    radioBttns.append(choice[0]) # an array to keep track of the bttns
-                    configGroups[iteration].append(choice[0]) #add bttns to thier groups
-                    #create the button
-                    self.bttn = QtWidgets.QRadioButton(self.group)
-                    self.bttn.setObjectName(choice[0]) #this is the name we use to access the object
-                    self.bttn.setText(choice[1]["title"]) #the text seen in the GUI
-                    self.formLayout.addWidget(self.bttn) #add the button to the layout
-                    #connect onclicked function to the button
-                    self.bttn.clicked.connect(partial(self.saveSelectedOptions,choice[0],iteration,rank_in_grp))
-                    rank_in_grp+=1
+                elif(iteration == 1):
+                    #first group added to row 0 col 0
+                    #makes a group for the currebnt module
+                    self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
+                    self.group.setObjectName(module[1]["variable"]) #sets the objects name to be the name module
+                    self.ui.gridLayout.addWidget(self.group, 0, 0, 1, 3)
+                    variables.append(module[1]["variable"])
+                else:
+                    #makes a group for the currebnt module
+                    self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
+                    self.group.setObjectName(module[1]["variable"]) #sets the objects name to be the name module
+                    self.ui.gridLayout.addWidget(self.group, 1, iteration-2, 1, 1)
+                    #all other groups added to row 1 and then the next open col
+                    self.ui.gridLayout.addWidget(self.group, 1, iteration-2)
+                    variables.append(module[1]["variable"])
+
+                if(iteration >= 1):
+                    self.group.setTitle(module[0]) #sets the title in the UI
+                        
+                    #each group gets its own form layout that the bttns are added to
+                    self.formLayout = QtWidgets.QFormLayout(self.group)
+                    self.formLayout.setObjectName("formLayout_" + module[0])
+                        
+                    #print(module)
+                    configGroups.append(list()) #makes the array for the groupping
+                
+                    for choice in module[1]["choices"].items():
+                        #print(choice[0]) var name of choice
+                        #print(choice[1]["title"]) title of var thats seen in the GUI
+                        radioBttns.append(choice[0]) # an array to keep track of the bttns
+                        configGroups[iteration-1].append(choice[0]) #add bttns to thier groups
+                        #create the button
+                        self.bttn = QtWidgets.QRadioButton(self.group)
+                        self.bttn.setObjectName(choice[0]) #this is the name we use to access the object
+                        self.bttn.setText(choice[1]["title"]) #the text seen in the GUI
+                        self.formLayout.addWidget(self.bttn) #add the button to the layout
+                        #connect onclicked function to the button
+                        self.bttn.clicked.connect(partial(self.saveSelectedOptions,choice[0], iteration-1))
                 iteration+=1
         #test arrays
-        print(configGroups)
-        print(radioBttns)
+        #print(configGroups)
+        #print(radioBttns)
         self.loadPreviousOptions()
 
-    def saveSelectedOptions(self, name, iteration, rank):
-        tmp='button'
+    def saveSelectedOptions(self, name, moduleNum):
         arch = file_archive('savedData.txt', serialized=True)
-        print(name)
         mapp = arch.archive
-        if rank==1 or rank==4 or rank==7 or rank==10:
-            if tmp+str(rank+1) in mapp:
-                mapp.pop(tmp+str(rank+1))
-            if tmp+str(rank-1) in mapp:
-                mapp.pop(tmp+str(rank-1))
-        elif rank==0 or rank==3 or rank==6 or rank==9:
-            if tmp+str(rank+1) in mapp:
-                mapp.pop(tmp+str(rank+1))
-            if tmp+str(rank+2) in mapp:
-                mapp.pop(tmp+str(rank+2))
-        else:
-            if tmp+str(rank-1) in mapp:
-                mapp.pop(tmp+str(rank-1))
-            if tmp+str(rank-2) in mapp:
-                mapp.pop(tmp+str(rank-2))
-        arch[name] = 'y'
+        arch["Version"] = versionNum
+        group = configGroups[moduleNum]
+
+        for choice in group:
+            #print(choice)
+            if choice in mapp:
+                mapp.pop(choice)
+                #arch.pop(choice)
+        arch[variables[moduleNum]] = name
         arch.dump()
-        print(mapp)
+        #print(arch.archive)
+       
 
     def loadPreviousOptions(self):
         arch = file_archive('savedData.txt')
         dictionary = arch.archive
-        cw = self.ui.centralwidget
         print(dictionary)
-        for i in dictionary:
-            if dictionary[i] == 'y':
-                print(i)
-                var=cw.findChild(QtWidgets.QRadioButton, i)
-                var.toggle()
-   
-   
-   def generateLaunchVars(self):
-        params = []
-        arch = file_archive('saveConfig.txt')
-        dictionary = arch.archive
-        print()
-        print(dictionary)
-        for i in dictionary:
-            if 'y' == dictionary[i]:
-                params.append(i)
-                print(i)
-                print(params)
+        if len(dictionary) == 0: #if empty dictionary
+            self.ui.Console.append("No previous profile found.")
+            return
+        
+        elif dictionary["Version"] != versionNum : #if version doesn't match
+            self.ui.Console.append("Config Version Mismatch. Could not load previous profile.")
+            return
 
-        print(params)
-        os.putenv('PARAMS', ' '.join(params))
-        #param2 = params.pop(1)
-       # param3 = params.pop(2)
-       # param4 = params.pop(3)
-        print(params)
-        subprocess.call(['Scripts/./runLaunch.sh >> kpw_logfile.txt'], shell=True)
-        #print()
-        #print(mapping)
-        #print(percep)
-        #print(rstrat)
-        #print(planning)
+        cw = self.ui.centralwidget
+        #print(dictionary)
+        iteration = 0
+        for i in dictionary:
+            if iteration != 0:
+               # print(dictionary[i])
+                var=cw.findChild(QtWidgets.QRadioButton, dictionary[i])
+                var.toggle()
+            iteration+=1
+
+    def generateLaunchVars(self):
+        arch = file_archive('savedData.txt')
+        dictionary = arch.archive
+        #print(dictionary)
+        global param
+        param = ""
+        for i in dictionary:
+            if i == 'Version':
+                continue
+
+           # print(i)
+           # print(dictionary[i])
+            test = i +":=" +  dictionary[i]
+            param += test + " "
+           # print(param)
+        #command = 'cd Scripts; ./runLaunch.sh "$1"'
+        #subprocess.call([command, 'sh',param], shell=True)
         
     def startCarBttnAction(self):
         # This is executed when the button is pressed
         self.ui.Console.append("Starting Car....")
         self.generateLaunchVars()
+        command = 'cd Scripts; ./runSSH.sh "$1"'
+        subprocess.call([command, 'sh',param], shell=True)
         #subprocess.call(['Scripts/./runSSH.sh >> kpw_logFile.txt'], shell=True)
+        
 
     def startSimBttnAction(self):
         # This is executed when the button is pressed
         #print('Run Sim Button Pressed')
         self.ui.Console.append("Simulator RUNNING....")
-        os.system('Scripts/./runSim.sh >> logfile_sim.txt &')
-        #print(proc_sim)
-        #proc_sim = subprocess.Popen(['Scripts/./runSim.sh >> logfile_sim.txt &',ROSWorkspacePath],shell=True,preexec_fn=os.setsid)
+        global proc_sim
+       # proc_sim = subprocess.Popen(['cd Scripts; screen -dmS jaw ./runSim.sh &'], \
+       #                                     shell=True,preexec_fn=os.setsid)        
 
     def emergencyBttnAction(self):
         # This is executed when the button is pressed
         self.ui.Console.append("Stop the Car....")
         subprocess.call(['./stopCar.py'])
-         # subprocess.call([Scripts/'./stopCar.sh >> kpw_logfile.txt'], shell=True)
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
@@ -197,32 +210,29 @@ class ImageDialog(QtWidgets.QMainWindow):
         myfile.close()
         self.ui.Console.append(content)
 
-    def createProfile(self):
-        robotIPAddress = self.ui.robotIPLabel.text
-        ROSWorkspacePath = self.ui.ROSWSField.text
-        self.window.close()
-
-    def openProfileLoader(self):
-        self.profile_window = QtWidgets.QMainWindow()
-        self.profile_ui = Ui_ProfileSelect()
-        self.profile_ui.setupUi(self.profile_window)
-        
-        self.profile_ui.localIPAddressField.setText(localIPAddress)
-        self.profile_ui.browseROSWSBttn.clicked.connect(self.filePicker)
-        self.profile_ui.createProfileBttn.clicked.connect(self.createProfile)
-        self.profile_window.show()
-
-    def filePicker(self):
+    def loadProfile(self):
         dialog = QFileDialog()
-        fname = dialog.getExistingDirectory(None, ("Select Folder")) #returns string
-        ROSWorkspacePath = "~" + fname
-        self.profile_ui.ROSWSField.setText(fname) #element 0 is our file path
-        # print(ROSWorkspacePath)
-        self.model = QFileSystemModel()
-        self.model.setRootPath(ROSWorkspacePath)
-        self.ui.treeView.setModel(self.model)
-        self.ui.treeView.setRootIndex(self.model.index(QtCore.QDir.currentPath()))
-        
+        fname = dialog.getOpenFileName(None, ("Select File"), ".txt") #returns string
+        #print(fname)
+        with open(fname[0]) as file:
+            #do stuff with the file
+            print(file.read())
+
+    def saveProfile(self):
+        name = QFileDialog.getSaveFileName(self, 'Save File')
+        f = open(name[0],'w')
+        arch = file_archive('savedData.txt')
+        diction = arch.archive
+        dictionary = {}
+
+        for index in arch.archive:
+            #print(index)
+            #print(dictionary[index])
+            dictionary[index] = diction[index]
+            #print(diction)
+        print(yaml.dump(dictionary,default_flow_style=False))
+        f.write(yaml.dump(dictionary))
+        f.close()
 
     # JAW - closure of ROS
     @atexit.register
@@ -237,17 +247,15 @@ class ImageDialog(QtWidgets.QMainWindow):
             os.system("screen -S jaw -X quit")
         if( 'proc_roscore' in globals()):
             os.killpg(proc_roscore.pid,signal.SIGTERM)
-    # KPW - Begin closing of screen 
-   # @atexit.register
-   # def closeScreen():
-       # print("Begin killing screen on car")
+
+    # KPW - Begin closing of screen
+    @atexit.register
+    def closeScreen():
+        print("Begin killing screen on car")
         #subprocess.call(['Scripts/./closeScreen.sh >> kpw_logFile.txt'], shell=True)
 
-
-
 if __name__ == "__main__":
-#     #proc_roscore=subprocess.Popen(['roscore &'], \
-    #                        shell=True,preexec_fn=os.setsid)
+#    proc_roscore=subprocess.Popen(['roscore &'],shell=True,preexec_fn=os.setsid)
     app = QtWidgets.QApplication(sys.argv)
     window = QtWidgets.QMainWindow()
     ui = ImageDialog()
