@@ -2,7 +2,7 @@
 echo $@ 
 
 
-sshpass -p 'NauCap2020!' ssh -T kyle@localhost 'cd ~/Documents/Capstone/CodeBase/Scripts;./runLaunch.sh $@ >> kpw_logfile.txt'  #replace with a launch file
+sshpass -p 'NauCap2020!' ssh -T kyle@localhost "cd ~/Documents/Capstone/CodeBase/Scripts;./runLaunch.sh ${@} >> kpw_logfile.txt"  #replace with a launch file
 #Pass Files over to car
 #sshpass -p 'Doan1234' scp sshTest.sh runClose.sh runStop.sh nvidia@10.18.92.118:'~/Documents'
 
