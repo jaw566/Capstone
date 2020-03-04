@@ -211,12 +211,35 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append(content)
 
     def loadProfile(self):
+        dictionary = {}
         dialog = QFileDialog()
         fname = dialog.getOpenFileName(None, ("Select File"), ".txt") #returns string
         #print(fname)
         with open(fname[0]) as file:
             #do stuff with the file
-            print(file.read())
+            for index in file: 
+                (key, val) = index.split()
+                dictionary[key] = val
+
+      
+        numVersion = dictionary["Version:"]
+      
+        if len(dictionary) == 0: #if empty dictionary
+            self.ui.Console.append("No previous profile found.")
+            return
+        
+        elif numVersion != str( versionNum) : #if version doesn't match
+            self.ui.Console.append("Config Version Mismatch. Could not load previous profile.")
+            return
+
+        cw = self.ui.centralwidget
+        iteration = 0
+        for i in dictionary:
+            if iteration != 0:
+                var=cw.findChild(QtWidgets.QRadioButton, dictionary[i])
+                var.toggle()
+            iteration+=1   
+        self.ui.Console.append("Your profile has been loaded sucessfully. ")
 
     def saveProfile(self):
         name = QFileDialog.getSaveFileName(self, 'Save File')

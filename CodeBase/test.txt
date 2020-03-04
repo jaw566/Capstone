@@ -1,5 +1,0 @@
-Version: 20200221
-strat: button1
-eyes: button3
-mapper: button6
-planner: button8
