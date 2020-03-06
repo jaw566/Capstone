@@ -26,7 +26,10 @@ robotIPAddress = ""
 ROSWorkspacePath = ""
 radioBttns = []
 configGroups = []
+variables = []
 versionNum = 0
+param = ""
+running = True
 
 class ImageDialog(QtWidgets.QMainWindow):
     
@@ -36,6 +39,15 @@ class ImageDialog(QtWidgets.QMainWindow):
         # Set up the user interface from Designer.
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        # JAW - console code
+        # hard coded text in console      
+        self.ui.Console.append("Starting RosLaunch Console") 
+        self.ui.Console.append("=======================") 
+        #self.ui.Console.append("ROS core INITIATED...........") 
+        self.ui.Console.append("Simulator READY.............")
+        # Remember to pass the definition/method, not the return value!
+
 
         # Make local modifications.
         self.loadConfiguration()
@@ -49,27 +61,19 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.actionLoad_Profile.triggered.connect(lambda: self.loadProfile())
         self.ui.actionSave_Profile.triggered.connect(lambda: self.saveProfile())
       
-        # JAW - console code
-        # hard coded text in console      
-        self.ui.Console.append("Starting RosLaunch Console") 
-        self.ui.Console.append("=======================") 
-        #self.ui.Console.append("ROS core INITIATED...........") 
-        self.ui.Console.append("Simulator READY.............")
-        # Remember to pass the definition/method, not the return value!
 
-        
     def loadConfiguration(self):
         #this is where the config fill will be read in and radio buttons remnamed
         with open('config.yaml') as file:
             modules = yaml.load(file, Loader=yaml.FullLoader)
             iteration = 0
-            rank_in_grp=0
             for module in modules.items():
                 #print(modules)
                 
                 if(iteration == 0):
                     #iteration zero is our version number
                     #print(module[1])
+                    global versionNum
                     versionNum = module[1]
 
                 elif(iteration == 1):
@@ -78,6 +82,7 @@ class ImageDialog(QtWidgets.QMainWindow):
                     self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
                     self.group.setObjectName(module[1]["variable"]) #sets the objects name to be the name module
                     self.ui.gridLayout.addWidget(self.group, 0, 0, 1, 3)
+                    variables.append(module[1]["variable"])
                 else:
                     #makes a group for the currebnt module
                     self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
@@ -85,6 +90,7 @@ class ImageDialog(QtWidgets.QMainWindow):
                     self.ui.gridLayout.addWidget(self.group, 1, iteration-2, 1, 1)
                     #all other groups added to row 1 and then the next open col
                     self.ui.gridLayout.addWidget(self.group, 1, iteration-2)
+                    variables.append(module[1]["variable"])
 
                 if(iteration >= 1):
                     self.group.setTitle(module[0]) #sets the title in the UI
@@ -107,49 +113,69 @@ class ImageDialog(QtWidgets.QMainWindow):
                         self.bttn.setText(choice[1]["title"]) #the text seen in the GUI
                         self.formLayout.addWidget(self.bttn) #add the button to the layout
                         #connect onclicked function to the button
-                        self.bttn.clicked.connect(partial(self.saveSelectedOptions,choice[0],iteration,rank_in_grp))
-                        rank_in_grp+=1
+                        self.bttn.clicked.connect(partial(self.saveSelectedOptions,choice[0], iteration-1))
                 iteration+=1
         #test arrays
-        print(configGroups)
-        print(radioBttns)
-        self.loadPreviousOptions()
+        #print(configGroups)
+        #print(radioBttns)
+        self.loadPreviousOptions()        
 
-    def saveSelectedOptions(self, name, iteration, rank):
-        tmp='button'
+    def saveSelectedOptions(self, name, moduleNum):
         arch = file_archive('savedData.txt', serialized=True)
-        print(name)
         mapp = arch.archive
-        if rank==1 or rank==4 or rank==7 or rank==10:
-            if tmp+str(rank+1) in mapp:
-                mapp.pop(tmp+str(rank+1))
-            if tmp+str(rank-1) in mapp:
-                mapp.pop(tmp+str(rank-1))
-        elif rank==0 or rank==3 or rank==6 or rank==9:
-            if tmp+str(rank+1) in mapp:
-                mapp.pop(tmp+str(rank+1))
-            if tmp+str(rank+2) in mapp:
-                mapp.pop(tmp+str(rank+2))
-        else:
-            if tmp+str(rank-1) in mapp:
-                mapp.pop(tmp+str(rank-1))
-            if tmp+str(rank-2) in mapp:
-                mapp.pop(tmp+str(rank-2))
-        arch[name] = 'y'
+        arch["Version"] = versionNum
+        group = configGroups[moduleNum]
+
+        for choice in group:
+            #print(choice)
+            if choice in mapp:
+                mapp.pop(choice)
+                #arch.pop(choice)
+        arch[variables[moduleNum]] = name
         arch.dump()
-        print(mapp)
+        #print(arch.archive)
+
+    def loadData(self, dictionary):
+         if len(dictionary) == 0: #if empty dictionary
+             self.ui.Console.append("No previous profile found.")
+             return
+         elif "Version:" in dictionary:
+              if dictionary["Version:"] != str(versionNum):
+                 self.ui.Console.append("Config Version Mismatch. Could not load previous profile.")
+                 return
+         elif dictionary["Version"] != versionNum : #if version doesn't match
+             self.ui.Console.append("Config Version Mismatch. Could not load previous profile.")
+             return
+
+         cw = self.ui.centralwidget
+         #print(dictionary)
+         iteration = 0
+         for i in dictionary:
+             if iteration != 0:
+                # print(dictionary[i])
+                 var=cw.findChild(QtWidgets.QRadioButton, dictionary[i])
+                 var.toggle()
+             iteration+=1  
 
     def loadPreviousOptions(self):
         arch = file_archive('savedData.txt')
         dictionary = arch.archive
-        cw = self.ui.centralwidget
         print(dictionary)
-        for i in dictionary:
-            if dictionary[i] == 'y':
-                print(i)
-                var=cw.findChild(QtWidgets.QRadioButton, i)
-                var.toggle()
+        self.loadData(dictionary)
 
+    def generateLaunchVars(self):
+        arch = file_archive('savedData.txt')
+        dictionary = arch.archive
+        global param 
+        param = ""
+        for i in dictionary:
+            if i == 'Version':
+                continue
+
+            test = i +":=" +  dictionary[i]
+            param += test + " "
+        #command = 'cd Scripts; ./runLaunch.sh "$1"'
+        #subprocess.call([command, 'sh',param], shell=True)
         
     def startCarBttnAction(self):
         # This is executed when the button is pressed
@@ -182,17 +208,27 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append(content)
 
     def loadProfile(self):
+        dictionary = {}
         dialog = QFileDialog()
         fname = dialog.getOpenFileName(None, ("Select File"), ".txt") #returns string
         #print(fname)
         with open(fname[0]) as file:
             #do stuff with the file
-            print(file.read())
+            for index in file: 
+                (key, val) = index.split()
+                dictionary[key] = val
+
+        self.loadData(dictionary)
+        self.ui.Console.append("Your profile has been loaded sucessfully. ")
 
     def saveProfile(self):
-        dialog = QFileDialog()
-        fname = dialog.getExistingDirectory(None, ("Select Folder")) #returns string
-        #ROSWorkspacePath = "~" + fname
+        name = QFileDialog.getSaveFileName(self, 'Save File')
+        f = open(name[0],'w')
+        arch = file_archive('savedData.txt')
+        dictionary = arch.archive
+        for i in dictionary:
+            f.write("%s: %s\n" % (i,dictionary[i]))
+        f.close()
 
     # JAW - closure of ROS
     @atexit.register
