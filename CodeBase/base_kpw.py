@@ -29,6 +29,7 @@ configGroups = []
 variables = []
 versionNum = 0
 param = ""
+running = True
 
 class ImageDialog(QtWidgets.QMainWindow):
     
@@ -134,45 +135,47 @@ class ImageDialog(QtWidgets.QMainWindow):
         arch[variables[moduleNum]] = name
         arch.dump()
         #print(arch.archive)
-       
+
+    def loadData(self, dictionary):
+         if len(dictionary) == 0: #if empty dictionary
+             self.ui.Console.append("No previous profile found.")
+             return
+         elif "Version:" in dictionary:
+              if dictionary["Version:"] != str(versionNum):
+                 self.ui.Console.append("Config Version Mismatch. Could not load previous profile.")
+                 return
+         elif dictionary["Version"] != versionNum : #if version doesn't match
+             self.ui.Console.append("Config Version Mismatch. Could not load previous profile.")
+             return
+
+         cw = self.ui.centralwidget
+         #print(dictionary)
+         iteration = 0
+         for i in dictionary:
+             if iteration != 0:
+                # print(dictionary[i])
+                 var=cw.findChild(QtWidgets.QRadioButton, dictionary[i])
+                 var.toggle()
+             iteration+=1  
 
     def loadPreviousOptions(self):
         arch = file_archive('savedData.txt')
         dictionary = arch.archive
         print(dictionary)
-        if len(dictionary) == 0: #if empty dictionary
-            self.ui.Console.append("No previous profile found.")
-            return
-        
-        elif dictionary["Version"] != versionNum : #if version doesn't match
-            self.ui.Console.append("Config Version Mismatch. Could not load previous profile.")
-            return
+        self.loadData(dictionary)
 
-        cw = self.ui.centralwidget
-        #print(dictionary)
-        iteration = 0
-        for i in dictionary:
-            if iteration != 0:
-               # print(dictionary[i])
-                var=cw.findChild(QtWidgets.QRadioButton, dictionary[i])
-                var.toggle()
-            iteration+=1
 
     def generateLaunchVars(self):
         arch = file_archive('savedData.txt')
         dictionary = arch.archive
-        #print(dictionary)
-        global param
+        global param 
         param = ""
         for i in dictionary:
             if i == 'Version':
                 continue
 
-           # print(i)
-           # print(dictionary[i])
             test = i +":=" +  dictionary[i]
             param += test + " "
-           # print(param)
         #command = 'cd Scripts; ./runLaunch.sh "$1"'
         #subprocess.call([command, 'sh',param], shell=True)
         
@@ -183,7 +186,8 @@ class ImageDialog(QtWidgets.QMainWindow):
         command = 'cd Scripts; ./runSSH.sh "$1"'
         subprocess.call([command, 'sh',param], shell=True)
         #subprocess.call(['Scripts/./runSSH.sh >> kpw_logFile.txt'], shell=True)
-        
+
+
 
     def startSimBttnAction(self):
         # This is executed when the button is pressed
@@ -196,7 +200,7 @@ class ImageDialog(QtWidgets.QMainWindow):
     def emergencyBttnAction(self):
         # This is executed when the button is pressed
         self.ui.Console.append("Stop the Car....")
-        subprocess.call(['./stopCar.py'])
+       #subprocess.call(['./stopCar.py'])
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
@@ -221,24 +225,7 @@ class ImageDialog(QtWidgets.QMainWindow):
                 (key, val) = index.split()
                 dictionary[key] = val
 
-      
-        numVersion = dictionary["Version:"]
-      
-        if len(dictionary) == 0: #if empty dictionary
-            self.ui.Console.append("No previous profile found.")
-            return
-        
-        elif numVersion != str( versionNum) : #if version doesn't match
-            self.ui.Console.append("Config Version Mismatch. Could not load previous profile.")
-            return
-
-        cw = self.ui.centralwidget
-        iteration = 0
-        for i in dictionary:
-            if iteration != 0:
-                var=cw.findChild(QtWidgets.QRadioButton, dictionary[i])
-                var.toggle()
-            iteration+=1   
+        self.loadData(dictionary)
         self.ui.Console.append("Your profile has been loaded sucessfully. ")
 
     def saveProfile(self):
