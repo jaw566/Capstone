@@ -180,7 +180,10 @@ class ImageDialog(QtWidgets.QMainWindow):
     def startCarBttnAction(self):
         # This is executed when the button is pressed
         self.ui.Console.append("Starting Car....")
-        subprocess.call(['Scripts/./runCar.sh >> &'], shell=True)
+        self.generateLaunchVars()
+        command = 'cd Scripts; ./runSSH.sh "$1"'
+        subprocess.call([command, 'sh',param], shell=True)
+        #subprocess.call(['Scripts/./runSSH.sh >> kpw_logFile.txt'], shell=True)
 
     def startSimBttnAction(self):
         # This is executed when the button is pressed

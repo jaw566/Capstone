@@ -225,6 +225,7 @@ class ImageDialog(QtWidgets.QMainWindow):
                 (key, val) = index.split()
                 dictionary[key] = val
 
+        print(dictionary)
         self.loadData(dictionary)
         self.ui.Console.append("Your profile has been loaded sucessfully. ")
 
