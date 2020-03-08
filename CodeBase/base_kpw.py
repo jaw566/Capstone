@@ -40,13 +40,14 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-         # JAW - console code
+        # JAW - console code
         # hard coded text in console      
         self.ui.Console.append("Starting RosLaunch Console") 
         self.ui.Console.append("=======================") 
         #self.ui.Console.append("ROS core INITIATED...........") 
         self.ui.Console.append("Simulator READY.............")
         # Remember to pass the definition/method, not the return value!
+
 
         # Make local modifications.
         self.loadConfiguration()
@@ -60,9 +61,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.actionLoad_Profile.triggered.connect(lambda: self.loadProfile())
         self.ui.actionSave_Profile.triggered.connect(lambda: self.saveProfile())
       
-       
 
-        
     def loadConfiguration(self):
         #this is where the config fill will be read in and radio buttons remnamed
         with open('config.yaml') as file:
@@ -119,12 +118,13 @@ class ImageDialog(QtWidgets.QMainWindow):
         #test arrays
         #print(configGroups)
         #print(radioBttns)
-        self.loadPreviousOptions()
+        self.loadPreviousOptions()        
 
     def saveSelectedOptions(self, name, moduleNum):
         arch = file_archive('savedData.txt', serialized=True)
         mapp = arch.archive
-        arch["Version"] = versionNum
+        if "Version" not in arch.archive:
+            arch["Version"] = versionNum
         group = configGroups[moduleNum]
 
         for choice in group:
@@ -134,36 +134,38 @@ class ImageDialog(QtWidgets.QMainWindow):
                 #arch.pop(choice)
         arch[variables[moduleNum]] = name
         arch.dump()
-        #print(arch.archive)
+       #print(arch.archive)
 
     def loadData(self, dictionary):
-         if len(dictionary) == 0: #if empty dictionary
+        if len(dictionary) == 0: #if empty dictionary
              self.ui.Console.append("No previous profile found.")
-             return
-         elif "Version:" in dictionary:
-              if dictionary["Version:"] != str(versionNum):
-                 self.ui.Console.append("Config Version Mismatch. Could not load previous profile.")
-                 return
-         elif dictionary["Version"] != versionNum : #if version doesn't match
+             return False
+        elif "Version:" in dictionary:
+             if dictionary["Version:"] != str(versionNum):
+                self.ui.Console.append("Config Version Mismatch. Could not load previous profile.")
+                return False
+        elif dictionary["Version"] != str(versionNum) and dictionary["Version"] != versionNum:
              self.ui.Console.append("Config Version Mismatch. Could not load previous profile.")
-             return
+             return False
 
-         cw = self.ui.centralwidget
-         #print(dictionary)
-         iteration = 0
-         for i in dictionary:
-             if iteration != 0:
-                # print(dictionary[i])
-                 var=cw.findChild(QtWidgets.QRadioButton, dictionary[i])
-                 var.toggle()
-             iteration+=1  
+        cw = self.ui.centralwidget
+        #print(dictionary)
+        iteration = 0
+        for i in dictionary:
+            if iteration != 0:
+               # print(dictionary[i])
+                var=cw.findChild(QtWidgets.QRadioButton, dictionary[i])
+#                print(cw.findChild(QtWidgets.QRadioButton, dictionary[i]))
+                var.toggle()
+            iteration+=1
+
+        return True   
 
     def loadPreviousOptions(self):
         arch = file_archive('savedData.txt')
         dictionary = arch.archive
         print(dictionary)
         self.loadData(dictionary)
-
 
     def generateLaunchVars(self):
         arch = file_archive('savedData.txt')
@@ -173,34 +175,33 @@ class ImageDialog(QtWidgets.QMainWindow):
         for i in dictionary:
             if i == 'Version':
                 continue
-
-            test = i +":=" +  dictionary[i]
-            param += test + " "
-        #command = 'cd Scripts; ./runLaunch.sh "$1"'
-        #subprocess.call([command, 'sh',param], shell=True)
+            if i.replace(":", ""):
+               i =  i.replace(":", "")
+            val =i +":=" +  dictionary[i]
+            param += val + " "
+        command = 'cd Scripts; ./runLaunch.sh "$1"'
+        subprocess.call([command, 'sh',param], shell=True)
         
     def startCarBttnAction(self):
         # This is executed when the button is pressed
         self.ui.Console.append("Starting Car....")
         self.generateLaunchVars()
-        command = 'cd Scripts; ./runSSH.sh "$1"'
-        subprocess.call([command, 'sh',param], shell=True)
+#        command = 'cd Scripts; ./runSSH.sh "$1"'
+#        subprocess.call([command, 'sh',param], shell=True)
         #subprocess.call(['Scripts/./runSSH.sh >> kpw_logFile.txt'], shell=True)
-
-
 
     def startSimBttnAction(self):
         # This is executed when the button is pressed
         #print('Run Sim Button Pressed')
         self.ui.Console.append("Simulator RUNNING....")
         global proc_sim
-       # proc_sim = subprocess.Popen(['cd Scripts; screen -dmS jaw ./runSim.sh &'], \
-       #                                     shell=True,preexec_fn=os.setsid)        
+        proc_sim = subprocess.Popen(['cd Scripts; screen -dmS jaw ./runSim.sh &'], \
+                                            shell=True,preexec_fn=os.setsid)        
 
     def emergencyBttnAction(self):
         # This is executed when the button is pressed
         self.ui.Console.append("Stop the Car....")
-       #subprocess.call(['./stopCar.py'])
+        subprocess.call(['./stopCar.py'])
 
     def logContentsFromFile(self):
         curr_wkg_dir = os.getcwd()
@@ -216,33 +217,37 @@ class ImageDialog(QtWidgets.QMainWindow):
 
     def loadProfile(self):
         dictionary = {}
+        arch = file_archive('savedData.txt', serialized=True)
+        arch.archive.clear()
+        arch.dump()
+        print(arch)
         dialog = QFileDialog()
         fname = dialog.getOpenFileName(None, ("Select File"), ".txt") #returns string
-        #print(fname)
         with open(fname[0]) as file:
             #do stuff with the file
-            for index in file: 
+            for index in file:
                 (key, val) = index.split()
                 dictionary[key] = val
-
-        print(dictionary)
         self.loadData(dictionary)
-        self.ui.Console.append("Your profile has been loaded sucessfully. ")
+        for key, each in dictionary.items():
+            arch_key = key.replace(":", "")
+            print(arch_key)
+            arch[arch_key] = dictionary[key]
+        arch.dump()
+        print(arch.archive)
+        print()
+        print(dictionary)
+        if(self.loadData(dictionary)):
+            self.ui.Console.append("Your profile has been loaded sucessfully.")
+
 
     def saveProfile(self):
         name = QFileDialog.getSaveFileName(self, 'Save File')
         f = open(name[0],'w')
         arch = file_archive('savedData.txt')
-        diction = arch.archive
-        dictionary = {}
-
-        for index in arch.archive:
-            #print(index)
-            #print(dictionary[index])
-            dictionary[index] = diction[index]
-            #print(diction)
-        print(yaml.dump(dictionary,default_flow_style=False))
-        f.write(yaml.dump(dictionary))
+        dictionary = arch.archive
+        for i in dictionary:
+            f.write("%s: %s\n" % (i,dictionary[i]))
         f.close()
 
     # JAW - closure of ROS
@@ -259,7 +264,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         if( 'proc_roscore' in globals()):
             os.killpg(proc_roscore.pid,signal.SIGTERM)
 
-    # KPW - Begin closing of screen
+    # KPW - Begin closing of screen 
     @atexit.register
     def closeScreen():
         print("Begin killing screen on car")
@@ -274,6 +279,3 @@ if __name__ == "__main__":
     ui.show()
     #ui.openProfileLoader()
     sys.exit(app.exec_())
-    
-
-

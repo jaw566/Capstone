@@ -3,4 +3,4 @@
 #    echo $i
 #done
 
-echo "Running on car"
+#echo "Running on car"

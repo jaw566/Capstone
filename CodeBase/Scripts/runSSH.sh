@@ -2,18 +2,17 @@
 echo $@ 
 
 
-sshpass -p 'NauCap2020!' ssh -T kyle@localhost "cd ~/Documents/Capstone/CodeBase/Scripts;./runLaunch.sh ${@} >> kpw_logfile.txt"  #replace with a launch file
 #Pass Files over to car
-#sshpass -p 'Doan1234' scp sshTest.sh runClose.sh runStop.sh nvidia@10.18.92.118:'~/Documents'
+sshpass -p 'doan_1234' scp sshTest.sh runClose.sh runStop.sh runLaunch.sh runSim.sh nvidia@10.18.92.160:'~/Documents'
 
 #Create the roscore screen. This is where we will run the program.
-#sshpass -p 'Doan1234' ssh -T nvidia@10.18.92.118 'screen -dmS roscore; pwd' 
+sshpass -p 'doan_1234' ssh -T nvidia@10.18.92.160 'screen -dmS roscore' 
 
 #Create the ssh screen. This is what we will enteract with and close files with. 
-#sshpass -p 'Doan1234' ssh -T nvidia@10.18.92.118 'screen -dmS ssh; pwd'  
+sshpass -p 'doan_1234' ssh -T nvidia@10.18.92.160 'screen -dmS Ssh'  
 
-#sshpass -p 'Doan1234' ssh -T nvidia@10.18.92.118 'cd ~/Documents; screen -r ssh; ./sshTest.sh >> kpw_logfile.txt'  #replace with a launch file 
+sshpass -p 'doan_1234' ssh -T nvidia@10.18.92.160 'cd ~/Documents; screen -r Ssh; ./sshTest.sh >> kpw_logfile.txt'  #replace with a launch file 
 
 #This reconnects roscore screen and passes the launch file to it to execute.  
-#sshpass -p 'Doan1234' ssh -T nvidia@10.18.92.118 'cd ~/Documents; screen -r roscore; ./runLaunch.sh $@>> kpw_logfile.txt'  #replace with a launch file
+sshpass -p 'doan_1234' ssh -T nvidia@10.18.92.160 "cd ~/Documents; screen -r roscore; ./runLaunch.sh ${@}>> kpw_logfile.txt"  #replace with a launch file
 
