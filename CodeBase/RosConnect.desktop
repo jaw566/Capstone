@@ -1,8 +1,0 @@
-[Desktop Entry]
-# path below is machine specific (currently Jordan's computer)
-Exec=/home/wright/Desktop/runRosConnect.sh
-Name=RosConnect
-Terminal=true
-# path below is machine specific (currently Jordan's computer)
-Icon=/home/wright/Downloads/logo.png
-Type=Application
