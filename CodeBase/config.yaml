@@ -1,16 +1,18 @@
-# config.yaml
-Version: 2020021 #used to kepp track of diffrent configs and relate to saved profiles
+# config.yaml - for creating a configuration window
 
-Racing Stradegy: #module name
+
+# used to keep track of different configs and relate to saved profiles
+Version: 2020021 
+
+Racing Strategy: #module name
   variable: strat #varname that gets passed in string
-  choices:  #list of buttons and thier values
+  choices:  #list of buttons and their values
     Racing_1: #button value passed to the string
       title: Racing #title of the button in the GUI
-      dependencies: #list of other choices that
-        #button3 for exaple
+      dependencies: Perception_1, Mapping_1, Planning_1
     Racing_2: 
       title: Lightning McQueen
-      dependencies:
+      dependencies: Perception_2, Mapping_2, Planning_2
     Racing_3: 
       title: Vroom Vroom
       dependencies:
@@ -20,23 +22,30 @@ Perception:
   choices:
     Perception_1: 
       title: Camera
+      dependencies: Racing_1, Mapping_1, Planning_1
     Perception_2: 
       title: LiDar
+      dependencies: Racing_2, Mapping_2, Planning_2
 
 Mapping:
   variable: mapper
   choices:
     Mapping_1: 
       title: gmap
+      dependencies: Racing_1, Perception_1, Planning_1
     Mapping_2: 
       title: applemaps
+      dependencies: Racing_2, Percepetion_2, Planning_2
     Mapping_3: 
       title: areWeTheirYet
+      dependencies: 
 
 Planning:
   variable: planner
   choices:
     Planning_1: 
       title: calander
+      dependencies: Racing_1, Mapping_1, Perception_1
     Planning_2: 
       title: planner
+      dependencies: Racing_1, Mapping_1, Perception_1

@@ -68,7 +68,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "ROSConnect"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "RosConnect"))
         self.StartCarBttn.setText(_translate("MainWindow", "Start Car"))
         self.runSimBttn.setText(_translate("MainWindow", "Run Sim"))
         self.stopCarBttn.setText(_translate("MainWindow", "Stop Car"))
