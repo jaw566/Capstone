@@ -63,54 +63,51 @@ class ImageDialog(QtWidgets.QMainWindow):
             iteration = 0
             for module in modules.items():
                 if(iteration == 0):
-                    #iteration zero is our version number
+                    # iteration zero is our version number
                     global versionNum
                     versionNum = module[1]
                 elif(iteration == 1):
-                    #first group added to row 0 col 0
-                    #makes a group for the current module
+                    # first group added to row 0 col 0
+                    # makes a group for the current module
                     self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
-                    #sets the objects name to be the name module
+                    # sets the objects name to be the name module
                     self.group.setObjectName(module[1]["variable"]) 
                     self.ui.gridLayout.addWidget(self.group, 0, 0, 1, 3)
                     variables.append(module[1]["variable"])
                 else:
-                    #makes a group for the current module
+                    # makes a group for the current module
                     self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
-                    #sets the objects name to be the name module
+                    # sets the objects name to be the name module
                     self.group.setObjectName(module[1]["variable"]) 
                     self.ui.gridLayout.addWidget(self.group, 1, \
                                                  iteration-2, 1, 1)
-                    #all other groups added to row 1 and then the next open col
+                    # all other groups added to row 1 and then the next open col
                     self.ui.gridLayout.addWidget(self.group, 1, iteration-2)
                     variables.append(module[1]["variable"])
 
                 if(iteration >= 1):
-                    self.group.setTitle(module[0]) #sets the title in the UI
-                    #each group gets its own form layout that bttns are added to
+                    self.group.setTitle(module[0]) # sets the title in the UI
+                    # each group gets its own form layout where bttns are added
                     self.formLayout = QtWidgets.QFormLayout(self.group)
                     self.formLayout.setObjectName("formLayout_" + module[0])
-                    configGroups.append(list()) #makes array for the grouping
+                    configGroups.append( list() ) # makes array for the grouping
                     for choice in module[1]["choices"].items():
-                        #print(choice[0]) var name of choice
-                        #print(choice[1]["title"]) title of var seen in the GUI
                         radioBttns.append(choice[0]) # button array
                         # add buttons to their respective groups
                         configGroups[iteration-1].append(choice[0])
                         # create the button in the GUI
                         self.bttn = QtWidgets.QRadioButton(self.group)
-                        #this is the name we use to access the object
+                        # this is the name we use to access the object
                         self.bttn.setObjectName(choice[0]) 
-                        #the text seen in the GUI
+                        # the text seen in the GUI
                         self.bttn.setText(choice[1]["title"]) 
-                        #get this buttons dependency list
+                        # get this buttons dependency list
                         mydep = choice[1]["dependencies"]
+                        # save the dependency list from yaml to global variable
                         dependencies[choice[0]] = mydep
-                        #add the button to the layout
+                        # add the button to the layout
                         self.formLayout.addWidget(self.bttn) 
-                        #connect onclicked function to the button
-                        self.bttn.clicked.connect(partial(\
-                            self.toggleOff,choice[0], iteration-1))
+                        # connect onclicked function to the button
                         self.bttn.clicked.connect(partial(\
                             self.saveSelectedOptions,choice[0], iteration-1))
                         self.bttn.clicked.connect(partial(\
@@ -119,84 +116,83 @@ class ImageDialog(QtWidgets.QMainWindow):
         # load any previously saved options in the klepto file savedData.txt
         self.loadPreviousOptions()        
 
-    def toggleOff(self, this_radbttn, mod_num):
-        cw = self.ui.centralwidget
-        sz = len(configGroups[mod_num])
-        count=0
-        for choice in configGroups[mod_num]:
-            radio_button = cw.findChild(QtWidgets.QRadioButton, choice)
-            if radio_button.isChecked() == False:
-                print(choice)
-                count+=1
-        if count == sz:
-            # we are turning on the button
-            for choice in configGroups[mod_num]:
-                radio_button = cw.findChild(QtWidgets.QRadioButton, choice)
-                if radio_button.isEnabled():
-                    radio_button.setChecked(True)
-        else:
-            for choice in configGroups[mod_num]:
-                radio_button = cw.findChild(QtWidgets.QRadioButton, choice)
-                radio_button.setAutoExclusive(False) 
-            for choice in configGroups[mod_num]:
-                print(choice)
-                radio_button = cw.findChild(QtWidgets.QRadioButton, choice)
-                radio_button.setChecked(False)
-        
     def setDependencies(self, this_radbttn, dependencies):
-        if dependencies != None:
-            cw = self.ui.centralwidget
-            sz = len(configGroups)
-            for i in range(0, sz):
-                group = configGroups[i]
-                for choice in group:
+        cw = self.ui.centralwidget
+        sz = len(configGroups)
+        for i in range(0, sz): # loop over all groups
+            group = configGroups[i]
+            if dependencies != None: # do we have a depenedencies list?
+                for choice in group: 
                     if(choice != this_radbttn) and (choice not in dependencies):
                         radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
                         radio_button.setEnabled(False)
+                        radio_button.setAutoExclusive(False)
+                        if radio_button.isChecked():
+                            radio_button.toggle()
+                    else:
+                        radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
+                        radio_button.setAutoExclusive(False)
+            else: # otherwise, assume we have no dependencies for this button
+                for choice in group: 
+                    radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
+                    radio_button.setAutoExclusive(False)
+
+        # determine if all the buttons are un-clicked
+        enable_all = True
+        for i in range(0, sz): # loop over all groups
+            group = configGroups[i]
+            for choice in group:
+                radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
+                if radio_button.isChecked():
+                    enable_all = False
+        # if so, then undo all disabling
+        if enable_all:
+            for i in range(0, sz): # loop over all groups
+                group = configGroups[i]
+                for choice in group:
+                    radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
+                    radio_button.setEnabled(True)
+
 
     def saveSelectedOptions(self, name, moduleNum):
+        cw = self.ui.centralwidget
         arch = file_archive('savedData.txt', serialized=True)
         mapp = arch.archive
         arch["Version"] = versionNum
+        # this radio buttons group
         group = configGroups[moduleNum]
+        # find our radio button object
         for choice in group:
-            if choice in mapp:
-                mapp.pop(choice)
-        arch[variables[moduleNum]] = name
-        arch.dump()
+            if choice == name:
+                radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
+                break
+        # if the button is checked, then add it to the savedData.txt file
+        if radio_button.isChecked():
+            arch[variables[moduleNum]] = name
+            arch.dump()
+        else: # otherwise remove the button from savedData.txt
+            mapp.pop(variables[moduleNum])
 
     def loadData(self, dictionary, from_savedData):
+
+        # Are we dealing with saved data from klepto?
         if( from_savedData ):
             self.ui.Console.append("> ...")
             self.ui.Console.append("> Loading previous session")
-    
             if len(dictionary) == 0: #if empty dictionary
                 self.ui.Console.append("> WARNING: saved session not found.")
                 self.ui.Console.append(">          The config window will be") 
                 self.ui.Console.append(">          left blank.")
-                #self.ui.Console.append("> Select 'Load File' from File")
-                #self.ui.Console.append("> drop-down menu to load a profile")
-                #self.ui.Console.append("> ...")
-                #self.ui.Console.append("> OR ")
-                #self.ui.Console.append("> ...")
-                #self.ui.Console.append("> Make appropriate selections in the")
-                #self.ui.Console.append("> configuration window. Then select")
-                #self.ui.Console.append("> 'Save Profile' from the drop-down")
-                #self.ui.Console.append("> menu to save your profile")
                 return
-
             elif "Version:" in dictionary:
-                 if dictionary["Version:"] != str(versionNum):
-                    self.ui.Console.append("> WARNING: Config Version Mismatch.\
-                                              Could not load previous session.")
-                    return
-            elif dictionary["Version"] != versionNum : #if version doesn't match
-                self.ui.Console.append("> WARNING: Config Version Mismatch. \
-                                           Could not load previous session.")
-                return
-
+                if dictionary["Version:"] != str(versionNum):
+                   self.ui.Console.append("> WARNING: Config Version Mismatch.\
+                                             Could not load previous session.")
+                   return
+            # otherwise load data from the savedData file
             cw = self.ui.centralwidget
             iteration = 0
+            #print(dictionary)
             for i in dictionary:
                 if iteration != 0:
                     var=cw.findChild(QtWidgets.QRadioButton, dictionary[i])
@@ -204,36 +200,48 @@ class ImageDialog(QtWidgets.QMainWindow):
                 iteration+=1  
             self.ui.Console.append("> Previous session successfully loaded.")
 
-
+        # Or are we loading a profile?
         else:
             self.ui.Console.append("> ...")
             self.ui.Console.append("> Loading profile")
-    
             if len(dictionary) == 0: #if empty dictionary
                 self.ui.Console.append("> WARNING: profile is blank.")
                 return
-
             elif "Version:" in dictionary:
-                 if dictionary["Version:"] != str(versionNum):
-                    self.ui.Console.append("> WARNING: Config Version Mismatch.\
-                                              Could not load profile.")
-                    return
-            elif dictionary["Version"] != versionNum : #if version doesn't match
-                self.ui.Console.append("> WARNING: Config Version Mismatch.\
-                                           Could not load profile.")
-                return
-
+                if dictionary["Version:"] != str(versionNum):
+                   self.ui.Console.append("> WARNING: Config Version Mismatch.\
+                                             Could not load profile.")
+                   return
+            # Otherwise load data from the profile file
+            # - Clear the config window of any settings
             cw = self.ui.centralwidget
-            #print(dictionary)
+            sz = len(configGroups)
+            #   - enabled all buttons
+            #   - un toggle all buttons that are currently toggled
+            for i in range(0, sz):
+                for choice in configGroups[i]:
+                    radio_button = cw.findChild(QtWidgets.QRadioButton, choice)
+                    radio_button.setEnabled(True)
+                    if radio_button.isChecked():
+                        radio_button.toggle()
+            # load the data! 
+            cw = self.ui.centralwidget
             iteration = 0
             for i in dictionary:
                 if iteration != 0:
-                   # print(dictionary[i])
                     var=cw.findChild(QtWidgets.QRadioButton, dictionary[i])
                     var.toggle()
                 iteration+=1  
-            self.ui.Console.append("> Your selected profile has been")
-            self.ui.Console.append("> successfully loaded.")
+            # make sure to disable any buttons not in this dependency tree
+            for i in range(0, sz):
+                for choice in configGroups[i]:
+                    radio_button = cw.findChild(QtWidgets.QRadioButton, choice)
+                    if( radio_button.isChecked() ):
+                        self.setDependencies(choice, dependencies[choice]) 
+                        self.ui.Console.append(">  Your selected profile has")
+                        self.ui.Console.append(">  been successfully loaded.")
+                        return
+            
         
 
     def loadPreviousOptions(self):
@@ -258,7 +266,6 @@ class ImageDialog(QtWidgets.QMainWindow):
         for i in dictionary:
             if i == 'Version':
                 continue
-
             test = i +":=" +  dictionary[i]
             param += test + " "
         return param
@@ -270,7 +277,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         global CAR_RUNNING
         self.ui.Console.append("> ...")
         self.ui.Console.append("> Starting car")
-        self.ui.Console.append("> This may take some time")
+        self.ui.Console.append(">  This may take some time")
         params = self.generateLaunchVars()
         command = 'cd Scripts; ./runSSH.sh "$1"'
         runcar = subprocess.call([command, 'sh',params], shell=True)
@@ -291,18 +298,29 @@ class ImageDialog(QtWidgets.QMainWindow):
         # This is executed when the button is pressed
         self.ui.Console.append("> ...")
         self.ui.Console.append("> Stopping car")
-        self.ui.Console.append("> This may take some time")
+        self.ui.Console.append(">  This may take some time")
         subprocess.call(['./stopCar.py'])
 
     def loadProfile(self):
         dictionary = {}
         dialog = QFileDialog()
         fname = dialog.getOpenFileName(None, ("Select File"), ".txt")
+        arch = file_archive('savedData.txt')
+        disk = arch.archive
+        # clear the disk archive
+        for key in disk:
+            if "Version" not in key:
+                disk.pop(key)
+
         with open(fname[0]) as file:
             #do stuff with the file
             for index in file: 
                 (key, val) = index.split()
                 dictionary[key] = val
+                arch[key[:len(key)-1]] = val
+        arch.dump()
+        # print(disk)
+            
         self.loadData(dictionary,False)
 
     def saveProfile(self):
@@ -316,11 +334,10 @@ class ImageDialog(QtWidgets.QMainWindow):
         for i in dictionary:
             f.write("%s: %s\n" % (i,dictionary[i]))
         f.close()
-        self.ui.Console.append("> Your profile has been saved sucessfully.")
+        self.ui.Console.append(">  Your profile has been saved sucessfully.")
 
     @atexit.register
     def closeROS():
-        # print("Begin killing program...")
         nodes = os.popen("rosnode list").readlines()
         for i in range(len(nodes)):
             nodes[i] = nodes[i].replace("\n","")

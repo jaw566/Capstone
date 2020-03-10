@@ -1,4 +1,4 @@
 Version: 2020021
+strat: Racing_1
+eyes: Perception_1
 mapper: Mapping_1
-eyes: Perception_2
-planner: Planning_1

@@ -35,7 +35,7 @@ Mapping:
       dependencies: Racing_1, Perception_1, Planning_1
     Mapping_2: 
       title: applemaps
-      dependencies: Racing_2, Percepetion_2, Planning_2
+      dependencies: Racing_2, Perception_2, Planning_2
     Mapping_3: 
       title: areWeTheirYet
       dependencies: 
@@ -48,4 +48,4 @@ Planning:
       dependencies: Racing_1, Mapping_1, Perception_1
     Planning_2: 
       title: planner
-      dependencies: Racing_1, Mapping_1, Perception_1
+      dependencies: Racing_2, Mapping_2, Perception_2
