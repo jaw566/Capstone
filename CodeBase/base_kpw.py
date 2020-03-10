@@ -51,6 +51,10 @@ class ImageDialog(QtWidgets.QMainWindow):
 
         # Make local modifications.
         self.loadConfiguration()
+        
+        # Show mouse over 
+        self.showHelp()
+
         # Connect up the buttons.
         self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
         self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
@@ -82,6 +86,7 @@ class ImageDialog(QtWidgets.QMainWindow):
                     self.group = QtWidgets.QGroupBox(self.ui.centralwidget)
                     self.group.setObjectName(module[1]["variable"]) #sets the objects name to be the name module
                     self.ui.gridLayout.addWidget(self.group, 0, 0, 1, 3)
+                    self.group.setToolTip('This is the module part of the configuration.')
                     variables.append(module[1]["variable"])
                 else:
                     #makes a group for the currebnt module
@@ -94,7 +99,8 @@ class ImageDialog(QtWidgets.QMainWindow):
 
                 if(iteration >= 1):
                     self.group.setTitle(module[0]) #sets the title in the UI
-                        
+                    self.group.setToolTip('This is the module part of the configuration.')
+  
                     #each group gets its own form layout that the bttns are added to
                     self.formLayout = QtWidgets.QFormLayout(self.group)
                     self.formLayout.setObjectName("formLayout_" + module[0])
@@ -109,6 +115,7 @@ class ImageDialog(QtWidgets.QMainWindow):
                         configGroups[iteration-1].append(choice[0]) #add bttns to thier groups
                         #create the button
                         self.bttn = QtWidgets.QRadioButton(self.group)
+                        self.bttn.setToolTip('Configuration option that user could possibly choose from.')
                         self.bttn.setObjectName(choice[0]) #this is the name we use to access the object
                         self.bttn.setText(choice[1]["title"]) #the text seen in the GUI
                         self.formLayout.addWidget(self.bttn) #add the button to the layout
@@ -119,6 +126,16 @@ class ImageDialog(QtWidgets.QMainWindow):
         #print(configGroups)
         #print(radioBttns)
         self.loadPreviousOptions()        
+
+    def showHelp(self):
+        self.ui.StartCarBttn.setToolTip('Select the configuration you want then press start car to start the car.')
+        self.ui.runSimBttn.setToolTip('Select the configuration you want. Press run sim to see how the car will perform in a simulation.')
+        self.ui.stopCarBttn.setToolTip('Press Stop car and have a script sent to the car to stop it.')
+        self.ui.Console.setToolTip('This is where we will show important information to the user.')
+        self.ui.menubar.setToolTip('Inside the file you will see a load and save profile option.')
+#        self.ui.menuFile.setToolTip('The save profile will take current selected configurations and save them to a file. The load profile takes in a saved profile and loads it into the GUI.')
+        self.ui.actionLoad_Profile.setToolTip('This is where you can select a profile to load into the GUI.')  
+        self.ui.actionLoad_Profile.setToolTip('This is where you can save the selected configuration to a window.')
 
     def saveSelectedOptions(self, name, moduleNum):
         arch = file_archive('savedData.txt', serialized=True)
@@ -155,8 +172,10 @@ class ImageDialog(QtWidgets.QMainWindow):
             if iteration != 0:
                # print(dictionary[i])
                 var=cw.findChild(QtWidgets.QRadioButton, dictionary[i])
-#                print(cw.findChild(QtWidgets.QRadioButton, dictionary[i]))
-                var.toggle()
+                if var is not None:
+                    var.toggle()
+                else:
+                    self.ui.Console.append("You are not able to toggle a radio button that doesn't exist.")
             iteration+=1
 
         return True   
@@ -218,25 +237,30 @@ class ImageDialog(QtWidgets.QMainWindow):
     def loadProfile(self):
         dictionary = {}
         arch = file_archive('savedData.txt', serialized=True)
-        arch.archive.clear()
-        arch.dump()
-        print(arch)
+        prev = arch.archive
+
         dialog = QFileDialog()
         fname = dialog.getOpenFileName(None, ("Select File"), ".txt") #returns string
         with open(fname[0]) as file:
-            #do stuff with the file
             for index in file:
                 (key, val) = index.split()
-                dictionary[key] = val
+                key = key.replace(':', '')
+                if val in radioBttns or key == "Version":
+                    dictionary[key] = val
+                else:
+                    for missing in prev:
+                        if missing not in dictionary:
+                            dictionary[key] = prev[missing]
+                    self.ui.Console.append('The value {} is not part of the current config file'.format(key))
+                    self.ui.Console.append('The previous value for {}, will be used.'.format(key))
+
         self.loadData(dictionary)
-        for key, each in dictionary.items():
-            arch_key = key.replace(":", "")
-            print(arch_key)
-            arch[arch_key] = dictionary[key]
+        arch.archive.clear()
         arch.dump()
-        print(arch.archive)
-        print()
-        print(dictionary)
+        for key, val in dictionary.items():
+            arch[key] = dictionary[key]
+        arch.dump()
+
         if(self.loadData(dictionary)):
             self.ui.Console.append("Your profile has been loaded sucessfully.")
 
