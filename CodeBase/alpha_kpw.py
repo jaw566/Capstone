@@ -39,12 +39,10 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append("-------------------------------") 
         self.ui.Console.append("RosConnect Console") 
         self.ui.Console.append("-------------------------------") 
-
-
+        
         # Create globle variable for cw
         global cw
         cw = self.ui.centralwidget
-
         # Remember to pass the definition/method, not the return value!
 
         # Load the config.yaml file to the Config window
@@ -142,12 +140,10 @@ class ImageDialog(QtWidgets.QMainWindow):
                     else:
                         radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
                         radio_button.setAutoExclusive(False)
-                radio_button.setToolTip('This is a dependency and can not be selected.')
             else: # otherwise, assume we have no dependencies for this button
                 for choice in group: 
                     radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
                     radio_button.setAutoExclusive(False)
-                    radio_button.setToolTip('All options may be selected. No dependencies.')
         # determine if all the buttons are un-clicked
         enable_all = True
         for i in range(0, sz): # loop over all groups
@@ -208,20 +204,20 @@ class ImageDialog(QtWidgets.QMainWindow):
         if len(dictionary) == 0:
             if from_savedData:
                 self.ui.Console.append("> WARNING: saved session not found.")
-                self.ui.Console.append(">          The config window will be")
+                self.ui.Console.append(">          The config window will be") 
                 self.ui.Console.append(">          left blank.")
                 return
             else:
                 self.ui.Console.append("> WARNING: profile is blank.")
-                return
-
+                return 
+        
         # Check to see if version numbers match 
         if "Version:" in dictionary:
             if dictionary["Version"] != str(versionNum):
                 if from_savedData:
                     self.ui.Console.append("> WARNING: Config Version Mismatch. Could not load previous session.")
                 else:
-                    print("Inside comparison of version numbers")
+                    print("Inside comparison of version numbers") 
                     self.ui.Console.append("> WARNING: Config Version Mismatch. Could not load profile.")
 
         # Check to see if we are loading from a file. 
@@ -254,18 +250,23 @@ class ImageDialog(QtWidgets.QMainWindow):
             for choice in configGroups[i]:
                 radio_button = cw.findChild(QtWidgets.QRadioButton, choice)
                 if( radio_button.isChecked() ):
-                    self.setDependencies(choice, dependencies[choice])
+                    self.setDependencies(choice, dependencies[choice]) 
                     if from_savedData:
                         self.ui.Console.append("> Previous session successfully loaded.")
                     else:
                         self.ui.Console.append(">  Your selected profile has been successfully loaded")
                     return
+            
+        
 
     def loadPreviousOptions(self):
         arch = file_archive('savedData.txt')
         dictionary = arch.archive
         self.loadData(dictionary,True)
 
+
+    def generateLaunchVars(self):
+        arch = file_archive('savedData.txt')
         dictionary = arch.archive
         param = ""
         for i in dictionary:

@@ -193,7 +193,6 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.actionLoad_Profile.setToolTip('This is where you can save the selected configuration to a window.')
 
     def loadData(self, dictionary, from_savedData):
-        print(dictionary)
         # Print where we are loading data from. 
         if( from_savedData ):
             self.ui.Console.append("> ...")
@@ -316,7 +315,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         for key in disk:
             if "Version" not in key:
                 disk.pop(key)
-        print(disk)
+       # print(disk)
         with open(fname[0]) as file:
             for index in file: 
                 (key, val) = index.split()
@@ -327,7 +326,6 @@ class ImageDialog(QtWidgets.QMainWindow):
                  #   self.ui.Console.append("> The value for {} is not part of the current config file".format(key))
                 arch[key] = val
         arch.dump()
-            
         self.loadData(dictionary,False)
 
     def saveProfile(self):
