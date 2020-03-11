@@ -1,0 +1,8 @@
+<launch>
+    <node pkg="turtlesim" name="teleop" type="turtle_teleop_key" output="screen" launch-prefix="xterm -e">
+        <!--TODO: remap the output topic of this node to /keyboard, which is the input topic of keyboard_node -->
+        <remap from="/turtle1/cmd_vel" to="/keyboard"/>
+    </node>
+    <!--TODO: create the keyboard_node that accepts /keyboard and drive the car ..-->
+    <node  pkg="keyboard_control" name="keyboard_node" type="keyboard_w_turtle_teleop.py"></node>
+</launch>
