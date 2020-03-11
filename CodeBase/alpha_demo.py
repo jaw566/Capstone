@@ -189,7 +189,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.stopCarBttn.setToolTip('Press Stop car and have a script sent to the car to stop it.')
         self.ui.Console.setToolTip('This is where we will show important information to the user.')
         self.ui.menubar.setToolTip('Inside the file you will see a load and save profile option.')
-        self.ui.menuFile.setToolTip('The save profile will take current selected configurations and save them to a file. The load profile takes in a saved profile and loads it into the GUI.')
+        self.ui.menuFile.setToolTip('The load profile takes in a saved profile and loads it into the GUI.\nThe save profile will take current selected configurations and save them to a file.')
         self.ui.actionLoad_Profile.setToolTip('This is where you can select a profile to load into the GUI.')  
         self.ui.actionLoad_Profile.setToolTip('This is where you can save the selected configuration to a window.')
 
@@ -266,6 +266,8 @@ class ImageDialog(QtWidgets.QMainWindow):
         dictionary = arch.archive
         self.loadData(dictionary,True)
 
+    def generateLaunchVars(self):
+        arch = file_archive('savedData.txt')
         dictionary = arch.archive
         param = ""
         for i in dictionary:
@@ -276,7 +278,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         return param
         #command = 'cd Scripts; ./runLaunch.sh "$1"'
         #subprocess.call([command, 'sh',param], shell=True)
-        
+
     def startCarBttnAction(self):
         # define global bool value for use at closure of application
         global CAR_RUNNING
@@ -286,7 +288,6 @@ class ImageDialog(QtWidgets.QMainWindow):
         params = self.generateLaunchVars()
         command = 'cd Scripts; ./runSSH.sh "$1"'
         runcar = subprocess.call([command, 'sh',params], shell=True)
-        #subprocess.call(['Scripts/./runSSH.sh >> kpw_logFile.txt'], shell=True)
 
     def startSimBttnAction(self):
         self.ui.Console.append("> ...")
@@ -323,8 +324,8 @@ class ImageDialog(QtWidgets.QMainWindow):
                 key = key[:len(key) -1 ]
                 if val in radioBttns or key == "Version":
                     dictionary[key] = val                
-                #else:
-                 #   self.ui.Console.append("> The value for {} is not part of the current config file".format(key))
+                else:
+                    self.ui.Console.append("> The value for {} is not part of the current config file".format(key))
                 arch[key] = val
         arch.dump()
         self.loadData(dictionary,False)
