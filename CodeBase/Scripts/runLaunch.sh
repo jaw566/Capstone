@@ -1,2 +1,5 @@
 #!/bin/bash
-echo roslaunch package_loc file.launch $@
+
+# echo roslaunch package_loc file.launch $@
+cd ~
+./runCar.sh
