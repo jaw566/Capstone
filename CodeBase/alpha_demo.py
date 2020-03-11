@@ -287,7 +287,12 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append(">  This may take some time")
         params = self.generateLaunchVars()
         command = 'cd Scripts; ./runSSH.sh "$1"'
-        runcar = subprocess.call([command, 'sh',params], shell=True)
+        CAR_RUNNING = subprocess.Popen([command, 'sh',params], \
+                                        shell=True, preexec_fn=os.setsid)
+        if CAR_RUNNING.returncode == None:
+            self.ui.Console.append("> Vehicle has been loaded successfully")
+        else:
+            self.ui.Console.append("> Error: Vehicle has *not* been loaded")
 
     def startSimBttnAction(self):
         self.ui.Console.append("> ...")
@@ -353,8 +358,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         if( 'SIM_RUNNING' in globals() ):
             os.system("screen -S sim -X quit")
         if( 'CAR_RUNNING' in globals() ):
-            subprocess.call(['Scripts/./closeScreen.sh >> kpw_logFile.txt'], \
-                                                                    shell=True)
+            subprocess.call(['cd Scripts; ./closeScreen.sh'], shell=True)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

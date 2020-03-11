@@ -1,5 +1,5 @@
 #!/bin/bash
 rm runClose.sh	
 
-screen -XS Ssh squit
+screen -XS Ssh quit
 screen -XS roscore quit
