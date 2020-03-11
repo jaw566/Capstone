@@ -55,7 +55,8 @@ class ImageDialog(QtWidgets.QMainWindow):
 
         # Connect the buttons
         self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
-        self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
+        self.ui.runSimBttn.clicked.connect(self.startSimBttnAction)
+        self.ui.stopCarBttn.clicked.connect(self.emergencyBttnAction)
         # self.ui.treeView.clicked.connect(self.populateEditor)
 
         # Connect the menu options
