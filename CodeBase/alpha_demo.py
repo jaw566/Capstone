@@ -310,7 +310,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append("> ...")
         self.ui.Console.append("> Stopping car")
         self.ui.Console.append(">  This may take some time")
-        subprocess.call(['./stopCar.py'])
+        subprocess.call(['cd Scripts; ./carStop.sh'], shell=True)
 
     def loadProfile(self):
         dictionary = {}
