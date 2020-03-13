@@ -298,8 +298,22 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append("> ...")
         self.ui.Console.append("> Loading simulator")
         global SIM_RUNNING
-        SIM_RUNNING = subprocess.Popen(['cd Scripts; screen -dmS sim \
-                            ./runSim.sh &'], shell=True, preexec_fn=os.setsid) 
+        arch = file_archive('savedData.txt')
+        dictionary = arch.archive
+        simVar = dictionary['strat']
+
+        if (simVar == "Racing_2"):
+            SIM_RUNNING = subprocess.Popen(['cd Scripts; screen -dmS sim \
+                        ./runSimWall.sh &'], shell=True, preexec_fn=os.setsid)
+                
+        elif (simVar == "Racing_3"):
+            SIM_RUNNING = subprocess.Popen(['cd Scripts; screen -dmS sim \
+                        ./runSimKB.sh &'], shell=True, preexec_fn=os.setsid)
+
+        else:
+            SIM_RUNNING = subprocess.Popen(['cd Scripts; screen -dmS sim \
+                        ./runSim.sh &'], shell=True, preexec_fn=os.setsid) 
+ 
         if SIM_RUNNING.returncode == None:
             self.ui.Console.append("> Simulator has been loaded successfully")
         else:

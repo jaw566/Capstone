@@ -8,13 +8,13 @@ Racing Strategy: #module name
   variable: strat #varname that gets passed in string
   choices:  #list of buttons and their values
     Racing_1: #button value passed to the string
-      title: Racing #title of the button in the GUI
+      title: Vroom Vroom #title of the button in the GUI
       dependencies: Perception_1, Mapping_1, Planning_1
     Racing_2: 
       title: Lightning McQueen
       dependencies: Perception_2, Mapping_2, Planning_2
     Racing_3: 
-      title: Vroom Vroom
+      title: Manual Override
       dependencies:
    
 Perception:
