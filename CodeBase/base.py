@@ -55,8 +55,8 @@ class ImageDialog(QtWidgets.QMainWindow):
 
         # Connect the buttons
         self.ui.StartCarBttn.clicked.connect(self.startCarBttnAction)
-        self.ui.runSimBttn.clicked.connect(self.startSimBttnAction) 
-        self.ui.stopCarBttn.clicked.connect(self.emergencyBttnAction) 
+        self.ui.runSimBttn.clicked.connect(self.startSimBttnAction)
+        self.ui.stopCarBttn.clicked.connect(self.emergencyBttnAction)
         # self.ui.treeView.clicked.connect(self.populateEditor)
 
         # Connect the menu options
@@ -189,12 +189,11 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.stopCarBttn.setToolTip('Press Stop car and have a script sent to the car to stop it.')
         self.ui.Console.setToolTip('This is where we will show important information to the user.')
         self.ui.menubar.setToolTip('Inside the file you will see a load and save profile option.')
-        self.ui.menuFile.setToolTip('The save profile will take current selected configurations and save them to a file. The load profile takes in a saved profile and loads it into the GUI.')
+        self.ui.menuFile.setToolTip('The load profile takes in a saved profile and loads it into the GUI.\nThe save profile will take current selected configurations and save them to a file.')
         self.ui.actionLoad_Profile.setToolTip('This is where you can select a profile to load into the GUI.')  
         self.ui.actionLoad_Profile.setToolTip('This is where you can save the selected configuration to a window.')
 
     def loadData(self, dictionary, from_savedData):
-        print(dictionary)
         # Print where we are loading data from. 
         if( from_savedData ):
             self.ui.Console.append("> ...")
@@ -267,6 +266,8 @@ class ImageDialog(QtWidgets.QMainWindow):
         dictionary = arch.archive
         self.loadData(dictionary,True)
 
+    def generateLaunchVars(self):
+        arch = file_archive('savedData.txt')
         dictionary = arch.archive
         param = ""
         for i in dictionary:
@@ -277,7 +278,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         return param
         #command = 'cd Scripts; ./runLaunch.sh "$1"'
         #subprocess.call([command, 'sh',param], shell=True)
-        
+
     def startCarBttnAction(self):
         # define global bool value for use at closure of application
         global CAR_RUNNING
@@ -286,15 +287,33 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append(">  This may take some time")
         params = self.generateLaunchVars()
         command = 'cd Scripts; ./runSSH.sh "$1"'
-        runcar = subprocess.call([command, 'sh',params], shell=True)
-        #subprocess.call(['Scripts/./runSSH.sh >> kpw_logFile.txt'], shell=True)
+        CAR_RUNNING = subprocess.Popen([command, 'sh',params], \
+                                        shell=True, preexec_fn=os.setsid)
+        if CAR_RUNNING.returncode == None:
+            self.ui.Console.append("> Vehicle has been loaded successfully")
+        else:
+            self.ui.Console.append("> Error: Vehicle has *not* been loaded")
 
     def startSimBttnAction(self):
         self.ui.Console.append("> ...")
         self.ui.Console.append("> Loading simulator")
         global SIM_RUNNING
-        SIM_RUNNING = subprocess.Popen(['cd Scripts; screen -dmS sim \
-                            ./runSim.sh &'], shell=True, preexec_fn=os.setsid) 
+        arch = file_archive('savedData.txt')
+        dictionary = arch.archive
+        simVar = dictionary['strat']
+
+        if (simVar == "Racing_2"):
+            SIM_RUNNING = subprocess.Popen(['cd Scripts; screen -dmS sim \
+                        ./runSimWall.sh &'], shell=True, preexec_fn=os.setsid)
+                
+        elif (simVar == "Racing_3"):
+            SIM_RUNNING = subprocess.Popen(['cd Scripts; screen -dmS sim \
+                        ./runSimKB.sh &'], shell=True, preexec_fn=os.setsid)
+
+        else:
+            SIM_RUNNING = subprocess.Popen(['cd Scripts; screen -dmS sim \
+                        ./runSim.sh &'], shell=True, preexec_fn=os.setsid) 
+ 
         if SIM_RUNNING.returncode == None:
             self.ui.Console.append("> Simulator has been loaded successfully")
         else:
@@ -305,7 +324,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append("> ...")
         self.ui.Console.append("> Stopping car")
         self.ui.Console.append(">  This may take some time")
-        subprocess.call(['./stopCar.py'])
+        subprocess.call(['cd Scripts; ./carStop.sh'], shell=True)
 
     def loadProfile(self):
         dictionary = {}
@@ -317,18 +336,17 @@ class ImageDialog(QtWidgets.QMainWindow):
         for key in disk:
             if "Version" not in key:
                 disk.pop(key)
-        print(disk)
+       # print(disk)
         with open(fname[0]) as file:
             for index in file: 
                 (key, val) = index.split()
                 key = key[:len(key) -1 ]
                 if val in radioBttns or key == "Version":
                     dictionary[key] = val                
-                #else:
-                 #   self.ui.Console.append("> The value for {} is not part of the current config file".format(key))
+                else:
+                    self.ui.Console.append("> The value for {} is not part of the current config file".format(key))
                 arch[key] = val
         arch.dump()
-            
         self.loadData(dictionary,False)
 
     def saveProfile(self):
@@ -354,8 +372,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         if( 'SIM_RUNNING' in globals() ):
             os.system("screen -S sim -X quit")
         if( 'CAR_RUNNING' in globals() ):
-            subprocess.call(['Scripts/./closeScreen.sh >> kpw_logFile.txt'], \
-                                                                    shell=True)
+            subprocess.call(['cd Scripts; ./closeScreen.sh'], shell=True)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

@@ -207,9 +207,9 @@ class ImageDialog(QtWidgets.QMainWindow):
         # Depending on where we are loading from gives a different message. 
         if len(dictionary) == 0:
             if from_savedData:
-                self.ui.Console.append("> WARNING: saved session not found.")
-                self.ui.Console.append(">          The config window will be")
-                self.ui.Console.append(">          left blank.")
+               # self.ui.Console.append("> WARNING: saved session not found.")
+               # self.ui.Console.append(">          The config window will be")
+               # self.ui.Console.append(">          left blank.")
                 return
             else:
                 self.ui.Console.append("> WARNING: profile is blank.")
