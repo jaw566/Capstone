@@ -51,6 +51,8 @@ class Ui_MainWindow(object):
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
+        self.menuClear_Config = QtWidgets.QMenu(self.menubar)
+        self.menuClear_Config.setObjectName("menuClear_Config")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -59,20 +61,26 @@ class Ui_MainWindow(object):
         self.actionLoad_Profile.setObjectName("actionLoad_Profile")
         self.actionSave_Profile = QtWidgets.QAction(MainWindow)
         self.actionSave_Profile.setObjectName("actionSave_Profile")
+        self.actionClear_Config = QtWidgets.QAction(MainWindow)
+        self.actionClear_Config.setObjectName("actionClear_Config")
         self.menuFile.addAction(self.actionLoad_Profile)
         self.menuFile.addAction(self.actionSave_Profile)
+        self.menuClear_Config.addAction(self.actionClear_Config)
         self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuClear_Config.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "RosConnect"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "ROSConnect"))
         self.StartCarBttn.setText(_translate("MainWindow", "Start Car"))
         self.runSimBttn.setText(_translate("MainWindow", "Run Sim"))
         self.stopCarBttn.setText(_translate("MainWindow", "Stop Car"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
+        self.menuClear_Config.setTitle(_translate("MainWindow", "Clear"))
         self.actionLoad_Profile.setText(_translate("MainWindow", "Load Profile"))
         self.actionSave_Profile.setText(_translate("MainWindow", "Save Profile"))
+        self.actionClear_Config.setText(_translate("MainWindow", "Profile"))
 

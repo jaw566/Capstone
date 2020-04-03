@@ -111,7 +111,14 @@
     <addaction name="actionLoad_Profile"/>
     <addaction name="actionSave_Profile"/>
    </widget>
+   <widget class="QMenu" name="menuClear">
+    <property name="title">
+     <string>Clear</string>
+    </property>
+    <addaction name="actionClear_Profile"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuClear"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionLoad_Profile">
@@ -122,6 +129,14 @@
   <action name="actionSave_Profile">
    <property name="text">
     <string>Save Profile</string>
+   </property>
+  </action>
+  <action name="actionClear_Profile">
+   <property name="text">
+    <string>Profile</string>
+   </property>
+   <property name="toolTip">
+    <string>Clear Profile</string>
    </property>
   </action>
  </widget>
