@@ -1,0 +1,206 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Auto Generated Documentation &#8212; F1/10 Yellowtails  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to F1/10 Yellowtails’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-base2">
+<span id="auto-generated-documentation"></span><h1>Auto Generated Documentation<a class="headerlink" href="#module-base2" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="base2-py">
+<h2>base2.py<a class="headerlink" href="#base2-py" title="Permalink to this headline">¶</a></h2>
+<p>This is where we have all of our logic in for creating our solution.</p>
+<dl class="class">
+<dt id="base2.ImageDialog">
+<em class="property">class </em><code class="descclassname">base2.</code><code class="descname">ImageDialog</code><a class="reference internal" href="_modules/base2.html#ImageDialog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#base2.ImageDialog" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="base2.ImageDialog.closeROS">
+<code class="descname">closeROS</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base2.html#ImageDialog.closeROS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#base2.ImageDialog.closeROS" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used when the user closes out of GUI, this method will make sure Robot Oberating Systm and Screen will close.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base2.ImageDialog.emergencyBttnAction">
+<code class="descname">emergencyBttnAction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base2.html#ImageDialog.emergencyBttnAction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#base2.ImageDialog.emergencyBttnAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds the logic to stop the car if the user presses stop Car button.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base2.ImageDialog.generateLaunchVars">
+<code class="descname">generateLaunchVars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base2.html#ImageDialog.generateLaunchVars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#base2.ImageDialog.generateLaunchVars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the launch string to use properly in the launch file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base2.ImageDialog.loadConfiguration">
+<code class="descname">loadConfiguration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base2.html#ImageDialog.loadConfiguration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#base2.ImageDialog.loadConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in a configuration file as a yaml, and parses the information to populate the GUI with the configurations options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base2.ImageDialog.loadData">
+<code class="descname">loadData</code><span class="sig-paren">(</span><em>dictionary</em>, <em>from_savedData</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base2.html#ImageDialog.loadData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#base2.ImageDialog.loadData" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function lets the user load in any profile saved. There is a check to make sure that you can only load in valid profiles.</p>
+<dl class="docutils">
+<dt>dictionary</dt>
+<dd>This what is the dictionary that is passed in that is holding all of the information.</dd>
+<dt>from_savedData</dt>
+<dd>This is a boolean value that will tell if it loading in from a saved value or just the previous profile.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="base2.ImageDialog.loadPreviousOptions">
+<code class="descname">loadPreviousOptions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base2.html#ImageDialog.loadPreviousOptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#base2.ImageDialog.loadPreviousOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the previous option from the klepto saved file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base2.ImageDialog.loadProfile">
+<code class="descname">loadProfile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base2.html#ImageDialog.loadProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#base2.ImageDialog.loadProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>loads a saved profile that the user would like to see back in the GUI.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base2.ImageDialog.saveProfile">
+<code class="descname">saveProfile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base2.html#ImageDialog.saveProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#base2.ImageDialog.saveProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds the logic to save all of the selected configuration options into a profile.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base2.ImageDialog.saveSelectedOptions">
+<code class="descname">saveSelectedOptions</code><span class="sig-paren">(</span><em>name</em>, <em>moduleNum</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base2.html#ImageDialog.saveSelectedOptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#base2.ImageDialog.saveSelectedOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>When the user selects all of the buttons they want to, they can save that option to use later on if they end up changing it.</p>
+<dl class="docutils">
+<dt>name</dt>
+<dd>This is the name of the button that was selected.</dd>
+<dt>moduleNum</dt>
+<dd>This is where the button is stored in the GUI.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="base2.ImageDialog.showHelp">
+<code class="descname">showHelp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base2.html#ImageDialog.showHelp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#base2.ImageDialog.showHelp" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method hows helpful information to the user when you mouse over anything on our GUI.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base2.ImageDialog.startCarBttnAction">
+<code class="descname">startCarBttnAction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base2.html#ImageDialog.startCarBttnAction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#base2.ImageDialog.startCarBttnAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds the logic for when the user wants to start the car.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base2.ImageDialog.startSimBttnAction">
+<code class="descname">startSimBttnAction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base2.html#ImageDialog.startSimBttnAction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#base2.ImageDialog.startSimBttnAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds the logic for when the user wants to start the simulation of the car.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">F1/10 Yellowtails</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Auto Generated Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#base2-py">base2.py</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to F1/10 Yellowtails’s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Bowen Boyd, Hanyue Wang, Kyle Watson, Jordan Wright.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/base.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
