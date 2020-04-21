@@ -5,11 +5,10 @@ base2.py
 ====================================
 This is where we have all of our logic in for creating our solution.
 """
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QFileSystemModel
-#from profileSelect import Ui_ProfileSelect
-#from testCL import Ui_MainWindow
+from UI.profileSelect import Ui_ProfileSelect
+from UI.testCL import Ui_MainWindow
 from klepto.archives import *
 from functools import partial
 
@@ -79,7 +78,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         """
         # this is where the configuration file will be read in
         #  and radio buttons renamed
-        with open('config.yaml') as file:
+        with open('config_new.yaml') as file:
             modules = yaml.load(file, Loader=yaml.FullLoader)
             iteration = 0
             for module in modules.items():
@@ -108,12 +107,12 @@ class ImageDialog(QtWidgets.QMainWindow):
 
                 if(iteration >= 1):
                     self.group.setTitle(module[0]) # sets the title in the UI
-                    self.group.setToolTip('This is a module part of the configuration.')
                     # each group gets its own form layout where bttns are added
                     self.formLayout = QtWidgets.QFormLayout(self.group)
                     self.formLayout.setObjectName("formLayout_" + module[0])
                     configGroups.append( list() ) # makes array for the grouping
                     for choice in module[1]["choices"].items():
+                        self.group.setToolTip(module[1]["description"])
                         radioBttns.append(choice[0]) # button array
                         # add buttons to their respective groups
                         configGroups[iteration-1].append(choice[0])
@@ -121,8 +120,6 @@ class ImageDialog(QtWidgets.QMainWindow):
                         self.bttn = QtWidgets.QRadioButton(self.group)
                         # this is the name we use to access the object
                         self.bttn.setObjectName(choice[0]) 
-                        # Set the tool tip/mouse over for help. 
-                        self.bttn.setToolTip('This is a valid option for a configuration.')
                         # the text seen in the GUI
                         self.bttn.setText(choice[1]["title"]) 
                         # get this buttons dependency list
@@ -130,7 +127,10 @@ class ImageDialog(QtWidgets.QMainWindow):
                         # save the dependency list from yaml to global variable
                         dependencies[choice[0]] = mydep
                         # add the button to the layout
-                        self.formLayout.addWidget(self.bttn) 
+                        self.formLayout.addWidget(self.bttn)
+                        # Set the tool tip/mouse over for help. 
+                        desc = choice[1]["description"]
+                        self.bttn.setToolTip(desc)
                         # connect onclicked function to the button
                         self.bttn.clicked.connect(partial(\
                             self.saveSelectedOptions,choice[0], iteration-1))
@@ -168,6 +168,41 @@ class ImageDialog(QtWidgets.QMainWindow):
             arch.dump()
         else: # otherwise remove the button from savedData.txt
             mapp.pop(variables[moduleNum])
+
+    def setDependencies(self, this_radbttn, dependencies):
+        sz = len(configGroups)
+        for i in range(0, sz): # loop over all groups
+            group = configGroups[i]
+            if dependencies != None: # do we have a depenedencies list?
+                for choice in group: 
+                    if(choice != this_radbttn) and (choice not in dependencies):
+                        radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
+                        radio_button.setEnabled(False)
+                        radio_button.setAutoExclusive(False)
+                        if radio_button.isChecked():
+                            radio_button.toggle()
+                    else:
+                        radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
+                        radio_button.setAutoExclusive(False)
+            else: # otherwise, assume we have no dependencies for this button
+                for choice in group: 
+                    radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
+                    radio_button.setAutoExclusive(False)
+        # determine if all the buttons are un-clicked
+        enable_all = True
+        for i in range(0, sz): # loop over all groups
+            group = configGroups[i]
+            for choice in group:
+                radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
+                if radio_button.isChecked():
+                    enable_all = False
+        # if so, then undo all disabling
+        if enable_all:
+            for i in range(0, sz): # loop over all groups
+                group = configGroups[i]
+                for choice in group:
+                    radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
+                    radio_button.setEnabled(True)
 
     def showHelp(self):
         """ 
