@@ -407,6 +407,20 @@ class ImageDialog(QtWidgets.QMainWindow):
             f.write("%s: %s\n" % (i,dictionary[i]))
         f.close()
         self.ui.Console.append(">  Your profile has been saved sucessfully.")
+    
+    def clearProfile(self):
+        print("clear")
+        self.ui.Console.append("> Clearing Profile...")
+        # - Clear the config window of any settings
+        sz = len(configGroups)
+        #   - enabled all buttons
+        #   - un toggle all buttons that are currently toggled
+        for i in range(0, sz):
+            for choice in configGroups[i]:
+                radio_button = cw.findChild(QtWidgets.QRadioButton, choice)
+                radio_button.setEnabled(True)
+                if radio_button.isChecked():
+                    radio_button.toggle()
 
     @atexit.register
     def closeROS():
@@ -432,7 +446,3 @@ if __name__ == "__main__":
     #ui.openProfileLoader()
     sys.exit(app.exec_())
     
-
-
-
-
