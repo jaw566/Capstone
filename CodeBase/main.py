@@ -1,17 +1,14 @@
 #!/usr/bin/env python3
 
-"""
-base2.py
-====================================
-This is where we have all of our logic in for creating our solution.
-"""
+#pyqt5 imports
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QFileSystemModel
 from UI.profileSelect import Ui_ProfileSelect
-from UI.testCL import Ui_MainWindow
+from UI.mainWindow import Ui_MainWindow
+
+#package imports
 from klepto.archives import *
 from functools import partial
-
 import subprocess
 import socket 
 import sys
@@ -29,6 +26,7 @@ robotIPAddress = ""
 ROSWorkspacePath = ""
 radioBttns = []
 configGroups = []
+simScripts = []
 dependencies = {}
 variables = []
 versionNum = 0
@@ -47,7 +45,6 @@ class ImageDialog(QtWidgets.QMainWindow):
         self.ui.Console.append("-------------------------------") 
         self.ui.Console.append("RosConnect Console") 
         self.ui.Console.append("-------------------------------") 
-
 
         # Create globle variable for cw
         global cw
@@ -78,7 +75,7 @@ class ImageDialog(QtWidgets.QMainWindow):
         """
         # this is where the configuration file will be read in
         #  and radio buttons renamed
-        with open('config_new.yaml') as file:
+        with open('config.yaml') as file:
             modules = yaml.load(file, Loader=yaml.FullLoader)
             iteration = 0
             for module in modules.items():
@@ -136,6 +133,9 @@ class ImageDialog(QtWidgets.QMainWindow):
                             self.saveSelectedOptions,choice[0], iteration-1))
                         self.bttn.clicked.connect(partial(\
                             self.setDependencies,choice[0], mydep))
+                        #for each of the racing stratagies determine which sim to run
+                        if(iteration == 1):
+                            simScripts.append(choice[1]["sim"])
                 iteration+=1
         # load any previously saved options in the klepto file savedData.txt
         self.loadPreviousOptions()        
@@ -344,20 +344,13 @@ class ImageDialog(QtWidgets.QMainWindow):
         global SIM_RUNNING
         arch = file_archive('savedData.txt')
         dictionary = arch.archive
-        simVar = dictionary['strat']
-
-        if (simVar == "Racing_2"):
-            SIM_RUNNING = subprocess.Popen(['cd Scripts; screen -dmS sim \
-                        ./runSimWall.sh &'], shell=True, preexec_fn=os.setsid)
-                
-        elif (simVar == "Racing_3"):
-            SIM_RUNNING = subprocess.Popen(['cd Scripts; screen -dmS sim \
-                        ./runSimKB.sh &'], shell=True, preexec_fn=os.setsid)
-
-        else:
-            SIM_RUNNING = subprocess.Popen(['cd Scripts; screen -dmS sim \
-                        ./runSim.sh &'], shell=True, preexec_fn=os.setsid) 
- 
+        stradegyVar = variables[0] #the first variable is our racing stradegy
+        choiceVar = dictionary[stradegyVar] #the currently selected choice
+        simIndex = configGroups[0].index(choiceVar)#the index of our choice var corresponds to our sim Index
+        #run sim
+        SIM_RUNNING = subprocess.Popen(['cd Scripts; screen -dmS sim ./' \
+            + str(simScripts[simIndex]) + ' &'], shell=True, preexec_fn=os.setsid)
+        #output to console
         if SIM_RUNNING.returncode == None:
             self.ui.Console.append("> Simulator has been loaded successfully")
         else:
