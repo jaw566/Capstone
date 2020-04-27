@@ -1,5 +1,5 @@
-# Capstone
-The Yellowtails project is a graphical user interface that allows you to drive an F1/10 vehicle autonomously. This improvement of access to autonomous racing means that the Yellowtails project can provide a learning platform to people with limited coding experience.
+# RosConnect
+RosConnect is a graphical user interface that allows you to drive an F1/10 vehicle autonomously. This improvement of access to autonomous racing means that the Yellowtails project can provide a learning platform to people with limited coding experience.
 
 Through our new cutting edge graphical user interface, new coders will be able to utilize the F1/10 platform to start autonomous racing. By abstracting the Robotic Operating System (ROS) and the comand line interface we lower the entry level of autonomuos racing.
 
@@ -23,50 +23,61 @@ cd ~/ git clone https://github.com/jaw566/Capstone.git
 Run the setup script
 
 ```
-cd ~/Capstone/Codebase/App/ ./setup.sh
+cd ~/RosConnect/App/ ./setup.sh
 ```
-There is now a desktop icon/file called RosConnect. Double clcke the file and then selct Trust and Launch to start the software.
 
+### Simulator Setup
 
-###Sourcing
+In order to run the simulators you need to install and source the simulator.
 
+We need the ros-kinetic-map-server to run the simutor
 
-End with an example of getting some data out of the system or using it for a little demo
+```
+sudo apt-get install ros-kinetic-map-server
+```
+
+Make a new workspace for the simulator
+
+```
+mkdir -p ~/f110_ros/src
+cd ~/f110_ros/src
+catkin_init_workspace
+```
+ 
+Clone the simulator
+ 
+```
+cd ~/f110_ros/src git clone https://github.com/FF1RR-NAU-Spring-2020/ff1rr-2020-spring.git
+``` 
+ 
+Make the workspace with catkin_make and source the ﬁle
+
+```
+cd ~/f110_ros/
+catkin_make
+source devel/setup.bash
+```
+
+To make the simulator work with out sourcing it every time add the source command to your bashrc file
+ 
+```
+echo 'source ~/ff110_ros/devel/setup.bash' >> ~/.bashrc
+```
+
+## Take it for a Spin
+If everything worked you should be able to run RosConnect.
+There should now be a desktop icon/file called RosConnect. 
+Double click the file and then select 'Trust and Launch' to start the software.
+
+You can also run the software via the commandline
+
+`cd ~/RosConnect/ ./main.py`
+
 </p>
 </details>
 
-<details><summary><strong>Getting Started for Development</strong></summary>
+<details><summary><strong>PyQt Development</strong></summary>
 <p>
-First we need to make sure pip3 is installed
-
-`sudo apt install python3-pip`
-
-PyQt5 is the core of our software so we need to install that
-
-`pip3 install pyqt5`
-
-For our configuration system we need PyYaml to parse our .yaml files
-
-`pip3 install pyyaml`
-
-For saving user selections on exit and relaoding then on launch we are using Klepto
-
-`pip3 install klepto`
-
-We will also need Screen
-
-`sudo apt-get install screen`
-
-We will also need Sphinx
-
-`sudo apt-get install python3-sphinx`
-
-## Take it for a Spin
-If everything worked you should be able to run the base.py file 
-
-`python3 ./base.py`
-
-*Note this has to be done in the CodeBase Directory*
 
 ## Using the PyQt Designer
 If you want to use the designer you navigate to the pyqt bin
