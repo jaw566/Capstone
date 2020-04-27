@@ -66,12 +66,16 @@ echo 'source ~/ff110_ros/devel/setup.bash' >> ~/.bashrc
 
 ## Take it for a Spin
 If everything worked you should be able to run RosConnect.
-There should now be a desktop icon/file called RosConnect. 
+
+There is now be a desktop icon/file called RosConnect.
+
 Double click the file and then select 'Trust and Launch' to start the software.
 
 You can also run the software via the commandline
 
-`cd ~/RosConnect/ ./main.py`
+```
+cd ~/RosConnect/ ./main.py
+```
 
 </p>
 </details>
