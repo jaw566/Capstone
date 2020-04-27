@@ -1,7 +1,8 @@
 # Capstone
 CS capstone repository for project: Autonomous F1/10 Racing for Everyone
 
-## Getting Started for Development
+<details><summary>## Getting Started for Development</summary>
+<p>
 
 First we need to make sure pip3 is installed
 
@@ -46,4 +47,5 @@ Then we can run the designer
 After you have saved your UI file you cna run the following command to generate a python file with all the objets generated.
 
 `pyuic5 -x UI_FILE_NAME.ui -o NAME_OF_EXC.py`
-
+</p>
+</details>
