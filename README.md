@@ -1,9 +1,42 @@
 # Capstone
-CS capstone repository for project: Autonomous F1/10 Racing for Everyone
+The Yellowtails project is a graphical user interface that allows you to drive an F1/10 vehicle autonomously. This improvement of access to autonomous racing means that the Yellowtails project can provide a learning platform to people with limited coding experience.
+
+Through our new cutting edge graphical user interface, new coders will be able to utilize the F1/10 platform to start autonomous racing. By abstracting the Robotic Operating System (ROS) and the comand line interface we lower the entry level of autonomuos racing.
+
+Learn more at our [website](https://www.cefns.nau.edu/capstone/projects/CS/2020/Yellowtails-S20/index.html).
+
+<details><summary><strong>Installation Instructions</strong></summary>
+<p>
+These instructions will get you a copy of the project up and running on your local machine.
+
+### Installing
+
+A step by step series of examples that tell you how to get the software running
+For this software to work ROS must be insalled on the host machine. To learn how to install ROS visit [ROS.org](https://www.ros.org/)
+
+Clone the repo into the home directroy
+
+```
+cd ~/ git clone https://github.com/jaw566/Capstone.git
+```
+
+Run the setup script
+
+```
+cd ~/Capstone/Codebase/App/ ./setup.sh
+```
+There is now a desktop icon/file called RosConnect. Double clcke the file and then selct Trust and Launch to start the software.
+
+
+###Sourcing
+
+
+End with an example of getting some data out of the system or using it for a little demo
+</p>
+</details>
 
 <details><summary><strong>Getting Started for Development</strong></summary>
 <p>
-
 First we need to make sure pip3 is installed
 
 `sudo apt install python3-pip`
