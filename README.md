@@ -1,7 +1,7 @@
 # Capstone
 CS capstone repository for project: Autonomous F1/10 Racing for Everyone
 
-<details><summary>## Getting Started for Development</summary>
+<details><summary><strong>Getting Started for Development</strong></summary>
 <p>
 
 First we need to make sure pip3 is installed
