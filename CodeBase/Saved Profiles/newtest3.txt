@@ -1,5 +1,0 @@
-Version: 2020021
-mapper: Mapping_1
-eyes: Perception_1
-strat: Racing_1
-planner: Planning_1
