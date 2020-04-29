@@ -10,17 +10,17 @@ Racing Strategy: #module name
     Racing_1: #button value passed to the string
       title: Vroom Vroom #title of the button in the GUI
       dependencies: Perception_1, Mapping_1, Planning_1
-      description: first racing strategy module with dependences Camera, gmap, calander, starting the car with google map in 3D.
+      description: first racing strategy module for starting the car with google map in 3D.
       sim: runSim.sh
     Racing_2: 
       title: Lightning McQueen
       dependencies: Perception_2, Mapping_2, Planning_2
-      description: second racing strategy module with dependences LiDar, applemaps, planner, starting car with apple map in 2D.
+      description: second racing strategy module for starting car with apple map in 2D.
       sim: runSimWall.sh
     Racing_3: 
       title: Manual Override
       dependencies:
-      description: Settings Manual overview, showing all the options.
+      description: third racing stategy for choosing any options (independent of dependencies) you wish.
       sim: runSimKB.sh
    
 Perception:

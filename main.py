@@ -67,11 +67,13 @@ class ImageDialog(QtWidgets.QMainWindow):
         # Connect the menu options
         self.ui.actionLoad_Profile.triggered.connect(lambda: self.loadProfile())
         self.ui.actionSave_Profile.triggered.connect(lambda: self.saveProfile())
+        self.ui.menuClear_Config.triggered.connect(lambda: self.clearProfile())
 
 
     def loadConfiguration(self):
         """ 
-        Takes in a configuration file as a yaml, and parses the information to populate the GUI with the configurations options. 
+        Takes in a configuration file as a yaml, and parses the information to populate the GUI 
+        with the configurations options. 
         """
         # this is where the configuration file will be read in
         #  and radio buttons renamed
@@ -143,7 +145,8 @@ class ImageDialog(QtWidgets.QMainWindow):
 
     def saveSelectedOptions(self, name, moduleNum):
         """
-        When the user selects all of the buttons they want to, they can save that option to use later on if they end up changing it.
+        When the user selects all of the buttons they want to, they can save that option 
+        to use later on if they end up changing it.
 
         Parameters
         ----------
@@ -219,7 +222,8 @@ class ImageDialog(QtWidgets.QMainWindow):
 
     def loadData(self, dictionary, from_savedData):
         """
-        This function lets the user load in any profile saved. There is a check to make sure that you can only load in valid profiles. 
+        This function lets the user load in any profile saved. 
+        There is a check to make sure that you can only load in valid profiles. 
 
         Parameters
         ----------
@@ -425,7 +429,9 @@ class ImageDialog(QtWidgets.QMainWindow):
     @atexit.register
     def closeROS():
         """
-        This function is used when the user closes out of GUI, this method will make sure Robot Oberating Systm and Screen will close.
+        This function is used when the user closes out of GUI, this method will make sure 
+        Robot Operating System and Screen will close.
+
         """
         nodes = os.popen("rosnode list").readlines()
         for i in range(len(nodes)):

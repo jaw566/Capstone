@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Assumption: Capstone directory is derived from the home directory
-cd $HOME/Capstone/CodeBase
+cd $HOME/RosConnect
 # run our base version of RosConnect app
 ./main.py
 

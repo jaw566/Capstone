@@ -17,10 +17,10 @@ def main():
 
     HOME  = os.environ['HOME']
 
-    files = os.listdir(HOME+'/Capstone/CodeBase/Scripts') 
+    files = os.listdir(HOME+'/RosConnect/Scripts') 
 
     for f in files:
-        with open(HOME+'/Capstone/CodeBase/Scripts/'+f,'r') as file:
+        with open(HOME+'/RosConnect/Scripts/'+f,'r') as file:
             data = file.readlines()
 
         line_ctr=0
@@ -31,7 +31,7 @@ def main():
                 data[ line_ctr ] = " ".join( line_split )+"\n"
             line_ctr+=1
 
-        with open(HOME+'/Capstone/CodeBase/Scripts/'+f,'w') as file:
+        with open(HOME+'/RosConnect/Scripts/'+f,'w') as file:
             file.writelines(data)
 
 if __name__ == "__main__":
