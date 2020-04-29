@@ -11,7 +11,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
-A step by step series of examples that tell you how to get the software running
+A step by step series of examples that tell you how to get the software running.
+
 For this software to work ROS must be insalled on the host machine. To learn how to install ROS visit [ROS.org](https://www.ros.org/)
 
 Clone the repo into the home directroy
