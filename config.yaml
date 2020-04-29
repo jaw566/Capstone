@@ -5,22 +5,22 @@ Version: 2020021
 
 Racing Strategy: #module name
   variable: strat #varname that gets passed in string
-  description: This decides how they are going have the car run. 
+  description: Start car setting options, this decides how they are going have the car.
   choices:  #list of buttons and their values
     Racing_1: #button value passed to the string
       title: Vroom Vroom #title of the button in the GUI
       dependencies: Perception_1, Mapping_1, Planning_1
-      description: This is the first racing strategy.
+      description: first racing strategy module with dependences Camera, gmap, calander, starting the car with google map in 3D.
       sim: runSim.sh
     Racing_2: 
       title: Lightning McQueen
       dependencies: Perception_2, Mapping_2, Planning_2
-      description: This is the second racing strategy.
+      description: second racing strategy module with dependences LiDar, applemaps, planner, starting car with apple map in 2D.
       sim: runSimWall.sh
     Racing_3: 
       title: Manual Override
       dependencies:
-      description: This is the final racing strategy.
+      description: Settings Manual overview, showing all the options.
       sim: runSimKB.sh
    
 Perception:
@@ -38,7 +38,7 @@ Perception:
 
 Mapping:
   variable: mapper
-  description: This is what sets the type of mapping it is going to see. 
+  description: This is what sets the type of mapping it is going to generate.
   choices:
     Mapping_1: 
       title: gmap
@@ -60,8 +60,8 @@ Planning:
     Planning_1: 
       title: calander
       dependencies: Racing_1, Mapping_1, Perception_1
-      description: This is an eample explanation for what this does. 
+      description: act of decideding. 
     Planning_2: 
       title: planner
       dependencies: Racing_2, Mapping_2, Perception_2
-      description: This is an example for this value. 
+      description:  a detailed formulation of a program of action. 
