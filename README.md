@@ -17,13 +17,13 @@ For this software to work ROS must be insalled on the host machine. To learn how
 Clone the repo into the home directroy
 
 ```
-cd ~/ git clone https://github.com/jaw566/Capstone.git
+cd ~/ && git clone https://github.com/jaw566/Capstone.git
 ```
 
 Run the setup script
 
 ```
-cd ~/RosConnect/App/ ./setup.sh
+cd ~/RosConnect/App/ && ./setup.sh
 ```
 
 ### Simulator Setup
@@ -47,7 +47,7 @@ catkin_init_workspace
 Clone the simulator
  
 ```
-cd ~/f110_ros/src git clone https://github.com/FF1RR-NAU-Spring-2020/ff1rr-2020-spring.git
+cd ~/f110_ros/src && git clone https://github.com/FF1RR-NAU-Spring-2020/ff1rr-2020-spring.git
 ``` 
  
 Make the workspace with catkin_make and source the ﬁle
@@ -74,7 +74,7 @@ Double click the file and then select 'Trust and Launch' to start the software.
 You can also run the software via the commandline
 
 ```
-cd ~/RosConnect/ ./main.py
+cd ~/RosConnect/ && ./main.py
 ```
 
 </p>
