@@ -6,7 +6,7 @@
 
 cd ~/RosConnect/App
 
-#./install.sh $1
+./install.sh $1
 
 ./mk_all_password_instances.py $1 # password set via first command line argument
 

@@ -1,15 +1,26 @@
 #!/bin/bash
 
-password= $1
+echo $1 | sudo -S apt-get install python3-pip
 
-echo $password |sudo -S apt install python3-pip=9.0.1
+echo " "
 
-echo $password |sudo -S apt-get install screen=4.06.02 
+echo $1 | sudo -S apt-get install screen=4.6.2-1ubuntu1
 
-echo $password |sudo -S apt-get install python3-sphinx=1.8.5
+echo " "
 
-pip3 install pyqt5
+echo $1 | sudo -S apt-get install python3-sphinx
 
-pip3 install pyyaml==5.3
+echo 
+
+echo $1 | sudo -S apt-get install python3-pyqt5
+
+#pip3 install PyQt5
+
+echo " "
+
+pip3 install pyyaml
+
+echo " "
 
 pip3 install klepto==0.1.8
+
