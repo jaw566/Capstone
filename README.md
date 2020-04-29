@@ -18,13 +18,13 @@ For this software to work ROS must be insalled on the host machine. To learn how
 Clone the repo into the home directroy
 
 ```
-cd ~/ && git clone https://github.com/jaw566/Capstone.git
+cd ~/ && git clone https://github.com/jaw566/RosConnect.git
 ```
 
 Run the setup script
 
 ```
-cd ~/RosConnect/App/ && ./setup.sh
+cd ~/RosConnect/App/ && ./setup.sh [host_password] [vehicle_password]
 ```
 
 ### Simulator Setup
