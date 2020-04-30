@@ -20,10 +20,6 @@ import yaml
 
 
 # globals
-hostname = socket.gethostname()    
-localIPAddress = socket.gethostbyname(hostname)
-robotIPAddress = ""
-ROSWorkspacePath = ""
 radioBttns = []
 configGroups = []
 simScripts = []
@@ -72,8 +68,8 @@ class ImageDialog(QtWidgets.QMainWindow):
 
     def loadConfiguration(self):
         """ 
-        Takes in a configuration file as a yaml, and parses the information to populate the GUI 
-        with the configurations options. 
+        Takes in a configuration file as a yaml, and parses the information to
+        populate the GUI with the configurations options. 
         """
         # this is where the configuration file will be read in
         #  and radio buttons renamed
@@ -145,8 +141,8 @@ class ImageDialog(QtWidgets.QMainWindow):
 
     def saveSelectedOptions(self, name, moduleNum):
         """
-        When the user selects all of the buttons they want to, they can save that option 
-        to use later on if they end up changing it.
+        When the user selects all of the buttons they want to, they can save
+        that option to use later on if they end up changing it.
 
         Parameters
         ----------
@@ -174,8 +170,8 @@ class ImageDialog(QtWidgets.QMainWindow):
 
     def setDependencies(self, this_radbttn, dependencies):
         sz = len(configGroups)
-        for i in range(0, sz): # loop over all groups
-            group = configGroups[i]
+        for item in range(0, sz): # loop over all groups
+            group = configGroups[item]
             if dependencies != None: # do we have a depenedencies list?
                 for choice in group: 
                     if(choice != this_radbttn) and (choice not in dependencies):
@@ -193,32 +189,42 @@ class ImageDialog(QtWidgets.QMainWindow):
                     radio_button.setAutoExclusive(False)
         # determine if all the buttons are un-clicked
         enable_all = True
-        for i in range(0, sz): # loop over all groups
-            group = configGroups[i]
+        for checked in range(0, sz): # loop over all groups
+            group = configGroups[checked]
             for choice in group:
                 radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
                 if radio_button.isChecked():
                     enable_all = False
         # if so, then undo all disabling
         if enable_all:
-            for i in range(0, sz): # loop over all groups
-                group = configGroups[i]
+            for undo in range(0, sz): # loop over all groups
+                group = configGroups[undo]
                 for choice in group:
                     radio_button=cw.findChild(QtWidgets.QRadioButton,choice)
                     radio_button.setEnabled(True)
 
     def showHelp(self):
         """ 
-        This method hows helpful information to the user when you mouse over anything on our GUI. 
+        This method hows helpful information to the user when you mouse over 
+        anything on our GUI. 
         """
-        self.ui.StartCarBttn.setToolTip('Select the configuration you want then press start car to start the car.')
-        self.ui.runSimBttn.setToolTip('Select the configuration you want. Press run sim to see how the car will perform in a simulation.')
-        self.ui.stopCarBttn.setToolTip('Press Stop car and have a script sent to the car to stop it.')
-        self.ui.Console.setToolTip('This is where we will show important information to the user.')
-        self.ui.menubar.setToolTip('Inside the file you will see a load and save profile option.')
-        self.ui.menuFile.setToolTip('The load profile takes in a saved profile and loads it into the GUI.\nThe save profile will take current selected configurations and save them to a file.')
-        self.ui.actionLoad_Profile.setToolTip('This is where you can select a profile to load into the GUI.')  
-        self.ui.actionLoad_Profile.setToolTip('This is where you can save the selected configuration to a window.')
+        self.ui.StartCarBttn.setToolTip('Select the configuration you want then\
+press start car to start the car.')
+        self.ui.runSimBttn.setToolTip('Select the configuration you want. Press\
+run sim to see how the car will perform in a simulation.')
+        self.ui.stopCarBttn.setToolTip('Press Stop car and have a script sent\
+to the car to stop it.')
+        self.ui.Console.setToolTip('This is where we will show important\
+information to the user.')
+        self.ui.menubar.setToolTip('Inside the file you will see a load and\
+ save profile option.')
+        self.ui.menuFile.setToolTip('The load profile takes in a saved profile\
+and loads it into the GUI.\nThe save profile will take current\
+selected configurations and save them to a file.')
+        self.ui.actionLoad_Profile.setToolTip('This is where you can select a\
+profile to load into the GUI.')  
+        self.ui.actionLoad_Profile.setToolTip('This is where you can save the\
+selected configuration to a window.')
 
     def loadData(self, dictionary, from_savedData):
         """
@@ -268,8 +274,8 @@ class ImageDialog(QtWidgets.QMainWindow):
             sz = len(configGroups)
             #   - enabled all buttons
             #   - un toggle all buttons that are currently toggled
-            for i in range(0, sz):
-                for choice in configGroups[i]:
+            for item in range(0, sz):
+                for choice in configGroups[item]:
                     radio_button = cw.findChild(QtWidgets.QRadioButton, choice)
                     radio_button.setEnabled(True)
                     if radio_button.isChecked():
@@ -277,9 +283,9 @@ class ImageDialog(QtWidgets.QMainWindow):
 
         # Load data into the GUI
         iteration = 0
-        for i in dictionary:
+        for data in dictionary:
             if iteration != 0:
-                var=cw.findChild(QtWidgets.QRadioButton, dictionary[i])
+                var=cw.findChild(QtWidgets.QRadioButton, dictionary[data])
                 if var is not None:
                     var.toggle()
                 else:
@@ -288,8 +294,8 @@ class ImageDialog(QtWidgets.QMainWindow):
             iteration+=1
         # make sure to disable any buttons not in this dependency tree
         sz = len(configGroups)
-        for i in range(0, sz):
-            for choice in configGroups[i]:
+        for undo in range(0, sz):
+            for choice in configGroups[undo]:
                 radio_button = cw.findChild(QtWidgets.QRadioButton, choice)
                 if( radio_button.isChecked() ):
                     self.setDependencies(choice, dependencies[choice])
@@ -314,10 +320,10 @@ class ImageDialog(QtWidgets.QMainWindow):
         arch = file_archive('savedData.txt')
         dictionary = arch.archive
         param = ""
-        for i in dictionary:
-            if i == 'Version':
+        for item in dictionary:
+            if item == 'Version':
                 continue
-            test = i +":=" +  dictionary[i]
+            test = item +":=" +  dictionary[item]
             param += test + " "
         return param
 
@@ -407,8 +413,8 @@ class ImageDialog(QtWidgets.QMainWindow):
         f = open(name[0],'w')
         arch = file_archive('savedData.txt')
         dictionary = arch.archive
-        for i in dictionary:
-            f.write("%s: %s\n" % (i,dictionary[i]))
+        for item in dictionary:
+            f.write("%s: %s\n" % (item,dictionary[item]))
         f.close()
         self.ui.Console.append(">  Your profile has been saved sucessfully.")
     
@@ -419,8 +425,8 @@ class ImageDialog(QtWidgets.QMainWindow):
         sz = len(configGroups)
         #   - enabled all buttons
         #   - un toggle all buttons that are currently toggled
-        for i in range(0, sz):
-            for choice in configGroups[i]:
+        for undo in range(0, sz):
+            for choice in configGroups[undo]:
                 radio_button = cw.findChild(QtWidgets.QRadioButton, choice)
                 radio_button.setEnabled(True)
                 if radio_button.isChecked():
@@ -434,8 +440,8 @@ class ImageDialog(QtWidgets.QMainWindow):
 
         """
         nodes = os.popen("rosnode list").readlines()
-        for i in range(len(nodes)):
-            nodes[i] = nodes[i].replace("\n","")
+        for item in range(len(nodes)):
+            nodes[iten] = nodes[item].replace("\n","")
         for node in nodes:
             os.system("rosnode kill "+ node)
         if( 'SIM_RUNNING' in globals() ):

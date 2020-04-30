@@ -14,7 +14,9 @@ echo
 
 echo $1 | sudo -S apt-get install python3-pyqt5
 
-#pip3 install PyQt5
+echo " "
+
+echo $1 | sudo -S apt-get install sshpass
 
 echo " "
 
