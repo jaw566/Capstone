@@ -24,7 +24,7 @@ cd ~/ && git clone https://github.com/jaw566/RosConnect.git
 Run the setup script
 
 ```
-cd ~/RosConnect/App/ && ./setup.sh [host_password] [vehicle_password] [host_name]
+cd ~/RosConnect/App/ && ./setup.sh [host_password] [vehicle_hostname] [vehicle_password]
 ```
 
 ### Simulator Setup
