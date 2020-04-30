@@ -27,13 +27,6 @@ Run the setup script
 cd ~/RosConnect/App/ && ./setup.sh [host_password] [vehicle_hostname] [vehicle_password]
 ```
 
-To reconfigure the setup settings
-
-```
-cd ~/RosConnect/App/ && ./mk_hostname_and_password.py [host_password] [vehicle_hostname] [vehicle_password]
-```
-
-
 ### Simulator Setup
 
 In order to run the simulators you need to install and source the simulator.
