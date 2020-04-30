@@ -27,6 +27,13 @@ Run the setup script
 cd ~/RosConnect/App/ && ./setup.sh [host_password] [vehicle_hostname] [vehicle_password]
 ```
 
+Maintenance: Run the install dependencies script
+
+```
+cd ~/RosConnect/App/ && ./install.sh [host_password]
+```
+
+
 ### Simulator Setup
 
 In order to run the simulators you need to install and source the simulator.
