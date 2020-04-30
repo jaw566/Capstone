@@ -8,7 +8,7 @@ cd ~/RosConnect/App
 
 ./install.sh $1 # raspberry Pi password
 
-./mk_all_password_instances.py $2 # vehicle password
+./mk_hostname_and_password.py $2 $3 # vehicle hostname and password (in that order)
 
 /bin/cp RosConnect.desktop $HOME/Desktop
 

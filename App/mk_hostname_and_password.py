@@ -8,12 +8,13 @@ import sys
 
 def main():
 
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 3:
         print("Incorrect number of arguments given")
-        print("Please use as ./fix_all_password_instances [password]")
+        print("Please run as ./mk_hostname_and_password [vehicle_hostname] [password]")
         return -1
     
-    password = str(sys.argv[1])
+    hostname = str(sys.argv[1])
+    password = str(sys.argv[2])
 
     HOME  = os.environ['HOME']
 
@@ -27,6 +28,11 @@ def main():
         for line in data:
             line_split = line.split()
             if line_split != [] and line_split[0] == 'sshpass':
+                i=0
+                for param in line_split:
+                    if "@" in param:
+                        line_split[i] = hostname
+                    i+=1
                 line_split[2] = "'"+password+"'"
                 data[ line_ctr ] = " ".join( line_split )+"\n"
             line_ctr+=1
