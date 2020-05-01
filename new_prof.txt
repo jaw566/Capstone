@@ -1,4 +1,0 @@
-Version: 2020021
-strat: Racing_1
-mapper: Mapping_1
-planner: Planning_1
