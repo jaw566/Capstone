@@ -30,36 +30,32 @@ def main():
         for line in data:
             line_split = line.split()
             if line_split != [] and line_split[0] == 'sshpass':
-                if( str(line_split[3]) == "scp"):
-                   new_split = line_split[9]
-                   new_split = new_split.split(":")
-                   new_value = new_split[0]
-                   second = new_split[1]
-                   loc = 9
-                   host_value = new_value.split("@")
-                   line_split = change_host(host_value, host, line_split, loc,hostname, second) 
-                else:
-                   other_split = line_split[5]
-                   loc = 5
-                   host_values = other_split.split("@")
-                   line_split = change_host(host_values, host,line_split, loc,hostname, None)
+                host_ctrl =0
+                ctrl = 0
+                for param in line_split:
+                   if "@" in param:
+                       host_values = param.split("@")
+                       host_values[0] = host
+                       host_name = host_values[0]
+                       host_ip = host_values[1]
+                       if ":" in host_ip:
+                           host_value = host_ip.split(":")
+                           host_value[0] = hostname
+                           second = host_value[1]
+                           new_host = host_value[0] + ":"+second 
+                       else:
+                           host_values[1] = hostname
+                           new_host = host_values[1]
+                       new_param = host_name + "@"+new_host
+                       param = new_param
+                       line_split[host_ctrl] = param
+                   host_ctrl+= 1 
                 line_split[2] = "'"+password+"'"
                 data[ line_ctr ] = " ".join( line_split )+"\n"
             line_ctr+=1
 
         with open(HOME+'/RosConnect/Scripts/'+f,'w') as file:
-            file.writelines(data)
-
-
-def change_host(line, host, line_split, loc, hostname, scp):
-    host_name = hostname
-    new_host = host_name + str("@") + host
-    if scp is not None:
-        new_host = new_host + ":" + scp
-    line_split[loc] = new_host
-    
-    return line_split
+             file.writelines(data)
 
 if __name__ == "__main__":
-
-    main()    
+    main()
