@@ -338,8 +338,7 @@ selected configuration to a window.')
         self.ui.Console.append(">  This may take some time")
         params = self.generateLaunchVars()
 
-        #FOR DEMO PURPOSE ONLY ECHO INSIDE FILE 
-        command = 'cd Scripts; ./test.sh "$1"'
+        command = 'cd Scripts; ./runSSH.sh "$1"'
         CAR_RUNNING = subprocess.Popen([command, 'sh',params], \
                                         shell=True, preexec_fn=os.setsid)
         if CAR_RUNNING.returncode == None:

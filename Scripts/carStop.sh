@@ -1,4 +1,4 @@
 #!/bin/bash
 
 
-sshpass -p 'password' ssh -T 10.19.18.160@nvidia "pkill ros"
+sshpass -p 'doan_1234' ssh -T nvidia@10.18.92.130 "pkill ros"
