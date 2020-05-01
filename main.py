@@ -376,7 +376,7 @@ selected configuration to a window.')
         self.ui.Console.append("> ...")
         self.ui.Console.append("> Stopping car")
         self.ui.Console.append(">  This may take some time")
-        subprocess.call(['cd Scripts; ./carStop.sh'], shell=True)
+        subprocess.call(['cd Scripts; ./carStop_test.sh'], shell=True)
 
     def loadProfile(self):
         """
@@ -421,7 +421,6 @@ selected configuration to a window.')
         self.ui.Console.append(">  Your profile has been saved sucessfully.")
     
     def clearProfile(self):
-        print("clear")
         self.ui.Console.append("> Clearing Profile...")
         # - Clear the config window of any settings
         sz = len(configGroups)
@@ -443,7 +442,7 @@ selected configuration to a window.')
         """
         nodes = os.popen("rosnode list").readlines()
         for item in range(len(nodes)):
-            nodes[iten] = nodes[item].replace("\n","")
+            nodes[item] = nodes[item].replace("\n","")
         for node in nodes:
             os.system("rosnode kill "+ node)
         if( 'SIM_RUNNING' in globals() ):

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Exec=bash -ic "./run_gui.sh &" 
 Name=RosConnect
-Terminal=false 
+Terminal=true
 Icon=logo.png
 Type=Application

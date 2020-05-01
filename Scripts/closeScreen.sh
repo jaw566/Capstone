@@ -1,7 +1,7 @@
 #!/bin/bash
 
-sshpass -p 'doan_1234' ssh -T nvidia@10.18.92.130 'cd ~/Documents; screen -r; rm runStop.sh runSim.sh runLaunch.sh carStop.sh'
+sshpass -p 'password' ssh -T 10.19.18.160@nvidia 'cd ~/Documents; screen -r; rm runStop.sh runSim.sh runLaunch.sh carStop.sh'
 
-sshpass -p 'doan_1234' ssh -T nvidia@10.18.92.130 'cd ~/Documents; screen -r; ./runClose.sh'
+sshpass -p 'password' ssh -T 10.19.18.160@nvidia 'cd ~/Documents; screen -r; ./runClose.sh'
 
 
