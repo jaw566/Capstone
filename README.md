@@ -93,7 +93,7 @@ Then we can run the designer
 
 `./designer`
 
-After you have saved your UI file you cna run the following command to generate a python file with all the objets generated.
+After you have saved your UI file you can run the following command to generate a python file with all the objects generated.
 
 `pyuic5 -x UI_FILE_NAME.ui -o NAME_OF_EXC.py`
 </p>
